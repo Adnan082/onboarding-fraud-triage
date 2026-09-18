@@ -1,0 +1,12 @@
+# M3. Works on every platform. predict(X) needs no sensitive feature, and the
+# result is a randomised classifier at ONE operating point: evaluate it there,
+# not with a threshold sweep.
+name: fairlearn_eg
+kind: fairlearn.reductions.ExponentiatedGradient
+use_age: false
+params:
+  constraints: FalsePositiveRateParity
+  eps: 0.01
+  max_iter: 50
+base_estimator: champion
+sensitive_feature: ${features.protected.age}

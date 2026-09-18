@@ -1,0 +1,22 @@
+# Champion: LightGBM without customer_age, lightly tuned.
+name: champion
+kind: lightgbm.LGBMClassifier
+use_age: false
+params:
+  seed: ${seed}
+  deterministic: true
+  force_row_wise: true
+  n_jobs: 4
+  verbosity: -1
+  n_estimators: 500
+  learning_rate: 0.05
+  num_leaves: 31
+  min_child_samples: 100
+  subsample: 0.9
+  subsample_freq: 1
+  colsample_bytree: 0.8
+# Tuning: months 0-3 train, month 4 validate, <= 30 trials, then refit on 0-4.
+tuning:
+  enabled: false        # flip on for the tuning run; the result is pasted above
+  max_trials: 30
+  metric: tpr_at_5pct_fpr

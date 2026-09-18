@@ -1,0 +1,7 @@
+# Fit on cal_prob, choose by Brier score on cal_tune.
+methods: [none, platt, isotonic]
+select_by: brier
+fit_on: cal_prob
+select_on: cal_tune
+ece_bins: 15          # equal-MASS bins; equal width is useless at ~1% prevalence
+report_by_age: true

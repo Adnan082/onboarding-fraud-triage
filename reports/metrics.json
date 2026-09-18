@@ -1,0 +1,2894 @@
+{
+  "baselines": {
+    "bootstrap": {
+      "level": 0.95,
+      "n_resamples": 1000
+    },
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-18T16:48:54.690821+00:00",
+      "git_sha": "unknown",
+      "seed": 20260917
+    },
+    "data": {
+      "prevalence": 0.011029,
+      "rows": 1000000,
+      "sample_frac": 1.0,
+      "variant": "base"
+    },
+    "models": {
+      "b0_logreg": {
+        "config": {
+          "name": "logreg",
+          "use_age": true
+        },
+        "deployment": {
+          "model": "logreg",
+          "months": {
+            "6": {
+              "discrimination": {
+                "n": 108168.0,
+                "pr_auc": 0.15311542474257486,
+                "prevalence": 0.013405073589231566,
+                "roc_auc": 0.881236717329785,
+                "tpr_at_0.05_fpr": 0.5020689655172413,
+                "tpr_ci": {
+                  "ci_high": 0.5275862068965518,
+                  "ci_low": 0.47586206896551725,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5020689655172413,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 17,
+                    "fpr": 0.007881316643486324,
+                    "n": 2166,
+                    "n_genuine": 2157
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 374,
+                    "fpr": 0.014861911384859924,
+                    "n": 25318,
+                    "n_genuine": 25165
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 908,
+                    "fpr": 0.029624796084828712,
+                    "n": 30959,
+                    "n_genuine": 30650
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1974,
+                    "fpr": 0.06998759085268569,
+                    "n": 28613,
+                    "n_genuine": 28205
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 1873,
+                    "fpr": 0.12024138152404186,
+                    "n": 15951,
+                    "n_genuine": 15577
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 531,
+                    "fpr": 0.13911448781765784,
+                    "n": 3963,
+                    "n_genuine": 3817
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 136,
+                    "fpr": 0.1459227467811159,
+                    "n": 975,
+                    "n_genuine": 932
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 37,
+                    "fpr": 0.18316831683168316,
+                    "n": 210,
+                    "n_genuine": 202
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 3,
+                    "fpr": 0.23076923076923078,
+                    "n": 13,
+                    "n_genuine": 13
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 2580,
+                    "fpr": 0.1256024536293267,
+                    "group": "age>=50",
+                    "n": 21112,
+                    "n_genuine": 20541
+                  },
+                  {
+                    "false_alarms": 3273,
+                    "fpr": 0.03797997145410028,
+                    "group": "age<50",
+                    "n": 87056,
+                    "n_genuine": 86177
+                  }
+                ],
+                "fpr_ratio": 0.30238240063514493,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.31723743654066383,
+                  "ci_low": 0.28914692962564725,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.30238240063514493,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.06107166629687153,
+                "fpr": 0.054845480612455255,
+                "n": 108168.0,
+                "n_flagged": 6606.0,
+                "n_fraud": 1450.0,
+                "precision": 0.11398728428701181,
+                "threshold": 0.7376047964416368,
+                "tpr": 0.5193103448275862
+              }
+            },
+            "7": {
+              "discrimination": {
+                "n": 96843.0,
+                "pr_auc": 0.18206406299188052,
+                "prevalence": 0.014745515938167962,
+                "roc_auc": 0.8862376591363894,
+                "tpr_at_0.05_fpr": 0.5322128851540616,
+                "tpr_ci": {
+                  "ci_high": 0.5595238095238095,
+                  "ci_low": 0.5021008403361344,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5322128851540616,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 12,
+                    "fpr": 0.00411381556393555,
+                    "n": 2930,
+                    "n_genuine": 2917
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 170,
+                    "fpr": 0.008146834715100398,
+                    "n": 21023,
+                    "n_genuine": 20867
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 682,
+                    "fpr": 0.021340509418611927,
+                    "n": 32363,
+                    "n_genuine": 31958
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1185,
+                    "fpr": 0.043210326721120185,
+                    "n": 27860,
+                    "n_genuine": 27424
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 789,
+                    "fpr": 0.08332453268560566,
+                    "n": 9725,
+                    "n_genuine": 9469
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 254,
+                    "fpr": 0.10717299578059072,
+                    "n": 2501,
+                    "n_genuine": 2370
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 48,
+                    "fpr": 0.1415929203539823,
+                    "n": 364,
+                    "n_genuine": 339
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 11,
+                    "fpr": 0.16176470588235295,
+                    "n": 74,
+                    "n_genuine": 68
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 2,
+                    "fpr": 0.6666666666666666,
+                    "n": 3,
+                    "n_genuine": 3
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 1104,
+                    "fpr": 0.09012980651481754,
+                    "group": "age>=50",
+                    "n": 12667,
+                    "n_genuine": 12249
+                  },
+                  {
+                    "false_alarms": 2049,
+                    "fpr": 0.02463747204386408,
+                    "group": "age<50",
+                    "n": 84176,
+                    "n_genuine": 83166
+                  }
+                ],
+                "fpr_ratio": 0.27335543031276366,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.29540220240850684,
+                  "ci_low": 0.25523212257365285,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.27335543031276366,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.039032248071621076,
+                "fpr": 0.03304511869202956,
+                "n": 96843.0,
+                "n_flagged": 3780.0,
+                "n_fraud": 1428.0,
+                "precision": 0.16587301587301587,
+                "threshold": 0.7376047964416368,
+                "tpr": 0.43907563025210083
+              }
+            }
+          },
+          "n_train": 675666,
+          "n_train_fraud": 6740,
+          "pooled": {
+            "discrimination": {
+              "n": 205011.0,
+              "pr_auc": 0.15972171968540014,
+              "prevalence": 0.014038271117159567,
+              "roc_auc": 0.8813873991490208,
+              "tpr_at_0.05_fpr": 0.5,
+              "tpr_ci": {
+                "ci_high": 0.5184155663655317,
+                "ci_low": 0.4808895066018068,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.5,
+                "seed": 20260917.0
+              }
+            },
+            "fairness": {
+              "age_cut": 50,
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 29,
+                  "fpr": 0.005715411903823414,
+                  "n": 5096,
+                  "n_genuine": 5074
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 544,
+                  "fpr": 0.011817865832464372,
+                  "n": 46341,
+                  "n_genuine": 46032
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1590,
+                  "fpr": 0.025396115512394582,
+                  "n": 63322,
+                  "n_genuine": 62608
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 3159,
+                  "fpr": 0.05678692768160492,
+                  "n": 56473,
+                  "n_genuine": 55629
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 2662,
+                  "fpr": 0.10628443663658868,
+                  "n": 25676,
+                  "n_genuine": 25046
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 785,
+                  "fpr": 0.1268789397123,
+                  "n": 6464,
+                  "n_genuine": 6187
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 184,
+                  "fpr": 0.14476789929189615,
+                  "n": 1339,
+                  "n_genuine": 1271
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 48,
+                  "fpr": 0.17777777777777778,
+                  "n": 284,
+                  "n_genuine": 270
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 5,
+                  "fpr": 0.3125,
+                  "n": 16,
+                  "n_genuine": 16
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 3684,
+                  "fpr": 0.11235132662397072,
+                  "group": "age>=50",
+                  "n": 33779,
+                  "n_genuine": 32790
+                },
+                {
+                  "false_alarms": 5322,
+                  "fpr": 0.03142733977784733,
+                  "group": "age<50",
+                  "n": 171232,
+                  "n_genuine": 169343
+                }
+              ],
+              "fpr_ratio": 0.27972379785983004,
+              "fpr_ratio_ci": {
+                "ci_high": 0.2906061896233014,
+                "ci_low": 0.26824773627526594,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.27972379785983004,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.050660696255322886,
+              "fpr": 0.04455482281468142,
+              "n": 205011.0,
+              "n_flagged": 10386.0,
+              "n_fraud": 2878.0,
+              "precision": 0.13287117273252455,
+              "threshold": 0.7376047964416368,
+              "tpr": 0.4794996525364837
+            }
+          },
+          "protocol": "deployment",
+          "split_sizes": {
+            "cal_conf": 39770,
+            "cal_prob": 39782,
+            "cal_tune": 39771,
+            "test_month_6": 108168,
+            "test_month_7": 96843,
+            "train": 675666
+          },
+          "threshold": 0.7376047964416368,
+          "threshold_set_on": "cal_tune",
+          "train_months": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "paper": {
+          "model": "logreg",
+          "months": {
+            "6": {
+              "discrimination": {
+                "n": 108168.0,
+                "pr_auc": 0.15542321502657563,
+                "prevalence": 0.013405073589231566,
+                "roc_auc": 0.8822058263770906,
+                "tpr_at_0.05_fpr": 0.5062068965517241,
+                "tpr_ci": {
+                  "ci_high": 0.5337931034482759,
+                  "ci_low": 0.48205172413793107,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5062068965517241,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 19,
+                    "fpr": 0.00880853036624942,
+                    "n": 2166,
+                    "n_genuine": 2157
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 426,
+                    "fpr": 0.01692827339558911,
+                    "n": 25318,
+                    "n_genuine": 25165
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 1001,
+                    "fpr": 0.03265905383360522,
+                    "n": 30959,
+                    "n_genuine": 30650
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 2137,
+                    "fpr": 0.07576670803049104,
+                    "n": 28613,
+                    "n_genuine": 28205
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 1952,
+                    "fpr": 0.12531296141747447,
+                    "n": 15951,
+                    "n_genuine": 15577
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 552,
+                    "fpr": 0.1446161907257008,
+                    "n": 3963,
+                    "n_genuine": 3817
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 136,
+                    "fpr": 0.1459227467811159,
+                    "n": 975,
+                    "n_genuine": 932
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 38,
+                    "fpr": 0.18811881188118812,
+                    "n": 210,
+                    "n_genuine": 202
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 3,
+                    "fpr": 0.23076923076923078,
+                    "n": 13,
+                    "n_genuine": 13
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 2681,
+                    "fpr": 0.13051944890706393,
+                    "group": "age>=50",
+                    "n": 21112,
+                    "n_genuine": 20541
+                  },
+                  {
+                    "false_alarms": 3583,
+                    "fpr": 0.041577218979542106,
+                    "group": "age<50",
+                    "n": 87056,
+                    "n_genuine": 86177
+                  }
+                ],
+                "fpr_ratio": 0.3185519041621687,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.33364822432814495,
+                  "ci_low": 0.30462080381037604,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.3185519041621687,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.0650746986169662,
+                "fpr": 0.05869675218800952,
+                "n": 108168.0,
+                "n_flagged": 7039.0,
+                "n_fraud": 1450.0,
+                "precision": 0.11010086660036937,
+                "threshold": 0.7645304171304707,
+                "tpr": 0.5344827586206896
+              }
+            },
+            "7": {
+              "discrimination": {
+                "n": 96843.0,
+                "pr_auc": 0.1849015309170591,
+                "prevalence": 0.014745515938167962,
+                "roc_auc": 0.8868520106255571,
+                "tpr_at_0.05_fpr": 0.5343137254901961,
+                "tpr_ci": {
+                  "ci_high": 0.5602240896358543,
+                  "ci_low": 0.5056022408963585,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5343137254901961,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 17,
+                    "fpr": 0.005827905382242029,
+                    "n": 2930,
+                    "n_genuine": 2917
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 216,
+                    "fpr": 0.01035127234389227,
+                    "n": 21023,
+                    "n_genuine": 20867
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 878,
+                    "fpr": 0.0274735590462482,
+                    "n": 32363,
+                    "n_genuine": 31958
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1467,
+                    "fpr": 0.053493290548424735,
+                    "n": 27860,
+                    "n_genuine": 27424
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 905,
+                    "fpr": 0.09557503432252613,
+                    "n": 9725,
+                    "n_genuine": 9469
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 279,
+                    "fpr": 0.11772151898734177,
+                    "n": 2501,
+                    "n_genuine": 2370
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 53,
+                    "fpr": 0.15634218289085547,
+                    "n": 364,
+                    "n_genuine": 339
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 14,
+                    "fpr": 0.20588235294117646,
+                    "n": 74,
+                    "n_genuine": 68
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 2,
+                    "fpr": 0.6666666666666666,
+                    "n": 3,
+                    "n_genuine": 3
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 1253,
+                    "fpr": 0.1022940648216181,
+                    "group": "age>=50",
+                    "n": 12667,
+                    "n_genuine": 12249
+                  },
+                  {
+                    "false_alarms": 2578,
+                    "fpr": 0.03099824447490561,
+                    "group": "age<50",
+                    "n": 84176,
+                    "n_genuine": 83166
+                  }
+                ],
+                "fpr_ratio": 0.30303072352204213,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.324173510021626,
+                  "ci_low": 0.2843163385924349,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.30303072352204213,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.046621851863325174,
+                "fpr": 0.04015091966671907,
+                "n": 96843.0,
+                "n_flagged": 4515.0,
+                "n_fraud": 1428.0,
+                "precision": 0.1514950166112957,
+                "threshold": 0.7645304171304707,
+                "tpr": 0.4789915966386555
+              }
+            }
+          },
+          "n_train": 794989,
+          "n_train_fraud": 8151,
+          "pooled": {
+            "discrimination": {
+              "n": 205011.0,
+              "pr_auc": 0.16433497501492086,
+              "prevalence": 0.014038271117159567,
+              "roc_auc": 0.8831210570124384,
+              "tpr_at_0.05_fpr": 0.5069492703266157,
+              "tpr_ci": {
+                "ci_high": 0.5257209867963865,
+                "ci_low": 0.4878300903405143,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.5069492703266157,
+                "seed": 20260917.0
+              }
+            },
+            "fairness": {
+              "age_cut": 50,
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 36,
+                  "fpr": 0.007094994087504927,
+                  "n": 5096,
+                  "n_genuine": 5074
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 642,
+                  "fpr": 0.01394681960375391,
+                  "n": 46341,
+                  "n_genuine": 46032
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1879,
+                  "fpr": 0.03001213902376693,
+                  "n": 63322,
+                  "n_genuine": 62608
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 3604,
+                  "fpr": 0.06478635244207158,
+                  "n": 56473,
+                  "n_genuine": 55629
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 2857,
+                  "fpr": 0.11407011099576779,
+                  "n": 25676,
+                  "n_genuine": 25046
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 831,
+                  "fpr": 0.1343138839502182,
+                  "n": 6464,
+                  "n_genuine": 6187
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 189,
+                  "fpr": 0.14870180959874116,
+                  "n": 1339,
+                  "n_genuine": 1271
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 52,
+                  "fpr": 0.1925925925925926,
+                  "n": 284,
+                  "n_genuine": 270
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 5,
+                  "fpr": 0.3125,
+                  "n": 16,
+                  "n_genuine": 16
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 3934,
+                  "fpr": 0.11997560231777982,
+                  "group": "age>=50",
+                  "n": 33779,
+                  "n_genuine": 32790
+                },
+                {
+                  "false_alarms": 6161,
+                  "fpr": 0.036381781355001384,
+                  "group": "age<50",
+                  "n": 171232,
+                  "n_genuine": 169343
+                }
+              ],
+              "fpr_ratio": 0.3032431648781127,
+              "fpr_ratio_ci": {
+                "ci_high": 0.31500717343002893,
+                "ci_low": 0.29137625893567404,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.3032431648781127,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.05635795152455234,
+              "fpr": 0.04994236468068054,
+              "n": 205011.0,
+              "n_flagged": 11554.0,
+              "n_fraud": 2878.0,
+              "precision": 0.1262766141595984,
+              "threshold": 0.7645304171304707,
+              "tpr": 0.5069492703266157
+            }
+          },
+          "protocol": "paper",
+          "threshold": 0.7645304171304707,
+          "threshold_caveat": "Set on the test set at 5% FPR, as the BAF paper does. Optimistic by construction: never read as a deployment figure.",
+          "threshold_set_on": "test",
+          "train_months": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "seconds": 147.70946989399994
+      },
+      "b1_lgbm": {
+        "config": {
+          "name": "lgbm",
+          "use_age": true
+        },
+        "deployment": {
+          "model": "lgbm",
+          "months": {
+            "6": {
+              "discrimination": {
+                "n": 108168.0,
+                "pr_auc": 0.15929997385905473,
+                "prevalence": 0.013405073589231566,
+                "roc_auc": 0.8871106835869722,
+                "tpr_at_0.05_fpr": 0.5124137931034483,
+                "tpr_ci": {
+                  "ci_high": 0.5379310344827586,
+                  "ci_low": 0.48758620689655174,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5124137931034483,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 38,
+                    "fpr": 0.01761706073249884,
+                    "n": 2166,
+                    "n_genuine": 2157
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 536,
+                    "fpr": 0.021299423802900855,
+                    "n": 25318,
+                    "n_genuine": 25165
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 1298,
+                    "fpr": 0.04234910277324633,
+                    "n": 30959,
+                    "n_genuine": 30650
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1968,
+                    "fpr": 0.06977486261301187,
+                    "n": 28613,
+                    "n_genuine": 28205
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 1916,
+                    "fpr": 0.12300186171920138,
+                    "n": 15951,
+                    "n_genuine": 15577
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 658,
+                    "fpr": 0.1723866911186796,
+                    "n": 3963,
+                    "n_genuine": 3817
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 141,
+                    "fpr": 0.15128755364806867,
+                    "n": 975,
+                    "n_genuine": 932
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 46,
+                    "fpr": 0.22772277227722773,
+                    "n": 210,
+                    "n_genuine": 202
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 5,
+                    "fpr": 0.38461538461538464,
+                    "n": 13,
+                    "n_genuine": 13
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 2766,
+                    "fpr": 0.13465751423981306,
+                    "group": "age>=50",
+                    "n": 21112,
+                    "n_genuine": 20541
+                  },
+                  {
+                    "false_alarms": 3840,
+                    "fpr": 0.044559453218376135,
+                    "group": "age<50",
+                    "n": 87056,
+                    "n_genuine": 86177
+                  }
+                ],
+                "fpr_ratio": 0.33090951864015333,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.3456064100088404,
+                  "ci_low": 0.31614088381796807,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.33090951864015333,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.0684860587234672,
+                "fpr": 0.06190145992241234,
+                "n": 108168.0,
+                "n_flagged": 7408.0,
+                "n_fraud": 1450.0,
+                "precision": 0.10826133909287257,
+                "threshold": 0.027337731150223022,
+                "tpr": 0.5531034482758621
+              }
+            },
+            "7": {
+              "discrimination": {
+                "n": 96843.0,
+                "pr_auc": 0.1874849560047249,
+                "prevalence": 0.014745515938167962,
+                "roc_auc": 0.8900868181470564,
+                "tpr_at_0.05_fpr": 0.5532212885154062,
+                "tpr_ci": {
+                  "ci_high": 0.5777310924369747,
+                  "ci_low": 0.5237920168067227,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5532212885154062,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 55,
+                    "fpr": 0.01885498800137127,
+                    "n": 2930,
+                    "n_genuine": 2917
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 475,
+                    "fpr": 0.022763214645133464,
+                    "n": 21023,
+                    "n_genuine": 20867
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 1476,
+                    "fpr": 0.046185618624444584,
+                    "n": 32363,
+                    "n_genuine": 31958
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1761,
+                    "fpr": 0.06421382730455076,
+                    "n": 27860,
+                    "n_genuine": 27424
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 1166,
+                    "fpr": 0.12313866300559721,
+                    "n": 9725,
+                    "n_genuine": 9469
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 398,
+                    "fpr": 0.1679324894514768,
+                    "n": 2501,
+                    "n_genuine": 2370
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 62,
+                    "fpr": 0.18289085545722714,
+                    "n": 364,
+                    "n_genuine": 339
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 17,
+                    "fpr": 0.25,
+                    "n": 74,
+                    "n_genuine": 68
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 2,
+                    "fpr": 0.6666666666666666,
+                    "n": 3,
+                    "n_genuine": 3
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 1645,
+                    "fpr": 0.13429667727977795,
+                    "group": "age>=50",
+                    "n": 12667,
+                    "n_genuine": 12249
+                  },
+                  {
+                    "false_alarms": 3767,
+                    "fpr": 0.045294952264146406,
+                    "group": "age<50",
+                    "n": 84176,
+                    "n_genuine": 83166
+                  }
+                ],
+                "fpr_ratio": 0.33727530108421233,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.3563895161829194,
+                  "ci_low": 0.3201381571500137,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.33727530108421233,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.06443418729283479,
+                "fpr": 0.05672064140858356,
+                "n": 96843.0,
+                "n_flagged": 6240.0,
+                "n_fraud": 1428.0,
+                "precision": 0.1326923076923077,
+                "threshold": 0.027337731150223022,
+                "tpr": 0.5798319327731093
+              }
+            }
+          },
+          "n_train": 675666,
+          "n_train_fraud": 6740,
+          "pooled": {
+            "discrimination": {
+              "n": 205011.0,
+              "pr_auc": 0.17158518938901748,
+              "prevalence": 0.014038271117159567,
+              "roc_auc": 0.8882859095790647,
+              "tpr_at_0.05_fpr": 0.5309242529534399,
+              "tpr_ci": {
+                "ci_high": 0.5496959694232106,
+                "ci_low": 0.510762682418346,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.5309242529534399,
+                "seed": 20260917.0
+              }
+            },
+            "fairness": {
+              "age_cut": 50,
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 93,
+                  "fpr": 0.018328734726054396,
+                  "n": 5096,
+                  "n_genuine": 5074
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 1011,
+                  "fpr": 0.021962982273201252,
+                  "n": 46341,
+                  "n_genuine": 46032
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 2774,
+                  "fpr": 0.04430743674929721,
+                  "n": 63322,
+                  "n_genuine": 62608
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 3729,
+                  "fpr": 0.06703338186916896,
+                  "n": 56473,
+                  "n_genuine": 55629
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 3082,
+                  "fpr": 0.12305358141020523,
+                  "n": 25676,
+                  "n_genuine": 25046
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 1056,
+                  "fpr": 0.17068045902699208,
+                  "n": 6464,
+                  "n_genuine": 6187
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 203,
+                  "fpr": 0.15971675845790717,
+                  "n": 1339,
+                  "n_genuine": 1271
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 63,
+                  "fpr": 0.23333333333333334,
+                  "n": 284,
+                  "n_genuine": 270
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 7,
+                  "fpr": 0.4375,
+                  "n": 16,
+                  "n_genuine": 16
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 4411,
+                  "fpr": 0.13452272034156756,
+                  "group": "age>=50",
+                  "n": 33779,
+                  "n_genuine": 32790
+                },
+                {
+                  "false_alarms": 7607,
+                  "fpr": 0.044920663977843785,
+                  "group": "age<50",
+                  "n": 171232,
+                  "n_genuine": 169343
+                }
+              ],
+              "fpr_ratio": 0.3339262234943318,
+              "fpr_ratio_ci": {
+                "ci_high": 0.34549708735420864,
+                "ci_low": 0.32234027080509703,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.3339262234943318,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.06657203759798255,
+              "fpr": 0.059455902796673475,
+              "n": 205011.0,
+              "n_flagged": 13648.0,
+              "n_fraud": 2878.0,
+              "precision": 0.11943141852286049,
+              "threshold": 0.027337731150223022,
+              "tpr": 0.56636553161918
+            }
+          },
+          "protocol": "deployment",
+          "split_sizes": {
+            "cal_conf": 39770,
+            "cal_prob": 39782,
+            "cal_tune": 39771,
+            "test_month_6": 108168,
+            "test_month_7": 96843,
+            "train": 675666
+          },
+          "threshold": 0.027337731150223022,
+          "threshold_set_on": "cal_tune",
+          "train_months": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "paper": {
+          "model": "lgbm",
+          "months": {
+            "6": {
+              "discrimination": {
+                "n": 108168.0,
+                "pr_auc": 0.15421817538274457,
+                "prevalence": 0.013405073589231566,
+                "roc_auc": 0.8869844404621655,
+                "tpr_at_0.05_fpr": 0.49448275862068963,
+                "tpr_ci": {
+                  "ci_high": 0.5206896551724138,
+                  "ci_low": 0.4703275862068966,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.49448275862068963,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 22,
+                    "fpr": 0.010199350950394067,
+                    "n": 2166,
+                    "n_genuine": 2157
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 434,
+                    "fpr": 0.017246175243393603,
+                    "n": 25318,
+                    "n_genuine": 25165
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 1073,
+                    "fpr": 0.03500815660685155,
+                    "n": 30959,
+                    "n_genuine": 30650
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1687,
+                    "fpr": 0.059812090054954796,
+                    "n": 28613,
+                    "n_genuine": 28205
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 1606,
+                    "fpr": 0.10310072542851641,
+                    "n": 15951,
+                    "n_genuine": 15577
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 525,
+                    "fpr": 0.13754257270107415,
+                    "n": 3963,
+                    "n_genuine": 3817
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 127,
+                    "fpr": 0.13626609442060086,
+                    "n": 975,
+                    "n_genuine": 932
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 34,
+                    "fpr": 0.16831683168316833,
+                    "n": 210,
+                    "n_genuine": 202
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 4,
+                    "fpr": 0.3076923076923077,
+                    "n": 13,
+                    "n_genuine": 13
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 2296,
+                    "fpr": 0.11177644710578842,
+                    "group": "age>=50",
+                    "n": 21112,
+                    "n_genuine": 20541
+                  },
+                  {
+                    "false_alarms": 3216,
+                    "fpr": 0.03731854207039001,
+                    "group": "age<50",
+                    "n": 87056,
+                    "n_genuine": 86177
+                  }
+                ],
+                "fpr_ratio": 0.33386767102259635,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.3511118332065299,
+                  "ci_low": 0.31683847201112897,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.33386767102259635,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.05771577546039494,
+                "fpr": 0.05165014336850391,
+                "n": 108168.0,
+                "n_flagged": 6243.0,
+                "n_fraud": 1450.0,
+                "precision": 0.11709114207912863,
+                "threshold": 0.04075475263664095,
+                "tpr": 0.5041379310344828
+              }
+            },
+            "7": {
+              "discrimination": {
+                "n": 96843.0,
+                "pr_auc": 0.17926690599805792,
+                "prevalence": 0.014745515938167962,
+                "roc_auc": 0.8881831776886199,
+                "tpr_at_0.05_fpr": 0.5476190476190477,
+                "tpr_ci": {
+                  "ci_high": 0.5707282913165266,
+                  "ci_low": 0.5189075630252101,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.5476190476190477,
+                  "seed": 20260917.0
+                }
+              },
+              "fairness": {
+                "age_cut": 50,
+                "by_band": [
+                  {
+                    "band": "10-19",
+                    "false_alarms": 46,
+                    "fpr": 0.01576962632841961,
+                    "n": 2930,
+                    "n_genuine": 2917
+                  },
+                  {
+                    "band": "20-29",
+                    "false_alarms": 368,
+                    "fpr": 0.01763550103033498,
+                    "n": 21023,
+                    "n_genuine": 20867
+                  },
+                  {
+                    "band": "30-39",
+                    "false_alarms": 1274,
+                    "fpr": 0.03986482257963577,
+                    "n": 32363,
+                    "n_genuine": 31958
+                  },
+                  {
+                    "band": "40-49",
+                    "false_alarms": 1566,
+                    "fpr": 0.05710326721120187,
+                    "n": 27860,
+                    "n_genuine": 27424
+                  },
+                  {
+                    "band": "50-59",
+                    "false_alarms": 929,
+                    "fpr": 0.0981096208680959,
+                    "n": 9725,
+                    "n_genuine": 9469
+                  },
+                  {
+                    "band": "60-69",
+                    "false_alarms": 345,
+                    "fpr": 0.14556962025316456,
+                    "n": 2501,
+                    "n_genuine": 2370
+                  },
+                  {
+                    "band": "70-79",
+                    "false_alarms": 48,
+                    "fpr": 0.1415929203539823,
+                    "n": 364,
+                    "n_genuine": 339
+                  },
+                  {
+                    "band": "80-89",
+                    "false_alarms": 11,
+                    "fpr": 0.16176470588235295,
+                    "n": 74,
+                    "n_genuine": 68
+                  },
+                  {
+                    "band": "90-99",
+                    "false_alarms": 2,
+                    "fpr": 0.6666666666666666,
+                    "n": 3,
+                    "n_genuine": 3
+                  }
+                ],
+                "by_group": [
+                  {
+                    "false_alarms": 1335,
+                    "fpr": 0.10898848885623316,
+                    "group": "age>=50",
+                    "n": 12667,
+                    "n_genuine": 12249
+                  },
+                  {
+                    "false_alarms": 3254,
+                    "fpr": 0.0391265661448188,
+                    "group": "age<50",
+                    "n": 84176,
+                    "n_genuine": 83166
+                  }
+                ],
+                "fpr_ratio": 0.3589972349871801,
+                "fpr_ratio_ci": {
+                  "ci_high": 0.3827121870985466,
+                  "ci_low": 0.3393830785423669,
+                  "level": 0.95,
+                  "n_resamples": 1000.0,
+                  "point": 0.3589972349871801,
+                  "seed": 20260917.0
+                }
+              },
+              "realised": {
+                "flag_rate": 0.05529568476812986,
+                "fpr": 0.048095163234292304,
+                "n": 96843.0,
+                "n_flagged": 5355.0,
+                "n_fraud": 1428.0,
+                "precision": 0.1430438842203548,
+                "threshold": 0.04075475263664095,
+                "tpr": 0.5364145658263305
+              }
+            }
+          },
+          "n_train": 794989,
+          "n_train_fraud": 8151,
+          "pooled": {
+            "discrimination": {
+              "n": 205011.0,
+              "pr_auc": 0.165617155041443,
+              "prevalence": 0.014038271117159567,
+              "roc_auc": 0.8873114189221981,
+              "tpr_at_0.05_fpr": 0.5201528839471855,
+              "tpr_ci": {
+                "ci_high": 0.5389246004169562,
+                "ci_low": 0.5010423905489924,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.5201528839471855,
+                "seed": 20260917.0
+              }
+            },
+            "fairness": {
+              "age_cut": 50,
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 68,
+                  "fpr": 0.013401655498620418,
+                  "n": 5096,
+                  "n_genuine": 5074
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 802,
+                  "fpr": 0.017422662495655196,
+                  "n": 46341,
+                  "n_genuine": 46032
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 2347,
+                  "fpr": 0.03748722208024534,
+                  "n": 63322,
+                  "n_genuine": 62608
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 3253,
+                  "fpr": 0.058476693810782146,
+                  "n": 56473,
+                  "n_genuine": 55629
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 2535,
+                  "fpr": 0.10121376666932844,
+                  "n": 25676,
+                  "n_genuine": 25046
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 870,
+                  "fpr": 0.14061742363019233,
+                  "n": 6464,
+                  "n_genuine": 6187
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 175,
+                  "fpr": 0.13768686073957515,
+                  "n": 1339,
+                  "n_genuine": 1271
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 45,
+                  "fpr": 0.16666666666666666,
+                  "n": 284,
+                  "n_genuine": 270
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 6,
+                  "fpr": 0.375,
+                  "n": 16,
+                  "n_genuine": 16
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 3631,
+                  "fpr": 0.1107349801768832,
+                  "group": "age>=50",
+                  "n": 33779,
+                  "n_genuine": 32790
+                },
+                {
+                  "false_alarms": 6470,
+                  "fpr": 0.03820648033872082,
+                  "group": "age<50",
+                  "n": 171232,
+                  "n_genuine": 169343
+                }
+              ],
+              "fpr_ratio": 0.34502629862480194,
+              "fpr_ratio_ci": {
+                "ci_high": 0.3589802842106313,
+                "ci_low": 0.3308356098151058,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.34502629862480194,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.05657257415455756,
+              "fpr": 0.04997204810693949,
+              "n": 205011.0,
+              "n_flagged": 11598.0,
+              "n_fraud": 2878.0,
+              "precision": 0.1290739782721159,
+              "threshold": 0.04075475263664095,
+              "tpr": 0.5201528839471855
+            }
+          },
+          "protocol": "paper",
+          "threshold": 0.04075475263664095,
+          "threshold_caveat": "Set on the test set at 5% FPR, as the BAF paper does. Optimistic by construction: never read as a deployment figure.",
+          "threshold_set_on": "test",
+          "train_months": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "seconds": 150.20350082100003
+      }
+    },
+    "target_fpr": 0.05
+  },
+  "champion": {
+    "calibration": {
+      "cal_tune": {
+        "age<50": {
+          "brier": 0.008976416783627929,
+          "calibration_in_the_large": 0.0006367536265046731,
+          "ece_equal_mass": 0.0011405328904679048,
+          "mean_predicted_rate": 0.010582145493248625,
+          "n": 32779.0,
+          "n_bins": 15.0,
+          "observed_rate": 0.009945391866743952
+        },
+        "age>=50": {
+          "brier": 0.01768235962112889,
+          "calibration_in_the_large": -0.0009131722361750451,
+          "ece_equal_mass": 0.0037824127153446786,
+          "mean_predicted_rate": 0.019824814033847837,
+          "n": 6992.0,
+          "n_bins": 15.0,
+          "observed_rate": 0.020737986270022882
+        },
+        "overall": {
+          "brier": 0.010506978054901136,
+          "calibration_in_the_large": 0.0003642665974670188,
+          "ece_equal_mass": 0.001197799494332497,
+          "mean_predicted_rate": 0.012207066627639757,
+          "n": 39771.0,
+          "n_bins": 15.0,
+          "observed_rate": 0.011842800030172738
+        }
+      },
+      "chosen": "platt",
+      "comparison": {
+        "isotonic": {
+          "brier": 0.010566191297563381,
+          "ece_equal_mass": 0.0025869146433672423,
+          "mean_predicted_rate": 0.012087612678674614,
+          "observed_rate": 0.011842800030172738
+        },
+        "none": {
+          "brier": 0.010541517699234948,
+          "ece_equal_mass": 0.003525855061568138,
+          "mean_predicted_rate": 0.008645478646299777,
+          "observed_rate": 0.011842800030172738
+        },
+        "platt": {
+          "brier": 0.010506978054901136,
+          "ece_equal_mass": 0.001197799494332497,
+          "mean_predicted_rate": 0.012207066627639757,
+          "observed_rate": 0.011842800030172738
+        }
+      },
+      "fit_on": "cal_prob",
+      "select_by": "brier",
+      "selected_on": "cal_tune"
+    },
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-18T16:58:21.945257+00:00",
+      "git_sha": "unknown",
+      "seed": 20260917
+    },
+    "discrimination_cal_tune": {
+      "n": 39771.0,
+      "pr_auc": 0.19218687415620123,
+      "prevalence": 0.011842800030172738,
+      "roc_auc": 0.8962073008000953,
+      "tpr_at_0.05_fpr": 0.5392781316348195
+    },
+    "model_version": "champion-unknown",
+    "months": {
+      "6": {
+        "calibration": {
+          "age<50": {
+            "brier": 0.00954062138656733,
+            "calibration_in_the_large": 0.0023296882511680238,
+            "ece_equal_mass": 0.0024802869877581755,
+            "mean_predicted_rate": 0.01242663734140879,
+            "n": 87056.0,
+            "n_bins": 15.0,
+            "observed_rate": 0.010096949090240765
+          },
+          "age>=50": {
+            "brier": 0.023233029755791352,
+            "calibration_in_the_large": -0.0010016569474984756,
+            "ece_equal_mass": 0.005379141458674518,
+            "mean_predicted_rate": 0.026044572684938053,
+            "n": 21112.0,
+            "n_bins": 15.0,
+            "observed_rate": 0.027046229632436528
+          },
+          "overall": {
+            "brier": 0.01221307650722277,
+            "calibration_in_the_large": 0.0016794833861964314,
+            "ece_equal_mass": 0.0022698970189276415,
+            "mean_predicted_rate": 0.015084556975427998,
+            "n": 108168.0,
+            "n_bins": 15.0,
+            "observed_rate": 0.013405073589231566
+          }
+        },
+        "discrimination": {
+          "n": 108168.0,
+          "pr_auc": 0.16547523022494381,
+          "prevalence": 0.013405073589231566,
+          "roc_auc": 0.8862195887194804,
+          "tpr_at_0.05_fpr": 0.5075862068965518,
+          "tpr_ci": {
+            "ci_high": 0.5351896551724138,
+            "ci_low": 0.4820689655172414,
+            "level": 0.95,
+            "n_resamples": 1000.0,
+            "point": 0.5075862068965518,
+            "seed": 20260917.0
+          }
+        },
+        "fairness": {
+          "age_cut": 50,
+          "by_band": [
+            {
+              "band": "10-19",
+              "false_alarms": 52,
+              "fpr": 0.02410755679184052,
+              "n": 2166,
+              "n_genuine": 2157
+            },
+            {
+              "band": "20-29",
+              "false_alarms": 737,
+              "fpr": 0.029286707728988674,
+              "n": 25318,
+              "n_genuine": 25165
+            },
+            {
+              "band": "30-39",
+              "false_alarms": 1465,
+              "fpr": 0.04779771615008157,
+              "n": 30959,
+              "n_genuine": 30650
+            },
+            {
+              "band": "40-49",
+              "false_alarms": 2252,
+              "fpr": 0.07984399929090587,
+              "n": 28613,
+              "n_genuine": 28205
+            },
+            {
+              "band": "50-59",
+              "false_alarms": 1803,
+              "fpr": 0.1157475765551775,
+              "n": 15951,
+              "n_genuine": 15577
+            },
+            {
+              "band": "60-69",
+              "false_alarms": 495,
+              "fpr": 0.12968299711815562,
+              "n": 3963,
+              "n_genuine": 3817
+            },
+            {
+              "band": "70-79",
+              "false_alarms": 111,
+              "fpr": 0.11909871244635194,
+              "n": 975,
+              "n_genuine": 932
+            },
+            {
+              "band": "80-89",
+              "false_alarms": 34,
+              "fpr": 0.16831683168316833,
+              "n": 210,
+              "n_genuine": 202
+            },
+            {
+              "band": "90-99",
+              "false_alarms": 3,
+              "fpr": 0.23076923076923078,
+              "n": 13,
+              "n_genuine": 13
+            }
+          ],
+          "by_group": [
+            {
+              "false_alarms": 2446,
+              "fpr": 0.1190789153400516,
+              "group": "age>=50",
+              "n": 21112,
+              "n_genuine": 20541
+            },
+            {
+              "false_alarms": 4506,
+              "fpr": 0.05228773338593824,
+              "group": "age<50",
+              "n": 87056,
+              "n_genuine": 86177
+            }
+          ],
+          "fpr_ratio": 0.4391015255439728,
+          "fpr_ratio_ci": {
+            "ci_high": 0.45954975008320287,
+            "ci_low": 0.4178973199592807,
+            "level": 0.95,
+            "n_resamples": 1000.0,
+            "point": 0.4391015255439728,
+            "seed": 20260917.0
+          }
+        },
+        "realised": {
+          "flag_rate": 0.0718974188299682,
+          "fpr": 0.06514364961862104,
+          "n": 108168.0,
+          "n_flagged": 7777.0,
+          "n_fraud": 1450.0,
+          "precision": 0.10608203677510608,
+          "threshold": 0.04199414243978042,
+          "tpr": 0.5689655172413793
+        },
+        "reliability": [
+          {
+            "bin": 0,
+            "lower": 4.077331711349158e-05,
+            "mean_predicted": 0.0004187403278074881,
+            "n": 7212,
+            "observed": 0.00041597337770382697,
+            "upper": 0.0006123944224765106
+          },
+          {
+            "bin": 1,
+            "lower": 0.0006124015834186903,
+            "mean_predicted": 0.0007723226863336919,
+            "n": 7212,
+            "observed": 0.00041597337770382697,
+            "upper": 0.000932451277644641
+          },
+          {
+            "bin": 2,
+            "lower": 0.0009324552697240257,
+            "mean_predicted": 0.0011022922130506946,
+            "n": 7212,
+            "observed": 0.0005546311702717693,
+            "upper": 0.0012745147701233336
+          },
+          {
+            "bin": 3,
+            "lower": 0.001274546768364527,
+            "mean_predicted": 0.0014597932919589174,
+            "n": 7211,
+            "observed": 0.0013867702121758425,
+            "upper": 0.0016586277576769403
+          },
+          {
+            "bin": 4,
+            "lower": 0.0016586665272020353,
+            "mean_predicted": 0.0018757992373907404,
+            "n": 7211,
+            "observed": 0.00041603106365275275,
+            "upper": 0.0021079751479432147
+          },
+          {
+            "bin": 5,
+            "lower": 0.002108069262419125,
+            "mean_predicted": 0.002372227224363669,
+            "n": 7211,
+            "observed": 0.002218832339481348,
+            "upper": 0.0026526108570766246
+          },
+          {
+            "bin": 6,
+            "lower": 0.0026526195830212686,
+            "mean_predicted": 0.00298453500041228,
+            "n": 7211,
+            "observed": 0.002773540424351685,
+            "upper": 0.003339605773170353
+          },
+          {
+            "bin": 7,
+            "lower": 0.003339612840058995,
+            "mean_predicted": 0.0037586927398969437,
+            "n": 7211,
+            "observed": 0.002218832339481348,
+            "upper": 0.004220375753786418
+          },
+          {
+            "bin": 8,
+            "lower": 0.0042207534074002314,
+            "mean_predicted": 0.004761844994497185,
+            "n": 7211,
+            "observed": 0.003882956594092359,
+            "upper": 0.005367084496882334
+          },
+          {
+            "bin": 9,
+            "lower": 0.005367836705718139,
+            "mean_predicted": 0.0061348603191196715,
+            "n": 7211,
+            "observed": 0.004715018721397865,
+            "upper": 0.0070252456620006785
+          },
+          {
+            "bin": 10,
+            "lower": 0.007025403565230478,
+            "mean_predicted": 0.008203847833992152,
+            "n": 7211,
+            "observed": 0.008320621273055055,
+            "upper": 0.009555762256938216
+          },
+          {
+            "bin": 11,
+            "lower": 0.009556194790272617,
+            "mean_predicted": 0.011408728290211894,
+            "n": 7211,
+            "observed": 0.010955484676189155,
+            "upper": 0.01373598982952231
+          },
+          {
+            "bin": 12,
+            "lower": 0.01373678001122102,
+            "mean_predicted": 0.017295824448307042,
+            "n": 7211,
+            "observed": 0.01927610594924421,
+            "upper": 0.02198517500192003
+          },
+          {
+            "bin": 13,
+            "lower": 0.021985635737328608,
+            "mean_predicted": 0.031228669013965586,
+            "n": 7211,
+            "observed": 0.033559839134655385,
+            "upper": 0.045231794533540315
+          },
+          {
+            "bin": 14,
+            "lower": 0.04523616984643379,
+            "mean_predicted": 0.13249613461872375,
+            "n": 7211,
+            "observed": 0.10997087782554431,
+            "upper": 0.9339884258341222
+          }
+        ]
+      },
+      "7": {
+        "calibration": {
+          "age<50": {
+            "brier": 0.010842873359004584,
+            "calibration_in_the_large": -0.0010030260334607816,
+            "ece_equal_mass": 0.0013535960732172115,
+            "mean_predicted_rate": 0.010995643421015553,
+            "n": 84176.0,
+            "n_bins": 15.0,
+            "observed_rate": 0.011998669454476335
+          },
+          "age>=50": {
+            "brier": 0.027262129650770264,
+            "calibration_in_the_large": -0.009177765215223632,
+            "ece_equal_mass": 0.009478980155550475,
+            "mean_predicted_rate": 0.02382136638657632,
+            "n": 12667.0,
+            "n_bins": 15.0,
+            "observed_rate": 0.03299913160179995
+          },
+          "overall": {
+            "brier": 0.012990501163262976,
+            "calibration_in_the_large": -0.002072276482284032,
+            "ece_equal_mass": 0.002313507371775524,
+            "mean_predicted_rate": 0.01267323945588393,
+            "n": 96843.0,
+            "n_bins": 15.0,
+            "observed_rate": 0.014745515938167962
+          }
+        },
+        "discrimination": {
+          "n": 96843.0,
+          "pr_auc": 0.2041893413998775,
+          "prevalence": 0.014745515938167962,
+          "roc_auc": 0.8892554800047147,
+          "tpr_at_0.05_fpr": 0.5574229691876751,
+          "tpr_ci": {
+            "ci_high": 0.5812324929971989,
+            "ci_low": 0.5279936974789916,
+            "level": 0.95,
+            "n_resamples": 1000.0,
+            "point": 0.5574229691876751,
+            "seed": 20260917.0
+          }
+        },
+        "fairness": {
+          "age_cut": 50,
+          "by_band": [
+            {
+              "band": "10-19",
+              "false_alarms": 61,
+              "fpr": 0.020911895783339046,
+              "n": 2930,
+              "n_genuine": 2917
+            },
+            {
+              "band": "20-29",
+              "false_alarms": 522,
+              "fpr": 0.025015574831072987,
+              "n": 21023,
+              "n_genuine": 20867
+            },
+            {
+              "band": "30-39",
+              "false_alarms": 1347,
+              "fpr": 0.042149070655234995,
+              "n": 32363,
+              "n_genuine": 31958
+            },
+            {
+              "band": "40-49",
+              "false_alarms": 1719,
+              "fpr": 0.06268232205367562,
+              "n": 27860,
+              "n_genuine": 27424
+            },
+            {
+              "band": "50-59",
+              "false_alarms": 873,
+              "fpr": 0.0921955855950998,
+              "n": 9725,
+              "n_genuine": 9469
+            },
+            {
+              "band": "60-69",
+              "false_alarms": 287,
+              "fpr": 0.12109704641350211,
+              "n": 2501,
+              "n_genuine": 2370
+            },
+            {
+              "band": "70-79",
+              "false_alarms": 41,
+              "fpr": 0.12094395280235988,
+              "n": 364,
+              "n_genuine": 339
+            },
+            {
+              "band": "80-89",
+              "false_alarms": 8,
+              "fpr": 0.11764705882352941,
+              "n": 74,
+              "n_genuine": 68
+            },
+            {
+              "band": "90-99",
+              "false_alarms": 2,
+              "fpr": 0.6666666666666666,
+              "n": 3,
+              "n_genuine": 3
+            }
+          ],
+          "by_group": [
+            {
+              "false_alarms": 1211,
+              "fpr": 0.09886521348681525,
+              "group": "age>=50",
+              "n": 12667,
+              "n_genuine": 12249
+            },
+            {
+              "false_alarms": 3649,
+              "fpr": 0.043876103215256236,
+              "group": "age<50",
+              "n": 84176,
+              "n_genuine": 83166
+            }
+          ],
+          "fpr_ratio": 0.4437971827280542,
+          "fpr_ratio_ci": {
+            "ci_high": 0.47224367802551387,
+            "ci_low": 0.41914328498712417,
+            "level": 0.95,
+            "n_resamples": 1000.0,
+            "point": 0.4437971827280542,
+            "seed": 20260917.0
+          }
+        },
+        "realised": {
+          "flag_rate": 0.058455438183451565,
+          "fpr": 0.0509353875176859,
+          "n": 96843.0,
+          "n_flagged": 5661.0,
+          "n_fraud": 1428.0,
+          "precision": 0.14149443561208266,
+          "threshold": 0.04199414243978042,
+          "tpr": 0.5609243697478992
+        },
+        "reliability": [
+          {
+            "bin": 0,
+            "lower": 4.115049997580125e-05,
+            "mean_predicted": 0.0003363402965790675,
+            "n": 6457,
+            "observed": 0.0003097413659594239,
+            "upper": 0.0004903914191644657
+          },
+          {
+            "bin": 1,
+            "lower": 0.0004904630062360742,
+            "mean_predicted": 0.0006181716090699381,
+            "n": 6457,
+            "observed": 0.00046461204893913583,
+            "upper": 0.0007456396410366322
+          },
+          {
+            "bin": 2,
+            "lower": 0.0007457276692465568,
+            "mean_predicted": 0.0008787174681185248,
+            "n": 6457,
+            "observed": 0.0013938361468174075,
+            "upper": 0.0010173081239011823
+          },
+          {
+            "bin": 3,
+            "lower": 0.0010174139907044026,
+            "mean_predicted": 0.0011682195342027034,
+            "n": 6456,
+            "observed": 0.0010842627013630732,
+            "upper": 0.0013271706029540824
+          },
+          {
+            "bin": 4,
+            "lower": 0.0013271856652533785,
+            "mean_predicted": 0.0014982066723545954,
+            "n": 6456,
+            "observed": 0.0006195786864931846,
+            "upper": 0.0016790198168534416
+          },
+          {
+            "bin": 5,
+            "lower": 0.0016790272199233068,
+            "mean_predicted": 0.0018848345979298607,
+            "n": 6456,
+            "observed": 0.0032527881040892194,
+            "upper": 0.0021094963883614808
+          },
+          {
+            "bin": 6,
+            "lower": 0.0021095231422214706,
+            "mean_predicted": 0.0023703578920698104,
+            "n": 6456,
+            "observed": 0.0017038413878562577,
+            "upper": 0.00264577326022022
+          },
+          {
+            "bin": 7,
+            "lower": 0.002645952380409571,
+            "mean_predicted": 0.002975651964220789,
+            "n": 6456,
+            "observed": 0.0030978934324659233,
+            "upper": 0.003334804939445034
+          },
+          {
+            "bin": 8,
+            "lower": 0.003335276179232971,
+            "mean_predicted": 0.003786844082402806,
+            "n": 6456,
+            "observed": 0.004182156133828996,
+            "upper": 0.004281985140597467
+          },
+          {
+            "bin": 9,
+            "lower": 0.004282248616763657,
+            "mean_predicted": 0.004909994804500107,
+            "n": 6456,
+            "observed": 0.0057311028500619575,
+            "upper": 0.005624579646275082
+          },
+          {
+            "bin": 10,
+            "lower": 0.005624794919837382,
+            "mean_predicted": 0.006533279866882963,
+            "n": 6456,
+            "observed": 0.007744733581164808,
+            "upper": 0.007601314102096335
+          },
+          {
+            "bin": 11,
+            "lower": 0.007601839589136014,
+            "mean_predicted": 0.009175465554367667,
+            "n": 6456,
+            "observed": 0.01533457249070632,
+            "upper": 0.011015707622519027
+          },
+          {
+            "bin": 12,
+            "lower": 0.011016294607761205,
+            "mean_predicted": 0.013936229881396502,
+            "n": 6456,
+            "observed": 0.017193308550185873,
+            "upper": 0.01766857510932599
+          },
+          {
+            "bin": 13,
+            "lower": 0.017668957854086065,
+            "mean_predicted": 0.025096080591017755,
+            "n": 6456,
+            "observed": 0.027881040892193308,
+            "upper": 0.03684769664143655
+          },
+          {
+            "bin": 14,
+            "lower": 0.03685085723720483,
+            "mean_predicted": 0.11493580211747578,
+            "n": 6456,
+            "observed": 0.13119578686493186,
+            "upper": 0.9645478869608958
+          }
+        ]
+      }
+    },
+    "seconds": 31.56867355999998,
+    "split_sizes": {
+      "cal_conf": 39770,
+      "cal_prob": 39782,
+      "cal_tune": 39771,
+      "test_month_6": 108168,
+      "test_month_7": 96843,
+      "train": 675666
+    },
+    "threshold": 0.04199414243978042,
+    "threshold_set_on": "cal_tune"
+  },
+  "policy": {
+    "calibration": "platt",
+    "capacity": {
+      "note": "ASSUMPTION: set by the owner, not derived from the data (section 3)",
+      "review_share": 0.05,
+      "verify_share": 0.02
+    },
+    "chosen": {
+      "alpha_fraud": 0.45,
+      "alpha_legit": 0.01,
+      "expected_fraud_coverage": 0.5520169851380042,
+      "expected_review_share": 0.04563626763219431,
+      "expected_verify_share": 0.013200573282039677
+    },
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-18T17:00:08.809817+00:00",
+      "git_sha": "unknown",
+      "seed": 20260917
+    },
+    "grid": [
+      {
+        "alpha_fraud": 0.05,
+        "alpha_legit": 0.01,
+        "approve_share": 0.5420783988333208,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.9532908704883227,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.4447210278846396,
+        "tau_fraud": 0.0038305603204583784,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.05,
+        "alpha_legit": 0.02,
+        "approve_share": 0.5420783988333208,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.9532908704883227,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.4338336979205954,
+        "tau_fraud": 0.0038305603204583784,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.05,
+        "alpha_legit": 0.05,
+        "approve_share": 0.5420783988333208,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.9532908704883227,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.40215232204370016,
+        "tau_fraud": 0.0038305603204583784,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.1,
+        "alpha_legit": 0.01,
+        "approve_share": 0.6797666641522717,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.9023354564755839,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.30703276256568857,
+        "tau_fraud": 0.006307384387833262,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.1,
+        "alpha_legit": 0.02,
+        "approve_share": 0.6797666641522717,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.9023354564755839,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.2961454326016444,
+        "tau_fraud": 0.006307384387833262,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.1,
+        "alpha_legit": 0.05,
+        "approve_share": 0.6797666641522717,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.9023354564755839,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.2644640567247492,
+        "tau_fraud": 0.006307384387833262,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.15,
+        "alpha_legit": 0.01,
+        "approve_share": 0.7582912172185764,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.8535031847133758,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.22850820949938397,
+        "tau_fraud": 0.008829854024794428,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.15,
+        "alpha_legit": 0.02,
+        "approve_share": 0.7582912172185764,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.8535031847133758,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.21762087953533982,
+        "tau_fraud": 0.008829854024794428,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.15,
+        "alpha_legit": 0.05,
+        "approve_share": 0.7582912172185764,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.8535031847133758,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.18593950365844458,
+        "tau_fraud": 0.008829854024794428,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.2,
+        "alpha_legit": 0.01,
+        "approve_share": 0.8176057931658747,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.802547770700637,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.1691936335520857,
+        "tau_fraud": 0.01218620445129633,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.2,
+        "alpha_legit": 0.02,
+        "approve_share": 0.8176057931658747,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.802547770700637,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.15830630358804154,
+        "tau_fraud": 0.01218620445129633,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.2,
+        "alpha_legit": 0.05,
+        "approve_share": 0.8176057931658747,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.802547770700637,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.1266249277111463,
+        "tau_fraud": 0.01218620445129633,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.25,
+        "alpha_legit": 0.01,
+        "approve_share": 0.8571069372155591,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.7515923566878981,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.12969248950240125,
+        "tau_fraud": 0.01600630782652882,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.25,
+        "alpha_legit": 0.02,
+        "approve_share": 0.8571069372155591,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.7515923566878981,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.11880515953835709,
+        "tau_fraud": 0.01600630782652882,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.25,
+        "alpha_legit": 0.05,
+        "approve_share": 0.8571069372155591,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.7515923566878981,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.08712378366146187,
+        "tau_fraud": 0.01600630782652882,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.3,
+        "alpha_legit": 0.01,
+        "approve_share": 0.8806668175303614,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.70276008492569,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.10613260918759901,
+        "tau_fraud": 0.01947763203880361,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.3,
+        "alpha_legit": 0.02,
+        "approve_share": 0.8806668175303614,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.70276008492569,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.09524527922355486,
+        "tau_fraud": 0.01947763203880361,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.3,
+        "alpha_legit": 0.05,
+        "approve_share": 0.8806668175303614,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.70276008492569,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.06356390334665962,
+        "tau_fraud": 0.01947763203880361,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.35,
+        "alpha_legit": 0.01,
+        "approve_share": 0.9098337984963918,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.6518046709129511,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.07696562822156848,
+        "tau_fraud": 0.025914528632336512,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.35,
+        "alpha_legit": 0.02,
+        "approve_share": 0.9098337984963918,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.6518046709129511,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.06607829825752433,
+        "tau_fraud": 0.025914528632336512,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.35,
+        "alpha_legit": 0.05,
+        "approve_share": 0.9098337984963918,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.6518046709129511,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.0343969223806291,
+        "tau_fraud": 0.025914528632336512,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.4,
+        "alpha_legit": 0.01,
+        "approve_share": 0.9267305322974027,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.6029723991507431,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.06006889442055769,
+        "tau_fraud": 0.03215574284963365,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.4,
+        "alpha_legit": 0.02,
+        "approve_share": 0.9267305322974027,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.6029723991507431,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.04918156445651354,
+        "tau_fraud": 0.03215574284963365,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.4,
+        "alpha_legit": 0.05,
+        "approve_share": 0.9267305322974027,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.6029723991507431,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.017500188579618315,
+        "tau_fraud": 0.03215574284963365,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.45,
+        "alpha_legit": 0.01,
+        "approve_share": 0.941163159085766,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5520169851380042,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.04563626763219431,
+        "tau_fraud": 0.039929239163640995,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.45,
+        "alpha_legit": 0.02,
+        "approve_share": 0.941163159085766,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5520169851380042,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.03474893766815016,
+        "tau_fraud": 0.039929239163640995,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.45,
+        "alpha_legit": 0.05,
+        "approve_share": 0.941163159085766,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5520169851380042,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.0030675617912549343,
+        "tau_fraud": 0.039929239163640995,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.055769279122979055
+      },
+      {
+        "alpha_fraud": 0.5,
+        "alpha_legit": 0.01,
+        "approve_share": 0.9534082623016771,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5010615711252654,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.033391164416283224,
+        "tau_fraud": 0.049458682125876105,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.5,
+        "alpha_legit": 0.02,
+        "approve_share": 0.9534082623016771,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5010615711252654,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.02250383445223907,
+        "tau_fraud": 0.049458682125876105,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.5,
+        "alpha_legit": 0.05,
+        "approve_share": 0.944230720877021,
+        "empty_share": 0.009177541424656157,
+        "fraud_coverage": 0.5010615711252654,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.009177541424656157,
+        "tau_fraud": 0.049458682125876105,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.0465917376983229
+      },
+      {
+        "alpha_fraud": 0.55,
+        "alpha_legit": 0.01,
+        "approve_share": 0.9621080686932689,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.45222929936305734,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.024691358024691357,
+        "tau_fraud": 0.0586591893770936,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.55,
+        "alpha_legit": 0.02,
+        "approve_share": 0.9621080686932689,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.45222929936305734,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.013804028060647205,
+        "tau_fraud": 0.0586591893770936,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.55,
+        "alpha_legit": 0.05,
+        "approve_share": 0.944230720877021,
+        "empty_share": 0.01787734781624802,
+        "fraud_coverage": 0.45222929936305734,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.01787734781624802,
+        "tau_fraud": 0.0586591893770936,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.03789193130673103
+      },
+      {
+        "alpha_fraud": 0.6,
+        "alpha_legit": 0.01,
+        "approve_share": 0.9705061476955571,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.4012738853503185,
+        "genuine_exclusion_rate": 0.009974554707379134,
+        "review_share": 0.016293279022403257,
+        "tau_fraud": 0.07189455163342943,
+        "tau_legit": 0.13681749888588565,
+        "verify_share": 0.013200573282039677
+      },
+      {
+        "alpha_fraud": 0.6,
+        "alpha_legit": 0.02,
+        "approve_share": 0.9705061476955571,
+        "empty_share": 0.0,
+        "fraud_coverage": 0.4012738853503185,
+        "genuine_exclusion_rate": 0.019974554707379136,
+        "review_share": 0.005405949058359106,
+        "tau_fraud": 0.07189455163342943,
+        "tau_legit": 0.08587602618044471,
+        "verify_share": 0.02408790324608383
+      },
+      {
+        "alpha_fraud": 0.6,
+        "alpha_legit": 0.05,
+        "approve_share": 0.944230720877021,
+        "empty_share": 0.02627542681853612,
+        "fraud_coverage": 0.4012738853503185,
+        "genuine_exclusion_rate": 0.04997455470737913,
+        "review_share": 0.02627542681853612,
+        "tau_fraud": 0.07189455163342943,
+        "tau_legit": 0.041894843970735195,
+        "verify_share": 0.029493852304442937
+      }
+    ],
+    "grid_csv": "reports/tables/policy_grid.csv",
+    "infeasible": null,
+    "model_version": "champion-unknown",
+    "months": {
+      "6": {
+        "approve_share": 0.9216219214555137,
+        "band_approve": 0.9216219214555137,
+        "band_review": 0.05885289549589527,
+        "band_verify": 0.01952518304859108,
+        "by_age_band": [
+          {
+            "approve_share": 0.9699907663896583,
+            "band": "10-19",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.3333333333333333,
+            "genuine_exclusion_rate": 0.0027816411682892906,
+            "n": 2166.0,
+            "n_fraud": 9.0,
+            "review_share": 0.02723915050784857,
+            "verify_share": 0.002770083102493075
+          },
+          {
+            "approve_share": 0.9642151828738447,
+            "band": "20-29",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.45751633986928103,
+            "genuine_exclusion_rate": 0.005444069143651898,
+            "n": 25318.0,
+            "n_fraud": 153.0,
+            "review_share": 0.029109724306817283,
+            "verify_share": 0.006675092819338021
+          },
+          {
+            "approve_share": 0.9423753997222133,
+            "band": "30-39",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.4886731391585761,
+            "genuine_exclusion_rate": 0.010570962479608483,
+            "n": 30959.0,
+            "n_fraud": 309.0,
+            "review_share": 0.04483348945379373,
+            "verify_share": 0.012791110823993023
+          },
+          {
+            "approve_share": 0.9060566875196588,
+            "band": "40-49",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.5784313725490197,
+            "genuine_exclusion_rate": 0.0191100868640312,
+            "n": 28613.0,
+            "n_fraud": 408.0,
+            "review_share": 0.07143606053192605,
+            "verify_share": 0.022507251948415057
+          },
+          {
+            "approve_share": 0.8618268447119303,
+            "band": "50-59",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.6684491978609626,
+            "genuine_exclusion_rate": 0.032034409706618736,
+            "n": 15951.0,
+            "n_fraud": 374.0,
+            "review_share": 0.09836373895053602,
+            "verify_share": 0.039809416337533696
+          },
+          {
+            "approve_share": 0.8402725208175624,
+            "band": "60-69",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.7123287671232876,
+            "genuine_exclusion_rate": 0.035892061828661254,
+            "n": 3963.0,
+            "n_fraud": 146.0,
+            "review_share": 0.10926066111531668,
+            "verify_share": 0.05046681806712087
+          },
+          {
+            "approve_share": 0.8430769230769231,
+            "band": "70-79",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.7906976744186046,
+            "genuine_exclusion_rate": 0.03755364806866953,
+            "n": 975.0,
+            "n_fraud": 43.0,
+            "review_share": 0.10564102564102563,
+            "verify_share": 0.05128205128205128
+          },
+          {
+            "approve_share": 0.8,
+            "band": "80-89",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.875,
+            "genuine_exclusion_rate": 0.04455445544554455,
+            "n": 210.0,
+            "n_fraud": 8.0,
+            "review_share": 0.14761904761904762,
+            "verify_share": 0.05238095238095238
+          },
+          {
+            "approve_share": 0.7692307692307693,
+            "band": "90-99",
+            "empty_share": 0.0,
+            "fraud_coverage": null,
+            "genuine_exclusion_rate": 0.07692307692307693,
+            "n": 13.0,
+            "n_fraud": 0.0,
+            "review_share": 0.15384615384615385,
+            "verify_share": 0.07692307692307693
+          }
+        ],
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5896551724137931,
+        "genuine_exclusion_rate": 0.015808017391630277,
+        "n": 108168.0,
+        "n_fraud": 1450.0,
+        "review_share": 0.05885289549589527,
+        "tau_fraud": 0.03864828072775947,
+        "tau_legit": 0.13203159243243098,
+        "verify_share": 0.01952518304859108
+      },
+      "7": {
+        "approve_share": 0.9364538479807524,
+        "band_approve": 0.9364538479807524,
+        "band_review": 0.0479022748159392,
+        "band_verify": 0.015643877203308447,
+        "by_age_band": [
+          {
+            "approve_share": 0.9754266211604096,
+            "band": "10-19",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.23076923076923078,
+            "genuine_exclusion_rate": 0.0010284538909838875,
+            "n": 2930.0,
+            "n_fraud": 13.0,
+            "review_share": 0.022525597269624574,
+            "verify_share": 0.0020477815699658703
+          },
+          {
+            "approve_share": 0.9698425533939019,
+            "band": "20-29",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.358974358974359,
+            "genuine_exclusion_rate": 0.004408875257583745,
+            "n": 21023.0,
+            "n_fraud": 156.0,
+            "review_share": 0.02497264900347239,
+            "verify_share": 0.0051847976026256955
+          },
+          {
+            "approve_share": 0.9478725705280722,
+            "band": "30-39",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.48641975308641977,
+            "genuine_exclusion_rate": 0.008980536954753114,
+            "n": 32363.0,
+            "n_fraud": 405.0,
+            "review_share": 0.04075641936779656,
+            "verify_share": 0.011371010104131262
+          },
+          {
+            "approve_share": 0.9228284278535535,
+            "band": "40-49",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.6376146788990825,
+            "genuine_exclusion_rate": 0.014549299883313885,
+            "n": 27860.0,
+            "n_fraud": 436.0,
+            "review_share": 0.057430007178750894,
+            "verify_share": 0.01974156496769562
+          },
+          {
+            "approve_share": 0.8831876606683805,
+            "band": "50-59",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.73046875,
+            "genuine_exclusion_rate": 0.02365614109198437,
+            "n": 9725.0,
+            "n_fraud": 256.0,
+            "review_share": 0.0834961439588689,
+            "verify_share": 0.03331619537275064
+          },
+          {
+            "approve_share": 0.8416633346661335,
+            "band": "60-69",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.6793893129770993,
+            "genuine_exclusion_rate": 0.036286919831223625,
+            "n": 2501.0,
+            "n_fraud": 131.0,
+            "review_share": 0.10395841663334666,
+            "verify_share": 0.05437824870051979
+          },
+          {
+            "approve_share": 0.8296703296703297,
+            "band": "70-79",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.72,
+            "genuine_exclusion_rate": 0.02359882005899705,
+            "n": 364.0,
+            "n_fraud": 25.0,
+            "review_share": 0.12362637362637363,
+            "verify_share": 0.046703296703296704
+          },
+          {
+            "approve_share": 0.7972972972972973,
+            "band": "80-89",
+            "empty_share": 0.0,
+            "fraud_coverage": 0.8333333333333334,
+            "genuine_exclusion_rate": 0.014705882352941176,
+            "n": 74.0,
+            "n_fraud": 6.0,
+            "review_share": 0.14864864864864866,
+            "verify_share": 0.05405405405405406
+          },
+          {
+            "approve_share": 0.3333333333333333,
+            "band": "90-99",
+            "empty_share": 0.0,
+            "fraud_coverage": null,
+            "genuine_exclusion_rate": 0.3333333333333333,
+            "n": 3.0,
+            "n_fraud": 0.0,
+            "review_share": 0.3333333333333333,
+            "verify_share": 0.3333333333333333
+          }
+        ],
+        "empty_share": 0.0,
+        "fraud_coverage": 0.5833333333333334,
+        "genuine_exclusion_rate": 0.011539066184562175,
+        "n": 96843.0,
+        "n_fraud": 1428.0,
+        "review_share": 0.0479022748159392,
+        "tau_fraud": 0.03864828072775947,
+        "tau_legit": 0.13203159243243098,
+        "verify_share": 0.015643877203308447
+      }
+    },
+    "seconds": 1.9957138080001187,
+    "thresholds": {
+      "alpha_fraud": 0.45,
+      "alpha_legit": 0.01,
+      "n_fraud": 470,
+      "n_legit": 39300,
+      "policy_version": "alpha_fraud=0.45,alpha_legit=0.01",
+      "tau_fraud": 0.03864828072775947,
+      "tau_legit": 0.13203159243243098
+    },
+    "thresholds_fitted_on": "cal_conf"
+  }
+}

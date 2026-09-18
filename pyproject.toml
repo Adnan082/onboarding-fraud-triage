@@ -1,0 +1,98 @@
+[project]
+name = "onboarding-fraud-triage"
+version = "0.1.0"
+description = "Calibrated fraud triage for online bank-account applications (BAF, NeurIPS 2022)"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+authors = [{ name = "Adnan" }]
+
+# Pinned stack: checked to resolve together on Python 3.11 (see CLAUDE.md section 4).
+# Ask the owner before adding anything here.
+dependencies = [
+  "scikit-learn==1.5.2",       # pinned for fairgbm 0.9.14; see CLAUDE.md section 4
+  "pandas>=2.2,<3",
+  "numpy>=2,<2.4",         # upper bound is what numba (via shap) supports; see docs/DECISIONS.md D4
+  "pyarrow>=17",
+  "lightgbm~=4.7",
+  "fairlearn~=0.14.0",
+  "mapie~=1.5",                # cross-check only; conformal is written from scratch
+  "shap~=0.51.0",
+  "pandera~=0.33.0",
+  "duckdb~=1.5",
+  "hydra-core==1.3.2",
+  "mlflow>=3,<4",
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "httpx>=0.27",
+  "pydantic>=2,<3",
+  "streamlit>=1.40",
+  "matplotlib>=3.9",
+  "joblib>=1.4",
+  "kaggle>=2,<3",
+]
+
+[project.optional-dependencies]
+# FairGBM bundles a Linux .so; import it lazily and skip its experiment elsewhere.
+fairgbm = ["fairgbm==0.9.14; sys_platform == 'linux'"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "hypothesis>=6",
+  "ruff>=0.7",
+  "mypy>=1.11",
+  "pre-commit>=4",
+  "nbstripout>=0.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/triage"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+no_implicit_optional = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]   # so tests can import tests.fixtures
+addopts = "-q --strict-markers"
+markers = [
+  "data: needs data/interim/ (run with `make test-data`)",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["src/triage"]
+branch = true
+
+[tool.coverage.report]
+# Bar from CLAUDE.md section 13: >= 85% for uncertainty/, fairness/, monitoring/, policy/.
+# fail_under is switched on once those packages are implemented.
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError", "if TYPE_CHECKING:"]
+
+[tool.uv]
+# Resolver constraint, not a new dependency: shap pulls numba in with no lower
+# bound, and the universal resolution otherwise walks back to numba 0.53.1
+# (2021), whose llvmlite 0.36 refuses to build on Python 3.11. See DECISIONS D4.
+constraint-dependencies = ["numba>=0.61"]

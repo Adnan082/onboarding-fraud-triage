@@ -1,0 +1,41 @@
+# Label-conditional split conformal policy (CLAUDE.md section 8.4).
+#
+# Every value tagged "# ASSUMPTION" is a placeholder the OWNER must set.
+# Do not treat any of them as agreed.
+
+# Chosen alphas. Filled in by `make conformal` from the sweep, within capacity.
+alpha_fraud: 0.30   # ASSUMPTION: at most 30% of fraud may be auto-approved
+alpha_legit: 0.02   # ASSUMPTION: at most 2% of genuine applicants excluded
+
+sweep:
+  alpha_fraud: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60]
+  alpha_legit: [0.01, 0.02, 0.05]
+  thresholds_on: cal_tune    # the sweep only; final thresholds come from cal_conf
+
+capacity:
+  review_share: 0.05   # ASSUMPTION: share of applications the team can review
+  verify_share: 0.02   # ASSUMPTION: share that can be sent for extra verification
+
+# Illustrative parameters only. Never state a "£ saved" figure.
+costs:
+  review_cost: 5.0        # ASSUMPTION
+  verify_cost: 2.0        # ASSUMPTION
+  friction_cost: 10.0     # ASSUMPTION: a genuine applicant sent to verify
+  # ASSUMPTION, and reserved for the owner: is proposed_credit_limit an
+  # acceptable proxy for the loss on a missed fraud?
+  loss_proxy: proposed_credit_limit
+  loss_proxy_multiplier: 1.0   # ASSUMPTION
+  per_n_applications: 10000
+  sensitivity_ratios: [0.5, 1.0, 2.0, 5.0]   # always publish the sensitivity table
+
+# Applied on ALERT: sends more cases to review.
+fallback:
+  alpha_fraud: 0.15   # ASSUMPTION
+  alpha_legit: 0.05   # ASSUMPTION
+
+# Rule 5: there is no automatic decline. The riskiest band is "verify".
+decisions:
+  legit_only: approve
+  both: review
+  empty: review
+  fraud_only: verify

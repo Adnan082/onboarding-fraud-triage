@@ -1,0 +1,44 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest   # Linux, so the fairgbm extra installs
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.10.6"
+          enable-cache: true
+
+      - name: Set up Python 3.11
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --frozen --extra fairgbm
+
+      - name: Lint
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run mypy src
+
+      - name: Test (data-free)
+        run: uv run pytest -m "not data" --cov=src/triage --cov-report=term-missing
+
+      - name: Check no row-level data was committed
+        run: |
+          if git ls-files | grep -E '^(data/(raw|interim)/|models/).*\.(csv|parquet|joblib)$'; then
+            echo "Row-level data or model artefacts are committed. See CLAUDE.md rule 3."
+            exit 1
+          fi

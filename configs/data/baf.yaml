@@ -1,0 +1,42 @@
+# Bank Account Fraud (BAF), NeurIPS 2022.
+# https://www.kaggle.com/datasets/sgpjesus/bank-account-fraud-dataset-neurips-2022
+kaggle_dataset: sgpjesus/bank-account-fraud-dataset-neurips-2022
+
+# Raw file name (as published) -> snake_case name written to data/interim/.
+variants:
+  base: Base.csv
+  variant_iv: Variant IV.csv
+  variant_v: Variant V.csv
+
+label: fraud_bool
+time_column: month
+months: [0, 1, 2, 3, 4, 5, 6, 7]
+
+# Simulated days: shuffle within month with the global seed, then cut into windows.
+window_size: 4000
+
+# Development only. Never report results from a sampled run.
+sample_frac: 1.0
+
+protocol:
+  paper:
+    train_months: [0, 1, 2, 3, 4, 5]
+    test_months: [6, 7]
+    # The BAF paper sets this threshold on the test set. Always label it as such.
+    threshold_on: test
+    threshold_fpr: 0.05
+  deployment:
+    train_months: [0, 1, 2, 3, 4]
+    calibration_month: 5
+    # Three equal, disjoint, label-stratified parts of month 5.
+    calibration_split:
+      cal_prob: 0.3334   # fit probability calibration
+      cal_tune: 0.3333   # choose alphas and the 5%-FPR operating threshold
+      cal_conf: 0.3333   # conformal thresholds only; never used for any choice
+    test_months: [6, 7]
+    report_pooled: true   # allowed as an extra, never on its own
+  champion_tuning:
+    train_months: [0, 1, 2, 3]
+    valid_month: 4
+    max_trials: 30
+    refit_months: [0, 1, 2, 3, 4]

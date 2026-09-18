@@ -1,0 +1,64 @@
+# Plain-English analyst text, keyed by feature and direction.
+# Direction is "high" or "low" relative to the TRAINING median.
+# Analysts only: never show this text to an applicant. No jargon.
+#
+# Reason codes come from SHAP TreeExplainer on the UNCALIBRATED LightGBM margin.
+reasons:
+  name_email_similarity:
+    low: "Name and email address look unrelated"
+    high: "Name and email address match closely"
+  prev_address_months_count:
+    low: "Very little history at the previous address"
+  current_address_months_count:
+    low: "Very little history at the current address"
+  days_since_request:
+    high: "Long gap between starting and finishing the application"
+  intended_balcon_amount:
+    high: "Unusually large opening balance transfer requested"
+  zip_count_4w:
+    high: "Many recent applications from the same postcode area"
+  velocity_6h:
+    high: "Many applications in the last few hours"
+  velocity_24h:
+    high: "Many applications in the last day"
+  velocity_4w:
+    high: "Many applications in the last month"
+  bank_branch_count_8w:
+    high: "Many recent applications at the same branch"
+  date_of_birth_distinct_emails_4w:
+    high: "Several email addresses used with the same date of birth"
+  credit_risk_score:
+    high: "Credit risk score is high"
+  bank_months_count:
+    low: "Little or no history with the bank"
+  proposed_credit_limit:
+    high: "Requested credit limit is unusually high"
+  session_length_in_minutes:
+    low: "Application completed unusually quickly"
+    high: "Application took unusually long"
+  device_distinct_emails_8w:
+    high: "Several email addresses used from the same device"
+  email_is_free:
+    high: "Free email provider used"
+  phone_home_valid:
+    low: "Home phone number could not be verified"
+  phone_mobile_valid:
+    low: "Mobile number could not be verified"
+  has_other_cards:
+    low: "No other cards held with the bank"
+  foreign_request:
+    high: "Application sent from outside the usual country"
+  keep_alive_session:
+    low: "Session kept alive in an unusual way"
+  income:
+    low: "Declared income is low for the product requested"
+  payment_type:
+    high: "Payment type is unusual for this product"
+  employment_status:
+    high: "Employment status is unusual for this product"
+  housing_status:
+    high: "Housing status is unusual for this product"
+  source:
+    high: "Application arrived through an unusual channel"
+  device_os:
+    high: "Device operating system is unusual for this channel"

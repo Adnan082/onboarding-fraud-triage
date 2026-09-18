@@ -1,0 +1,348 @@
+# Progress
+
+Newest entry first. Each session records: what changed, results (copied from the
+artefact, with its path), what didn't work, the next step, and open questions.
+
+---
+
+## 2026-09-18 (late) — Champion, calibration, and the conformal policy
+
+**What changed**
+- `models/calibrate.py`: none / Platt / isotonic, fitted on `cal_prob`, chosen on
+  `cal_tune`, plus the reliability curve stored for the figure.
+- `models/champion.py`: fit (refusing to run if `use_age` is true), save with a
+  hashed manifest, and `load_fitted`, which every later stage uses so they all
+  score with the same artefacts the API serves.
+- `stages/train.py` and `stages/conformal.py`.
+- `policy/sweep.py`: the alpha grid, capacity selection, coverage by age band.
+- Five more README tables (calibration, policy, trade-off curve, coverage by age)
+  and two more "What didn't work" entries.
+
+**Results** (from `reports/metrics.json`, sections `champion` and `policy`, and
+`reports/tables/policy_grid.csv`)
+- Calibration on `cal_tune`: Platt **0.010507** Brier / **0.00120** ECE; isotonic
+  0.010566 / 0.00259; uncalibrated 0.010542 / 0.00353. The uncalibrated model
+  predicts **0.865%** against an observed **1.184%**.
+- Champion (no age) vs B1 (age): ROC-AUC **0.8862 vs 0.8871** on month 6 and
+  0.8893 vs 0.8901 on month 7. **Dropping age costs essentially nothing.**
+- FPR ratio, month 6: champion **0.439 (0.418-0.460)** against B1's 0.331
+  (0.316-0.346). M1 helps materially and still leaves older applicants stopped
+  about 2.3x as often (FPR 0.119 vs 0.052).
+- Calibration is markedly worse for the older group: Brier 0.0177 vs 0.0090 on
+  `cal_tune`, and on month 7 ECE 0.00948 vs 0.00135 with the model
+  under-predicting fraud for over-50s by 0.9 points.
+- Policy chosen on `cal_tune`: `alpha_fraud=0.45`, `alpha_legit=0.01` — the best
+  coverage inside the placeholder 5% review capacity. Thresholds on `cal_conf`:
+  tau_fraud 0.038648, tau_legit 0.132032, from 470 frauds.
+- **Fraud coverage held**: 0.5897 (month 6) and 0.5833 (month 7) against a 0.55
+  target. **Genuine exclusion did not**: 0.0158 and 0.0115 against a 0.01 promise.
+- Trade-off curve: 55% coverage costs a 4.6% review share; 90% costs **30.7%**;
+  95% costs 44.5%. On 100,000 applications that is 4,564 reviews against 30,703.
+- Coverage by age band, month 6: 0.458 for 20-29 rising to 0.712 for 60-69, with
+  review share 2.9% against 10.9%. The policy is age-blind; the burden is not.
+- Tests: **215 passed, 3 skipped**; lint and mypy clean.
+
+**What didn't work**
+- The genuine-exclusion guarantee was breached on both test months. Exchangeability
+  between month 5 and months 6-7 does not hold, which is the monitor's whole
+  reason for existing.
+- Fraud coverage over-delivered by ~4 points, outside the +/-1.5 point acceptance
+  criterion in section 9. `cal_conf` holds only 470 frauds, so the threshold is a
+  noisy order statistic.
+- Two tests I wrote first were wrong, not the code: one fixture was not actually
+  miscalibrated, and one asserted a review-share relationship that only holds when
+  the score distributions overlap the way the real ones do. Both now assert what is
+  true unconditionally.
+
+**Next step**
+- The monitor (section 8.5): the three detectors, thresholds calibrated on clean
+  windows, and the injected-bug experiments. The genuine-exclusion breach above is
+  the thing it needs to catch.
+
+**Open questions for the owner**
+1. **The alpha targets are now load-bearing.** The policy currently promises to
+   catch 55% of fraud because that is what a 5% review capacity buys. Both numbers
+   are placeholders. The trade-off table is the thing to look at before deciding.
+2. `git_sha` is still `unknown`, and it is now stamped into `models/manifest.json`
+   and reported by the API as `model_version: champion-unknown`.
+3. Unchanged: cost parameters, the `proposed_credit_limit` proxy, DECISIONS D4,
+   and the stale Windows copy.
+
+---
+
+## 2026-09-18 (night) — First real results: B0 and B1 on the full million
+
+**What changed**
+- `features/sentinels.py` and `features/encode.py`: the six real sentinels flagged
+  and blanked, the two look-alikes deliberately left alone (D10), one-hot and
+  LightGBM encodings both pinned to the frozen contract's category levels.
+- `models/baselines.py`: B0 and B1, each owning its own preprocessing.
+- `evaluation/protocols.py`: both protocols end to end, with fairness measured in
+  every slice.
+- `evaluation/artefacts.py`, `evaluation/tables.py`, `stages/report.py`: the rule-6
+  path. Stages write `reports/metrics.json`; `make report` renders the README
+  tables from it; nothing else may write a number into the README.
+- README: four generated tables (data, detection, fairness, age bands) and the
+  first three real "What didn't work" entries.
+
+**Results** (all from `reports/metrics.json`, section `baselines`)
+- **B1 matches the published references in section 9.** Pooled paper protocol:
+  ROC-AUC **0.8873**, TPR@5%FPR **0.5202**. Pooled deployment: ROC-AUC **0.8883**,
+  TPR@5%FPR **0.5309**. The third-party reference is 0.535 recall at 5% FPR and
+  ROC-AUC 0.89. Week 1's acceptance criterion is met.
+- **B0 is barely behind B1.** Month 6, deployment: ROC-AUC 0.8812 vs 0.8871,
+  TPR@5%FPR 0.5021 (0.476-0.528) vs 0.5124 (0.488-0.538). The intervals overlap
+  heavily.
+- **The cal_tune threshold does not transfer.** Target 5% FPR; realised: B1 month 6
+  6.19% (+24%), month 7 5.67% (+13%); B0 month 6 5.48% (+10%), month 7 3.30%
+  (-34%).
+- **Fairness reproduces the paper.** FPR ratio at the deployment threshold: B1
+  0.331 (0.316-0.346) month 6 and 0.337 (0.320-0.356) month 7; B0 0.302 and 0.273.
+  Section 9 cites about 0.3 for the paper's best Base models.
+- FPR by 10-year band (B1, month 6) climbs monotonically: 1.76% at 10-19, 4.23% at
+  30-39, 12.3% at 50-59, 17.2% at 60-69. Bands above 70 hold too few genuine
+  applicants to read, and the README marks them as such.
+- Runtime: the full baseline stage takes ~5 minutes, almost all bootstrap.
+- Tests: **195 passed, 3 skipped**; lint and mypy clean.
+
+**What didn't work**
+- Gradient boosting barely beat logistic regression — about one point of TPR, with
+  overlapping intervals. Recorded in the README.
+- A threshold set on month 5 does not hold on months 6 and 7, in either direction.
+- `with_model` could not merge a second model config into Hydra's composed one,
+  because the models have different parameter sets; it replaces the node instead.
+
+**Next step**
+- `make train`: the champion without age, plus the calibration comparison
+  (none / Platt / isotonic, chosen by Brier on `cal_tune`), and `models/manifest.json`.
+- Then the conformal policy, which is where the threshold-transfer problem above
+  gets its real answer.
+
+**Open questions for the owner**
+- Unchanged: capacity and cost parameters, the `proposed_credit_limit` proxy, the
+  alpha targets, DECISIONS D4, the stale Windows copy, and the missing git commit
+  (artefacts still record `git_sha=unknown`).
+
+---
+
+## 2026-09-18 (evening) — Full dataset, and the move to WSL2
+
+**What changed**
+- Downloaded the remaining three variants: all six BAF CSVs are now in
+  `data/raw` (1.3 GB). The pipeline still reads Base, Variant IV and Variant V.
+- Benchmarked the real workload before choosing where to train (DECISIONS D12).
+- Moved the project to `~/projects/onboarding-fraud-triage` in WSL2 Ubuntu-22.04:
+  uv installed, project copied (106 files, 1.2 MB), Kaggle token copied, data
+  copied to ext4, interim parquet rebuilt there.
+- Fixed `config_hash` so the provenance key survives moving the checkout
+  (DECISIONS D11), with two tests in `tests/test_scaffold.py`.
+
+**Results**
+- Timings on this laptop (Core Ultra 7 258V, 8 cores, 32 GB): load 1M rows 0.2 s;
+  LightGBM champion 500 trees on 675,666 rows **7.6 s**; score 108,168 rows 0.46 s;
+  B0 logistic regression 1.9 s. Extrapolated: 30-trial tuning ~4 min, M3 fairlearn
+  ~6 min, all 246 monitoring windows ~4 s. No cloud needed.
+- A throwaway champion-shaped fit scored ROC-AUC 0.886 and TPR@5%FPR 0.519 on
+  month 6, against the public references of 0.89 and 0.535 in section 9. Not a
+  reportable number -- no calibration, no protocol -- but the pipeline looks sound.
+- In WSL: **150 passed, 4 skipped** data-free, 3 passed with `-m data`; lint and
+  mypy clean. Contract passes for all three variants.
+- The checksums written on Windows verify unchanged after the copy to ext4, so the
+  files are byte-identical across the move.
+- `config_hash` is now `1f6a7be2` on both Windows and WSL, verified on each.
+
+**What didn't work / findings**
+- **`libgomp1` is missing from the distro**, so LightGBM *and* FairGBM fail to
+  import in WSL. It needs `sudo apt install libgomp1`, which needs the owner. Note
+  the Dockerfile already installs it.
+- `make` is not installed in the distro either; same one-line fix.
+- The config hash was machine-dependent, caught only because a new test called it
+  outside a Hydra run (D11).
+
+**Next step**
+- Once `libgomp1` is in: confirm FairGBM imports, then `features/sentinels.py` and
+  `features/encode.py`, then B0 and B1 under both protocols.
+
+**Open questions for the owner**
+- Unchanged: capacity and cost parameters, the `proposed_credit_limit` proxy, the
+  alpha targets, and DECISIONS D4.
+- The Windows copy under OneDrive is now stale. Safe to delete once you are happy
+  with WSL.
+- Still no git commit, so every artefact records `git_sha=unknown`.
+
+---
+
+## 2026-09-18 (later) — Real data in, contract frozen
+
+**What changed**
+- Kaggle credentials in place; downloaded Base, Variant IV and Variant V only
+  (`-f` per file, ~680 MB of CSV rather than the full 1.4 GB).
+- `src/triage/data/load.py`: checksum write/verify, and CSV to parquet in DuckDB
+  (62 MB per variant with zstd, ~1 second each).
+- `src/triage/data/contract.py`: **contract v1.0 frozen** from the first verified
+  load, plus `reports/data_contract.md` generated from it.
+- `tests/test_contract.py` is real: 26 tests, all on the fixture, plus three
+  `@pytest.mark.data` tests against the real variants.
+- Corrected CLAUDE.md section 7 against the load, and updated the Makefile `data`
+  target to match what the Kaggle CLI actually does.
+- `src/triage/runtime.py`: the seeding/provenance helper, so `data.load` and
+  `data.contract` run as Hydra apps on the same footing as the stages.
+
+**Results**
+- 3,000,000 rows converted; `data/checksums.sha256` written for all three files.
+- Contract v1.0: **base, variant_iv and variant_v all pass**
+  (`reports/data_contract.md`).
+- Tests: **148 passed, 4 skipped** data-free; **3 passed** with `-m data`. Lint and
+  mypy clean.
+- Real split sizes (deployment protocol): train 675,666 (months 0-4);
+  cal_prob 39,782 / cal_tune 39,771 / cal_conf 39,770; test month 6 = 108,168 and
+  month 7 = 96,843. Simulated days: **246 full 4,000-row windows**.
+- **`cal_conf` holds only 470 frauds.** That is the resolution limit on the
+  conformal thresholds, and it needs saying next to any coverage number.
+- Base fraud prevalence 1.103% overall, rising 0.875% (month 2) to 1.475%
+  (month 7). Monthly volume *declines*, 132,440 to 96,843.
+- Age: 18.3% of Base is 50 or over, and fraud is ~3x more common in that group
+  (2.341% against 0.825%). Variants IV and V are 50.6% older, and in Variant V the
+  two groups have nearly equal fraud rates (1.118% against 1.087%).
+
+**What didn't work / findings**
+- `kaggle datasets download --unzip` is silently ignored when `-f` is used: files
+  arrive as `.zip` with URL-encoded names. Both the Makefile and section 7 now say so.
+- DuckDB rejects a bound parameter as a `COPY ... TO` target; the paths are inlined
+  and escaped instead.
+- **Variant V has 34 columns**, not 32: two extra continuous columns `x1` and `x2`.
+  Dropped at the interim step (DECISIONS D9).
+- **Negative does not always mean missing** (DECISIONS D10). `credit_risk_score` is
+  negative for 1.44% of Base including 488 rows at exactly -1, and those are real
+  scores. `velocity_6h` is negative for 44 rows in a million, which is not
+  physically meaningful and is documented nowhere; it gets a flag and a line in the
+  validation report.
+- An exact-range contract would have rejected both variants, which drift past
+  Base's minima and maxima on ten columns. Bounds now carry documented headroom
+  (DECISIONS D8), while closed domains such as `income` stay exact, which is what
+  keeps the `income x 10` rejection working.
+
+**Next step**
+- `features/sentinels.py` (the six sentinel columns, and the two that only look
+  like sentinels) and `features/encode.py`, then B0 and B1 under both protocols.
+
+**Open questions for the owner**
+- Unchanged: capacity and cost parameters, the `proposed_credit_limit` proxy, the
+  alpha targets, and DECISIONS D4.
+- New: `data/` now holds 827 MB inside a OneDrive-synced folder. Worth excluding
+  from sync, or moving the project off OneDrive.
+
+---
+
+## 2026-09-18 — Conformal, splits, metrics, fairness and PSI (all data-free)
+
+**What changed**
+- `tests/fixtures/make_fixture.py`: the seeded, BAF-shaped generator every
+  data-free test now runs on (DECISIONS D5).
+- `src/triage/uncertainty/conformal.py`: label-conditional split conformal,
+  written from scratch (rule 7). Threshold form, taken straight off the sorted
+  calibration probabilities, plus a score-form reference implementation used only
+  by the tests.
+- `src/triage/data/split.py`: both protocols, the three stratified `cal_*` parts,
+  and the simulated 4,000-application days.
+- `src/triage/evaluation/metrics.py`: TPR@5%FPR, the matching threshold, realised
+  rates per month, ROC-AUC/PR-AUC, Brier, equal-mass ECE and
+  calibration-in-the-large. `ece_equal_mass` lives in `models/calibrate.py`.
+- `src/triage/fairness/`: FPR, FPR ratio, FPR by group and by 10-year band,
+  relative likelihood with the DWP 0.80-1.25 "notable" flag, and the stratified
+  percentile bootstrap.
+- `src/triage/monitoring/psi.py` + `psi.sql`: PSI in DuckDB, with a pandas
+  implementation as the definition and a test that the two agree.
+- `src/triage/policy/decide.py`: `decide_many` and `band_shares`.
+- Tests: `test_conformal.py`, `test_splits.py`, `test_fairness.py`, `test_psi.py`,
+  `test_policy.py` are now real, plus a new `test_metrics.py`.
+
+**Results** (local, `uv run pytest -m "not data"`)
+- **125 passed, 5 skipped**, up from 23 passed / 10 skipped. `ruff check`,
+  `ruff format --check` and `mypy src` clean.
+- Coverage of the modules implemented so far: `uncertainty/conformal.py` 95%,
+  `fairness/bootstrap.py` 100%, `fairness/metrics.py` 97%, `monitoring/psi.py` 98%,
+  `data/split.py` 95%, `evaluation/metrics.py` 96%, `policy/decide.py` 94%.
+  The 85% package bar is met for `uncertainty/` and `fairness/`; `monitoring/` and
+  `policy/` are still pulled down by their unimplemented modules.
+- Conformal coverage check: mean fraud coverage over 200 seeded repeats clears
+  `1 - alpha - 0.01` at both alpha pairs tested, and the genuine exclusion rate
+  stays under `alpha_legit + 0.01`.
+- PSI: the DuckDB path matches the pandas definition to 1e-12 on five fixture
+  columns, and identical distributions give exactly 0 in both.
+- No model results. `reports/metrics.json` still does not exist.
+
+**What didn't work / what to watch**
+- On the hand-built 20-row fairness slice the FPR-ratio point estimate is 0.25 and
+  its 95% bootstrap interval is the whole range [0, 1]. Recorded as a test
+  (`test_a_tiny_slice_gives_a_useless_interval`). The lesson carries into the
+  report: narrow 10-year age bands at ~1% prevalence will not support a claim, and
+  the band table must show intervals and say when they are uninformative.
+- The MAPIE marginal cross-check is not written yet. It is a nice-to-have from
+  section 4, not one of the section 13 requirements, and it needs a fitted
+  estimator, so it waits for the training code.
+
+**Next step**
+- Still blocked on data for `make data` / the contract. Next data-free steps, in
+  order: `features/sentinels.py` and `features/encode.py`, then B0/B1 and the
+  champion on the fixture, which unblocks `test_repro.py`, `test_regression.py`
+  and the API tests.
+
+**Open questions for the owner**
+- Unchanged from 2026-09-17: capacity and cost parameters, the
+  `proposed_credit_limit` proxy, the alpha targets, Kaggle credentials, and
+  DECISIONS D4.
+
+---
+
+## 2026-09-17 — Scaffold
+
+**What changed**
+- Initialised the repository (`git init`, no commit yet) and laid out the
+  structure in CLAUDE.md section 6. Renamed `CLAUDE_1.md` to `CLAUDE.md`, the
+  name the layout expects.
+- Tooling: `pyproject.toml` with the pinned stack and the `fairgbm` Linux-only
+  extra, `Makefile` with every target in section 5, `.pre-commit-config.yaml`
+  (ruff, ruff-format, nbstripout, hygiene hooks), `.github/workflows/ci.yml`
+  running `lint` + data-free tests, `docker/Dockerfile`.
+- Hydra configs for data, features, model (logreg / lgbm / champion / fairgbm /
+  fairlearn_eg), calibration, policy, monitor, plus `configs/reasons.yaml`.
+- Hydra logs to the console only (`configs/hydra/job_logging/console.yaml`), so
+  stages never leave `*.log` files in the repository.
+- Module skeletons across `src/triage/`, `experiments/`, `app/demo.py`, and the
+  test files from section 13.
+- Implemented for real: `triage.policy.decide.decide`, `triage.config`,
+  `triage.seeding`, `/health`, `/version`, `/monitor/status`, and
+  `tests/test_scaffold.py` + `tests/test_policy.py`.
+
+**Results**
+- No model results yet. `reports/metrics.json` does not exist.
+- Scaffold gate, run locally on Windows with uv 0.10.6 / CPython 3.11.9:
+  - `uv lock` resolves 167 packages; `uv sync` installs cleanly.
+  - `ruff check` + `ruff format --check` + `mypy src` (49 files): clean.
+  - `pytest -m "not data"`: **23 passed, 10 skipped** (the skips are the section 13
+    suites waiting on their modules).
+  - `python -m triage.stages.baseline` composes the config, seeds, stamps
+    provenance, then stops at its TODO -- as does an override run
+    (`data.sample_frac=0.1 model=lgbm`), which changes the config hash and fires
+    the "development run" warning.
+
+**What didn't work**
+- The stack as written did not install. `numpy>=2,<3` + `shap==0.51.0` dragged
+  numba back to 0.53.1 (2021), whose llvmlite will not build on Python 3.11.
+  Fixed by capping numpy at `<2.4` and constraining `numba>=0.61`; see DECISIONS
+  D4, which needs the owner's sign-off under rule 11.
+
+**Next step**
+- Week 1, item 2: run `make data` (needs the owner's Kaggle credentials), write
+  `data/checksums.sha256`, confirm the column list and the sentinel rules against
+  the datasheet, then freeze the pandera contract.
+
+**Open questions for the owner**
+1. Review capacity and every cost parameter in `configs/policy/default.yaml` are
+   placeholders tagged `# ASSUMPTION`. What should they be?
+2. Is `proposed_credit_limit` an acceptable proxy for the loss on a missed fraud?
+3. What are the alpha targets, and the fallback alpha preset?
+4. Kaggle credentials: `make data` cannot run without them.
+5. DECISIONS D4 changes two pins in CLAUDE.md section 4 (numpy cap, numba floor).
+   It was needed to make the environment install at all -- please confirm.

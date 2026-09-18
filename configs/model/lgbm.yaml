@@ -1,0 +1,10 @@
+# B1: paper-comparable baseline. Defaults, all features INCLUDING customer_age.
+name: lgbm
+kind: lightgbm.LGBMClassifier
+use_age: true
+params:
+  seed: ${seed}
+  deterministic: true
+  force_row_wise: true
+  n_jobs: 4
+  verbosity: -1

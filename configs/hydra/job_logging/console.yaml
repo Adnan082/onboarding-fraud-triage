@@ -1,0 +1,16 @@
+# Console-only logging: stages print to stdout and never write a *.log file
+# into the repository.
+version: 1
+formatters:
+  triage:
+    format: "[%(asctime)s][%(levelname)s] %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: triage
+    stream: ext://sys.stdout
+root:
+  level: INFO
+  handlers: [console]
+disable_existing_loggers: false

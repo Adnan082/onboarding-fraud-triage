@@ -1,0 +1,80 @@
+# Rule 4: age measures, it never decides. The champion excludes customer_age.
+use_age: false
+
+# Column lists below are UNVERIFIED: confirm against the datasheet and the first
+# load, then correct them here and in CLAUDE.md section 7.
+categoricals:
+  - payment_type
+  - employment_status
+  - housing_status
+  - source
+  - device_os
+
+binaries:
+  - email_is_free
+  - phone_home_valid
+  - phone_mobile_valid
+  - has_other_cards
+  - foreign_request
+  - keep_alive_session
+
+numerics:
+  - name_email_similarity
+  - prev_address_months_count
+  - current_address_months_count
+  - days_since_request
+  - intended_balcon_amount
+  - zip_count_4w
+  - velocity_6h
+  - velocity_24h
+  - velocity_4w
+  - bank_branch_count_8w
+  - date_of_birth_distinct_emails_4w
+  - credit_risk_score
+  - bank_months_count
+  - proposed_credit_limit
+  - session_length_in_minutes
+  - device_distinct_emails_8w
+  - device_fraud_count
+  - income
+
+# Measurement / constraint use only, never a model input at decision time.
+protected:
+  age: customer_age
+  age_cut: 50            # the paper's grouping; roughly an 80/20 split
+  age_band_width: 10     # also report FPR by 10-year band
+
+# Missing values arrive as negative numbers. Each entry adds an explicit
+# <column>_missing flag in features/sentinels.py, and the sentinel itself is
+# blanked to NaN so no model treats -1 as a small count.
+# All verified against the first load, 2026-09-18 (share of Base affected).
+sentinels:
+  minus_one:
+    - prev_address_months_count      # 71.3%
+    - current_address_months_count   # 0.43%
+    - bank_months_count              # 25.4%
+    - session_length_in_minutes      # 0.20%
+    - device_distinct_emails_8w      # 0.04%
+  any_negative:
+    - intended_balcon_amount         # 74.3%, minimum -15.53, never exactly -1
+
+  # NOT missing (DECISIONS D10): credit_risk_score is negative for 1.44% of Base,
+  # including 488 rows at exactly -1, and those are real scores.
+  #
+  # velocity_6h is negative for 44 rows in a million (minimum -170.6). That is not
+  # physically meaningful and is documented nowhere, so it gets a flag but keeps
+  # its value: it is a published data quirk to report, not a hole to fill.
+  quirk_negative:
+    - velocity_6h
+
+# Columns dropped because the first verified load showed no variance at all.
+zero_variance:
+  - device_fraud_count   # 0 for all 1,000,000 rows of Base
+
+# Encoders are fit on training months only.
+encoding:
+  categorical: one_hot        # B0; LightGBM uses native categoricals
+  unseen_category: other      # B0: an unseen level encodes as all-zeros
+  standardise_numerics: true  # B0 only
+  impute_numerics: median     # B0 only; the *_missing flag carries the information
+  drop_zero_variance: true    # recorded above and in docs/DECISIONS.md

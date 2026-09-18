@@ -1,0 +1,44 @@
+# Row-level data never goes in git (CLAUDE.md rule 3).
+data/*
+!data/README.md
+!data/checksums.sha256
+*.csv
+*.parquet
+!tests/fixtures/*.csv
+!tests/fixtures/*.parquet
+
+# Artefacts and secrets
+mlruns/
+models/*
+!models/.gitkeep
+kaggle.json
+.env
+.kaggle/
+
+# Aggregate reports ARE committed; scratch output is not.
+reports/**/*.tmp
+*.log
+outputs/
+multirun/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

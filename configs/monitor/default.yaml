@@ -1,0 +1,67 @@
+# Label-free monitoring (CLAUDE.md section 8.5).
+window_size: ${data.window_size}
+reference:
+  psi_months: [0, 1, 2, 3, 4]    # training months
+  domain_clf_rows: 4000          # sampled from cal_conf
+  rate_test_on: cal_conf
+
+detectors:
+  psi:
+    enabled: true
+    numeric_bins: reference_deciles
+    categorical_other_bucket: true
+    epsilon: 1.0e-4
+    rule_of_thumb: { watch: 0.10, alert: 0.25 }
+  domain_clf:
+    enabled: true
+    n_estimators: 50
+    cv_folds: 5
+    metric: roc_auc
+  conformal_rate:
+    enabled: true
+    test: binomial
+    p_value: 0.001
+
+# Empirical thresholds: 200 bootstrap clean windows from cal_prob + cal_tune,
+# 99th percentile.
+threshold_calibration:
+  clean_windows: 200
+  source: [cal_prob, cal_tune]
+  percentile: 99
+
+alarms:
+  watch: any_detector_over_threshold
+  alert_consecutive_windows: 2
+  alert_score_psi: 0.25
+
+fallback:
+  policy_preset: ${policy.fallback}
+  state_file: ${paths.models}/monitor_state.json
+  event_log: ${paths.reports}/monitor_events.jsonl
+
+# Injected bugs, each starting at window 5 of month 6.
+bugs:
+  start_month: 6
+  start_window: 5
+  specs:
+    - id: swap_employment
+      kind: swap_top_categories
+      column: employment_status
+      n: 2
+      in_contract: true
+    - id: mirror_income
+      kind: mirror_lookup          # lowest <-> highest observed value; NOT 1 - x
+      column: income
+      in_contract: true
+    - id: all_mobile_valid
+      kind: constant
+      column: phone_mobile_valid
+      value: 1
+      in_contract: true
+    - id: income_x10
+      kind: multiply
+      column: income
+      factor: 10
+      in_contract: false           # must be rejected in batch AND at the API
+
+stress_variants: [variant_iv, variant_v]   # score the Base champion on months 6-7

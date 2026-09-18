@@ -1,0 +1,11 @@
+# M2. Linux only (bundled .so). Imported lazily; the experiment skips elsewhere.
+name: fairgbm
+kind: fairgbm.FairGBMClassifier
+use_age: false           # age is a TRAINING-TIME constraint group only
+params:
+  constraint_type: FPR
+  seed: ${seed}
+  n_jobs: 4
+constraint_group:
+  column: ${features.protected.age}
+  expression: ">= 50"

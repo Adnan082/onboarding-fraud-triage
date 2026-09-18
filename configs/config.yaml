@@ -1,0 +1,40 @@
+# Root Hydra config. Every stage composes from here.
+defaults:
+  - data: baf
+  - features: default
+  - model: champion
+  - calibration: default
+  - policy: default
+  - monitor: default
+  # Console logging only: stages must not litter the repo with *.log files.
+  - override hydra/job_logging: console
+  - _self_
+
+seed: 20260917
+
+# Percentile bootstrap settings, shared by every confidence interval published
+# (section 8.3). Resampling is stratified; the seed above makes it reproducible.
+bootstrap:
+  n_resamples: 1000
+  level: 0.95
+
+paths:
+  root: ${hydra:runtime.cwd}
+  raw: ${paths.root}/data/raw
+  interim: ${paths.root}/data/interim
+  models: ${paths.root}/models
+  reports: ${paths.root}/reports
+  tables: ${paths.root}/reports/tables
+  figures: ${paths.root}/reports/figures
+  metrics: ${paths.root}/reports/metrics.json
+
+mlflow:
+  tracking_uri: file:${paths.root}/mlruns
+  experiment: onboarding-fraud-triage
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  job:
+    chdir: false
