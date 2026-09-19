@@ -282,3 +282,57 @@ alphas, and records `infeasible` in `reports/metrics.json`.
 owner as a finding rather than disappearing into a silently weaker policy. With
 the current placeholder capacity (5% review, 2% verify) the grid does have
 feasible pairs, so this path is exercised only by tests for now.
+
+---
+
+## D17 — 2026-09-19 — Bug detection is measured on a quiet stream, not only on month 6
+
+**Context.** Section 8.5 injects each bug from window 5 of month 6 and measures
+the delay to ALERT. Empirically month 6 is *already* in ALERT before any bug
+lands: it has drifted from month 5 on its own, and 26 of its 27 windows alarm
+with no bug at all. A delay measured there cannot be attributed to the bug.
+
+**Decision.** Run both. The section 8.5 experiment is reported as specified, with
+`already_alerting_before_bug` recorded against it, and a second experiment injects
+the same bugs into a stream drawn from month 5, which is quiet by construction
+(18 of 19 windows OK, 0 alerts).
+
+**Consequences.** The attributable numbers are the ones worth quoting: all three
+in-contract bugs reach ALERT one window after injection, which is the floor the
+two-consecutive-windows rule allows. The out-of-contract bug is rejected by the
+contract and never scored at all.
+
+---
+
+## D18 — 2026-09-19 — `psi_feature_max` is kept but known to be weak
+
+**Context.** The worst-feature PSI detector has a clean-window threshold of 3.97.
+A PSI of 4 is far beyond the 0.25 "major shift" rule of thumb, and the maximum is
+`velocity_4w` in all 51 test windows: a four-week velocity trends structurally
+between months, so it swamps the maximum and leaves the detector with almost no
+headroom to signal anything else.
+
+**Decision.** Keep it, report the limitation, and lean on the other three
+detectors. Excluding structurally time-varying features would need a rule for
+which those are, and inventing that rule post hoc on the test months is exactly
+the kind of choice the protocol exists to prevent.
+
+**Consequences.** Three effective detectors rather than four. Worth revisiting
+with a reference window that moves with time, rather than a fixed training-month
+reference.
+
+---
+
+## D19 — 2026-09-19 — Reason codes are optional per request
+
+**Context.** The latency benchmark puts a scored request at p50 7.25 ms without
+reason codes and 151 ms with them. SHAP walks every tree for every request, so
+explanations cost roughly twenty times the entire latency budget in section 10.
+
+**Decision.** `?explain=false` skips them, and the benchmark reports both paths
+rather than a single headline number.
+
+**Consequences.** The section 10 target is met for scoring and missed by an order
+of magnitude for explanation. A real deployment would compute reason codes out of
+band, for the applications a human is going to look at anyway, rather than on
+every request.

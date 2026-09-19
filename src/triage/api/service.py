@@ -21,6 +21,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from hydra import compose, initialize_config_dir
+from hydra.core.global_hydra import GlobalHydra
 from omegaconf import DictConfig
 
 from triage.config import CONFIG_DIR
@@ -47,8 +48,15 @@ def load_config() -> DictConfig:
     a ``hydra.main`` app. The service is not one -- it is started by uvicorn -- so
     the root is pinned explicitly to the installed project directory.
     """
+    overrides = [f"paths.root={PROJECT_ROOT}"]
+
+    # A stage may already have initialised Hydra (the benchmark runs inside one).
+    # Initialising twice raises, so reuse what is there.
+    if GlobalHydra.instance().is_initialized():
+        return compose(config_name="config", overrides=overrides)
+
     with initialize_config_dir(version_base="1.3", config_dir=str(CONFIG_DIR)):
-        return compose(config_name="config", overrides=[f"paths.root={PROJECT_ROOT}"])
+        return compose(config_name="config", overrides=overrides)
 
 
 def _thresholds_from(cfg: DictConfig) -> ConformalThresholds:

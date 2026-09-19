@@ -4057,5 +4057,61 @@
       "tau_legit": 0.13203159243243098
     },
     "thresholds_fitted_on": "cal_conf"
+  },
+  "service": {
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-19T15:27:43.165742+00:00",
+      "git_sha": "81bcd7ee",
+      "seed": 20260917
+    },
+    "device": "cpu",
+    "docker": {
+      "available": false,
+      "reason": "onboarding-fraud-triage:dev is not built: run `make docker`"
+    },
+    "latency": {
+      "http_with_shap": {
+        "max_ms": 559.2455020005218,
+        "mean_ms": 164.80953887398482,
+        "min_ms": 141.0881599995264,
+        "n": 2000.0,
+        "p50_ms": 151.3670855001692,
+        "p95_ms": 212.50052745053836,
+        "p99_ms": 254.0762754401385
+      },
+      "http_without_shap": {
+        "max_ms": 31.9016700004795,
+        "mean_ms": 7.791855540997858,
+        "min_ms": 5.466414000693476,
+        "n": 2000.0,
+        "p50_ms": 7.250139999996463,
+        "p95_ms": 11.982896500103378,
+        "p99_ms": 16.3257026600786
+      },
+      "scoring_with_shap": {
+        "max_ms": 379.2099660004169,
+        "mean_ms": 166.9863041650033,
+        "min_ms": 141.03503300066222,
+        "n": 2000.0,
+        "p50_ms": 154.85898800034192,
+        "p95_ms": 216.31819064969022,
+        "p99_ms": 255.70310368993884
+      },
+      "scoring_without_shap": {
+        "max_ms": 12.775369999872055,
+        "mean_ms": 5.801959839000574,
+        "min_ms": 4.8070680004457245,
+        "n": 2000.0,
+        "p50_ms": 5.423550000614341,
+        "p95_ms": 7.8240265001113585,
+        "p99_ms": 9.153001170261632
+      }
+    },
+    "model_version": "champion-927bedf6",
+    "note": "Sequential, single process, in-process HTTP client (no network). Reason codes dominate: compare with_shap against without_shap.",
+    "requests": 2000,
+    "target_p50_ms": 15.0,
+    "warmup": 100
   }
 }

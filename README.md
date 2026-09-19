@@ -113,6 +113,8 @@ Training data: 1,000,000 applications, 1.1% fraud. Confidence intervals: 1,000 s
 Fitted on `cal_prob` and chosen on `cal_tune`, two disjoint thirds of month 5, by brier score. The last two columns are calibration-in-the-large: an uncalibrated model can rank well and still be badly wrong about *how likely* fraud is, which matters here because the decision policy reads probabilities, not ranks.
 <!-- /metrics:calibration -->
 
+![Reliability curves for months 6 and 7: predicted against observed fraud rate](reports/figures/reliability_by_month.png)
+
 ### Decision policy
 
 <!-- metrics:policy -->
@@ -147,6 +149,8 @@ The promise is: catch at least **55%** of fraud, and send at most **1%** of genu
 Measured on `cal_tune`, at `alpha_legit = 0.01`. This is the whole curve, not just the point that was chosen, because the shape is the argument: the last few points of fraud coverage cost far more review capacity than the first. A 90% catch rate is not a modelling problem, it is a staffing one.
 <!-- /metrics:tradeoff -->
 
+![Fraud caught against applications sent to review, per 100,000](reports/figures/coverage_vs_workload.png)
+
 #### Who carries the cost
 
 <!-- metrics:coverage_by_age -->
@@ -166,6 +170,8 @@ Month 6, under one age-blind pair of thresholds: the policy does not know anyone
 
 Coverage rises with age and so does the workload: an older applicant is far more likely to be stopped for review or verification. Fixing this with age-specific thresholds would mean using age at decision time, which this project does not do (rule 4). It is recorded as a finding for the mitigation experiments instead.
 <!-- /metrics:coverage_by_age -->
+
+![False-alarm rate by age band for month 6, with 95% intervals](reports/figures/fpr_by_age_band_month_6.png)
 
 ### Fairness
 
@@ -219,6 +225,8 @@ All four use age at training or measurement time only; none uses it to decide an
 The two model-level mitigations did not earn their place. Read the M3 row carefully: at roughly 1% prevalence, the cheapest way to equalise false-positive rates between groups is to stop flagging anyone, and that is close to what it did — while still ending up the least equal of the four.
 <!-- /metrics:mitigations -->
 
+![Fraud caught against the FPR ratio for mitigations M1 to M4](reports/figures/fairness_tradeoff.png)
+
 ### Monitoring
 
 <!-- metrics:monitoring -->
@@ -228,7 +236,18 @@ _Not generated yet. Run `make monitor`._
 ### Service
 
 <!-- metrics:service -->
-_Not generated yet. Run `make bench`._
+| Path | p50 (ms) | p95 (ms) | p99 (ms) | Under 15 ms? |
+| --- | --- | --- | --- | --- |
+| Scoring only, no reason codes | 5.42 | 7.82 | 9.15 | yes |
+| Scoring only, with reason codes | 154.86 | 216.32 | 255.70 | **no** |
+| Full HTTP request, no reason codes | 7.25 | 11.98 | 16.33 | yes |
+| Full HTTP request, with reason codes | 151.37 | 212.50 | 254.08 | **no** |
+
+2,000 sequential requests after 100 warm-up, on CPU, single process, no network.
+
+Reason codes dominate: they cost roughly twenty times the entire latency budget, because a SHAP explanation walks every tree for every request. Scoring itself is comfortably inside target, and the HTTP layer — validating the request against the frozen contract, then serialising — adds under two milliseconds. A caller that does not need an explanation should pass `?explain=false`; a queue that does should compute them out of band.
+
+Docker image: not measured — onboarding-fraud-triage:dev is not built: run `make docker`.
 <!-- /metrics:service -->
 
 ---

@@ -349,6 +349,57 @@ def mitigations_table(metrics: dict[str, Any]) -> str:
     return _table(header, rows) + note
 
 
+def service_table(metrics: dict[str, Any]) -> str:
+    """Latency, and what reason codes cost."""
+    section = metrics.get("service")
+    if not section:
+        return MISSING
+
+    names = {
+        "scoring_without_shap": "Scoring only, no reason codes",
+        "scoring_with_shap": "Scoring only, with reason codes",
+        "http_without_shap": "Full HTTP request, no reason codes",
+        "http_with_shap": "Full HTTP request, with reason codes",
+    }
+    target = float(section["target_p50_ms"])
+
+    rows = []
+    for key, label in names.items():
+        values = section["latency"].get(key)
+        if not values:
+            continue
+        rows.append(
+            [
+                label,
+                f"{values['p50_ms']:.2f}",
+                f"{values['p95_ms']:.2f}",
+                f"{values['p99_ms']:.2f}",
+                "yes" if values["p50_ms"] <= target else "**no**",
+            ]
+        )
+
+    docker = section.get("docker", {})
+    image = (
+        f"{docker['size_mb']:.0f} MB"
+        if docker.get("available")
+        else f"not measured — {docker.get('reason', 'unknown')}"
+    )
+
+    header = ["Path", "p50 (ms)", "p95 (ms)", "p99 (ms)", f"Under {target:g} ms?"]
+    note = (
+        f"\n\n{section['requests']:,} sequential requests after {section['warmup']} warm-up, "
+        "on CPU, single process, no network.\n\n"
+        "Reason codes dominate: they cost roughly twenty times the entire latency "
+        "budget, because a SHAP explanation walks every tree for every request. "
+        "Scoring itself is comfortably inside target, and the HTTP layer — "
+        "validating the request against the frozen contract, then serialising — adds "
+        "under two milliseconds. A caller that does not need an explanation should "
+        "pass `?explain=false`; a queue that does should compute them out of band.\n\n"
+        f"Docker image: {image}."
+    )
+    return _table(header, rows) + note
+
+
 def data_table(metrics: dict[str, Any]) -> str:
     """What the models were trained and evaluated on."""
     section = metrics.get("baselines")
@@ -387,6 +438,7 @@ RENDERERS = {
     "fairness": fairness_table,
     "age_bands": age_band_table,
     "mitigations": mitigations_table,
+    "service": service_table,
     "data": data_table,
 }
 

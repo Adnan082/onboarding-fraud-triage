@@ -52,17 +52,15 @@ def collect_findings(metrics: dict[str, Any]) -> list[dict[str, str]]:
                 _finding(
                     "High",
                     "The genuine-applicant guarantee did not hold out of sample",
-                    f"The policy promises that at most {_pct(target_exclusion)} of genuine "
-                    f"applicants are sent for extra verification. On the test months it "
-                    f"reached {_pct(worst)}, breaching the promise on "
-                    f"{'both months' if len(breaches) > 1 else 'one month'}. The conformal "
-                    "guarantee is conditional on new applications being exchangeable with "
-                    "the calibration month, and they are not: fraud prevalence rises and "
-                    "the score distribution moves.",
-                    "Do not quote the genuine-applicant figure as a guarantee without the "
-                    "exchangeability condition stated beside it. Re-derive thresholds on a "
-                    "recent month rather than a fixed one, and treat the monitor's alert as "
-                    "the trigger to do so.",
+                    f"The policy promises at most {_pct(target_exclusion)} of genuine "
+                    f"applicants sent for extra verification. It reached {_pct(worst)}, "
+                    f"breaching the promise on "
+                    f"{'both test months' if len(breaches) > 1 else 'one test month'}. The "
+                    "guarantee is conditional on exchangeability with the calibration month, "
+                    "and that fails here: prevalence rises and the score distribution moves.",
+                    "Never quote the genuine-applicant figure without its exchangeability "
+                    "condition beside it. Re-derive thresholds on a recent month rather than a "
+                    "fixed one, triggered by the monitor's alert.",
                 )
             )
 
@@ -99,17 +97,15 @@ def collect_findings(metrics: dict[str, Any]) -> list[dict[str, str]]:
                     _finding(
                         "High",
                         "The policy's burden falls unevenly across age bands",
-                        f"Fraud coverage ranges from {_pct(min(coverages))} to "
-                        f"{_pct(max(coverages))} across age bands, and the share of "
-                        f"applicants sent to review from {_pct(min(reviews))} to "
-                        f"{_pct(max(reviews))}. The policy is age-blind by construction -- "
-                        "it never sees the attribute -- so this is the model's own "
-                        "behaviour surfacing through a single pair of thresholds.",
-                        "Do not correct this with age-specific thresholds: that would use a "
-                        "protected attribute at decision time and needs legal sign-off "
-                        "before it could even be considered. Report the disparity, and use "
-                        "the mitigation experiments to decide what detection it is worth "
-                        "giving up to narrow it.",
+                        f"Fraud coverage runs from {_pct(min(coverages))} to "
+                        f"{_pct(max(coverages))} across age bands, and the share sent to "
+                        f"review from {_pct(min(reviews))} to {_pct(max(reviews))}. The policy "
+                        "is age-blind by construction, so this is the model's own behaviour "
+                        "surfacing through one pair of thresholds.",
+                        "Do not correct this with age-specific thresholds: that uses a "
+                        "protected attribute at decision time and needs legal sign-off before "
+                        "it could even be considered. Report the disparity, and use the "
+                        "mitigation experiments to price what narrowing it would cost.",
                     )
                 )
 
@@ -126,13 +122,12 @@ def collect_findings(metrics: dict[str, Any]) -> list[dict[str, str]]:
                         "Calibration is worse for older applicants",
                         f"Expected calibration error is {format_number(eces[worst_group])} for "
                         f"{worst_group} against {format_number(min(eces.values()))} for the "
-                        "best-served group. The conformal thresholds are derived from pooled "
-                        "probabilities, so a group the model is less well calibrated for "
-                        "inherits a weaker guarantee without that being visible in the "
-                        "headline number.",
+                        "best-served group. Conformal thresholds come from pooled "
+                        "probabilities, so a less well calibrated group inherits a weaker "
+                        "guarantee, invisibly.",
                         "Report coverage by age band alongside the headline guarantee, every "
-                        "time. Consider group-wise calibration as an analysis, noting it "
-                        "would use age at scoring time and so needs sign-off.",
+                        "time. Group-wise calibration is worth analysing, noting it would use "
+                        "age at scoring time and needs sign-off.",
                     )
                 )
 
@@ -210,17 +205,15 @@ def render(metrics: dict[str, Any]) -> str:
         "",
         "## 1. Purpose, users and proposed risk tier",
         "",
-        "The model scores online bank-account applications for fraud and routes each one to",
-        "**approve**, **human review**, or **extra verification**. It never declines an",
-        "application automatically, so its worst direct action against a customer is a",
-        "request for further checks.",
+        "Scores online bank-account applications and routes each to **approve**, **human",
+        "review**, or **extra verification**. It never declines automatically: its worst",
+        "direct action against a customer is a request for further checks.",
         "",
-        "Users are the fraud operations team, who work the review queue, and the model risk",
-        "function, who own this report. **Proposed tier: high**, on the grounds that it",
-        "affects access to a payment account, touches a protected characteristic in its",
-        "measurement, and would sit within the automated decision-making safeguards of the",
-        "Data (Use and Access) Act. The absence of an automatic decline lowers the severity",
-        "of a single error; it does not lower the tier.",
+        "Users are fraud operations, who work the review queue, and model risk, who own this",
+        "report. **Proposed tier: high** — it affects access to a payment account, touches a",
+        "protected characteristic in its measurement, and sits within the automated",
+        "decision-making safeguards of the Data (Use and Access) Act. No automatic decline",
+        "lowers the severity of one error; it does not lower the tier.",
         "",
         "## 2. Data and known gaps",
         "",
@@ -251,22 +244,19 @@ def render(metrics: dict[str, Any]) -> str:
         "",
         "## 3. Method and key choices",
         "",
-        "LightGBM, trained without `customer_age`, with probability calibration fitted on one",
-        "third of month 5 and selected on another. The decision bands come from",
-        "label-conditional split conformal prediction: two thresholds, fitted on a third part",
-        "of month 5 that nothing else touches, turn a probability into a set of plausible",
-        "labels, and the set picks the band.",
+        "LightGBM without `customer_age`, calibrated on one third of month 5 and selected on",
+        "another. Decision bands come from label-conditional split conformal prediction: two",
+        "thresholds, fitted on a third part of month 5 that nothing else touches, turn a",
+        "probability into a set of plausible labels, and the set picks the band.",
         "",
         "Three choices a reviewer should test:",
         "",
-        "- **Age is excluded from the model and used only to measure it.** Dropping it costs",
-        "  almost nothing in detection, which says the information was never uniquely in that",
-        "  column.",
+        "- **Age is excluded from the model, used only to measure it.** Dropping it costs",
+        "  almost nothing in detection: the information was never uniquely there.",
         "- **Thresholds are never set on evaluation data.** The published baseline protocol,",
-        "  which sets its threshold on the test set, is reproduced only for comparison and is",
-        "  labelled as optimistic wherever it appears.",
-        "- **The conformal calibration part is used once.** Anything else -- choosing alphas,",
-        "  choosing a calibration method, choosing an operating point -- happens on a",
+        "  which sets its threshold on the test set, is reproduced only for comparison and",
+        "  labelled optimistic wherever it appears.",
+        "- **The conformal calibration part is used once.** Every other choice happens on a",
         "  different part of the same month.",
         "",
         "## 4. Performance",
@@ -330,16 +320,23 @@ def render(metrics: dict[str, Any]) -> str:
     if fairness:
         lines += [
             "",
-            "**What each mitigation cost:**",
+            "**What each mitigation cost** (month 6; both months are in the README):",
             "",
-            "| Experiment | Month | Fraud caught | False alarms | Ratio |",
-            "|---|---|---|---|---|",
+            "| Experiment | Fraud caught | False alarms | Ratio |",
+            "|---|---|---|---|",
         ]
-        for row in fairness.get("tradeoff", []):
+        # Month 6 only, to stay inside two pages.
+        for row in (r for r in fairness.get("tradeoff", []) if r["month"] == 6):
             lines.append(
-                f"| `{row['experiment']}` | {row['month']} | {_pct(row['tpr'])} "
+                f"| `{row['experiment']}` | {_pct(row['tpr'])} "
                 f"| {_pct(row['fpr'])} | {format_number(row['fpr_ratio'])} |"
             )
+        lines += [
+            "",
+            "Neither model-level mitigation beat simply dropping age. M3 equalised by",
+            "flagging almost nobody -- at ~1% prevalence the cheapest way to equalise",
+            "false-positive rates is to stop having any -- and was still the least equal.",
+        ]
     else:
         lines += ["", "_Mitigation experiments not yet run (`make fairness`)._"]
 
@@ -364,17 +361,15 @@ def render(metrics: dict[str, Any]) -> str:
             f"| Conformal rate test | {format_number(thresholds.get('conformal_neglogp'))} "
             "| the policy's own crossing rates drifting from calibration |",
             "",
-            "**Alarm rules.** Watch when any detector exceeds its threshold; alert when the",
-            "same detector exceeds it in two consecutive windows, or score PSI passes 0.25.",
+            "**Alarms.** Watch when any detector exceeds its threshold; alert when the same",
+            "detector exceeds it twice running, or score PSI passes 0.25.",
             "",
-            "**Fallback.** On alert the policy switches to a preset with tighter alphas, which",
-            "sends more applications to a human, and the event is appended to",
-            "`reports/monitor_events.jsonl`. The service reads the state on every request. The",
-            "fallback is never cleared automatically.",
+            "**Fallback.** On alert the policy tightens its alphas, sending more applications",
+            "to a human; the event is logged and the service reads the state on every request.",
+            "It is never cleared automatically.",
             "",
             "**Owner.** Fraud operations own the queue; model risk own the thresholds.",
-            "",
-            "**Re-validation triggers.** Any alert; any change to the model, its calibration or",
+            "**Re-validation triggers:** any alert; any change to the model, its calibration or",
             "the alpha targets; a new calibration month; or twelve months elapsed.",
         ]
     else:

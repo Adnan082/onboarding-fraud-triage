@@ -10,17 +10,15 @@
 
 ## 1. Purpose, users and proposed risk tier
 
-The model scores online bank-account applications for fraud and routes each one to
-**approve**, **human review**, or **extra verification**. It never declines an
-application automatically, so its worst direct action against a customer is a
-request for further checks.
+Scores online bank-account applications and routes each to **approve**, **human
+review**, or **extra verification**. It never declines automatically: its worst
+direct action against a customer is a request for further checks.
 
-Users are the fraud operations team, who work the review queue, and the model risk
-function, who own this report. **Proposed tier: high**, on the grounds that it
-affects access to a payment account, touches a protected characteristic in its
-measurement, and would sit within the automated decision-making safeguards of the
-Data (Use and Access) Act. The absence of an automatic decline lowers the severity
-of a single error; it does not lower the tier.
+Users are fraud operations, who work the review queue, and model risk, who own this
+report. **Proposed tier: high** — it affects access to a payment account, touches a
+protected characteristic in its measurement, and sits within the automated
+decision-making safeguards of the Data (Use and Access) Act. No automatic decline
+lowers the severity of one error; it does not lower the tier.
 
 ## 2. Data and known gaps
 
@@ -41,22 +39,19 @@ Known gaps, in order of how much they limit the conclusions:
 
 ## 3. Method and key choices
 
-LightGBM, trained without `customer_age`, with probability calibration fitted on one
-third of month 5 and selected on another. The decision bands come from
-label-conditional split conformal prediction: two thresholds, fitted on a third part
-of month 5 that nothing else touches, turn a probability into a set of plausible
-labels, and the set picks the band.
+LightGBM without `customer_age`, calibrated on one third of month 5 and selected on
+another. Decision bands come from label-conditional split conformal prediction: two
+thresholds, fitted on a third part of month 5 that nothing else touches, turn a
+probability into a set of plausible labels, and the set picks the band.
 
 Three choices a reviewer should test:
 
-- **Age is excluded from the model and used only to measure it.** Dropping it costs
-  almost nothing in detection, which says the information was never uniquely in that
-  column.
+- **Age is excluded from the model, used only to measure it.** Dropping it costs
+  almost nothing in detection: the information was never uniquely there.
 - **Thresholds are never set on evaluation data.** The published baseline protocol,
-  which sets its threshold on the test set, is reproduced only for comparison and is
-  labelled as optimistic wherever it appears.
-- **The conformal calibration part is used once.** Anything else -- choosing alphas,
-  choosing a calibration method, choosing an operating point -- happens on a
+  which sets its threshold on the test set, is reproduced only for comparison and
+  labelled optimistic wherever it appears.
+- **The conformal calibration part is used once.** Every other choice happens on a
   different part of the same month.
 
 ## 4. Performance
@@ -86,18 +81,18 @@ Predictive equality, on genuine applicants only, at the operating threshold. A
 ratio of 1.00 would mean both groups are stopped equally often. Age is used here
 to measure the model; the model does not see it.
 
-**What each mitigation cost:**
+**What each mitigation cost** (month 6; both months are in the README):
 
-| Experiment | Month | Fraud caught | False alarms | Ratio |
-|---|---|---|---|---|
-| `m1_drop_age` | 6 | 56.9% | 6.5% | 0.439 |
-| `m1_drop_age` | 7 | 56.1% | 5.1% | 0.444 |
-| `m2_fairgbm` | 6 | 54.1% | 6.2% | 0.445 |
-| `m2_fairgbm` | 7 | 56.3% | 5.7% | 0.473 |
-| `m3_fairlearn_eg` | 6 | 3.8% | 0.1% | 0.192 |
-| `m3_fairlearn_eg` | 7 | 4.2% | 0.1% | 0.252 |
-| `m4_policy_only` | 6 | 59.0% | 7.1% | 0.45 |
-| `m4_policy_only` | 7 | 58.3% | 5.6% | 0.45 |
+| Experiment | Fraud caught | False alarms | Ratio |
+|---|---|---|---|
+| `m1_drop_age` | 56.9% | 6.5% | 0.439 |
+| `m2_fairgbm` | 54.1% | 6.2% | 0.445 |
+| `m3_fairlearn_eg` | 3.8% | 0.1% | 0.192 |
+| `m4_policy_only` | 59.0% | 7.1% | 0.45 |
+
+Neither model-level mitigation beat simply dropping age. M3 equalised by
+flagging almost nobody -- at ~1% prevalence the cheapest way to equalise
+false-positive rates is to stop having any -- and was still the least equal.
 
 ## 6. Monitoring plan
 
@@ -112,26 +107,24 @@ thresholds set at the 99th percentile of
 | Domain classifier AUC | 0.52 | the window being distinguishable from the reference at all |
 | Conformal rate test | 2.02 | the policy's own crossing rates drifting from calibration |
 
-**Alarm rules.** Watch when any detector exceeds its threshold; alert when the
-same detector exceeds it in two consecutive windows, or score PSI passes 0.25.
+**Alarms.** Watch when any detector exceeds its threshold; alert when the same
+detector exceeds it twice running, or score PSI passes 0.25.
 
-**Fallback.** On alert the policy switches to a preset with tighter alphas, which
-sends more applications to a human, and the event is appended to
-`reports/monitor_events.jsonl`. The service reads the state on every request. The
-fallback is never cleared automatically.
+**Fallback.** On alert the policy tightens its alphas, sending more applications
+to a human; the event is logged and the service reads the state on every request.
+It is never cleared automatically.
 
 **Owner.** Fraud operations own the queue; model risk own the thresholds.
-
-**Re-validation triggers.** Any alert; any change to the model, its calibration or
+**Re-validation triggers:** any alert; any change to the model, its calibration or
 the alpha targets; a new calibration month; or twelve months elapsed.
 
 ## 7. Findings
 
 **1. The genuine-applicant guarantee did not hold out of sample** — *High*
 
-The policy promises that at most 1.0% of genuine applicants are sent for extra verification. On the test months it reached 1.6%, breaching the promise on both months. The conformal guarantee is conditional on new applications being exchangeable with the calibration month, and they are not: fraud prevalence rises and the score distribution moves.
+The policy promises at most 1.0% of genuine applicants sent for extra verification. It reached 1.6%, breaching the promise on both test months. The guarantee is conditional on exchangeability with the calibration month, and that fails here: prevalence rises and the score distribution moves.
 
-*Recommendation:* Do not quote the genuine-applicant figure as a guarantee without the exchangeability condition stated beside it. Re-derive thresholds on a recent month rather than a fixed one, and treat the monitor's alert as the trigger to do so.
+*Recommendation:* Never quote the genuine-applicant figure without its exchangeability condition beside it. Re-derive thresholds on a recent month rather than a fixed one, triggered by the monitor's alert.
 
 **2. Fraud coverage is looser than intended** — *Medium*
 
@@ -141,15 +134,15 @@ Coverage came in +4.0 points against a 55% target, outside the ±1.5 point toler
 
 **3. The policy's burden falls unevenly across age bands** — *High*
 
-Fraud coverage ranges from 35.9% to 79.1% across age bands, and the share of applicants sent to review from 2.5% to 12.4%. The policy is age-blind by construction -- it never sees the attribute -- so this is the model's own behaviour surfacing through a single pair of thresholds.
+Fraud coverage runs from 35.9% to 79.1% across age bands, and the share sent to review from 2.5% to 12.4%. The policy is age-blind by construction, so this is the model's own behaviour surfacing through one pair of thresholds.
 
-*Recommendation:* Do not correct this with age-specific thresholds: that would use a protected attribute at decision time and needs legal sign-off before it could even be considered. Report the disparity, and use the mitigation experiments to decide what detection it is worth giving up to narrow it.
+*Recommendation:* Do not correct this with age-specific thresholds: that uses a protected attribute at decision time and needs legal sign-off before it could even be considered. Report the disparity, and use the mitigation experiments to price what narrowing it would cost.
 
 **4. Calibration is worse for older applicants** — *Medium*
 
-Expected calibration error is 0.00378 for age>=50 against 0.00114 for the best-served group. The conformal thresholds are derived from pooled probabilities, so a group the model is less well calibrated for inherits a weaker guarantee without that being visible in the headline number.
+Expected calibration error is 0.00378 for age>=50 against 0.00114 for the best-served group. Conformal thresholds come from pooled probabilities, so a less well calibrated group inherits a weaker guarantee, invisibly.
 
-*Recommendation:* Report coverage by age band alongside the headline guarantee, every time. Consider group-wise calibration as an analysis, noting it would use age at scoring time and so needs sign-off.
+*Recommendation:* Report coverage by age band alongside the headline guarantee, every time. Group-wise calibration is worth analysing, noting it would use age at scoring time and needs sign-off.
 
 **5. Detector thresholds behave as designed on clean windows** — *Low*
 

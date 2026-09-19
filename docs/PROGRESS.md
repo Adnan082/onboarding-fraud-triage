@@ -5,6 +5,68 @@ artefact, with its path), what didn't work, the next step, and open questions.
 
 ---
 
+## 2026-09-19 — Monitor, mitigations, API, and the reporting layer
+
+**What changed**
+- The drift monitor: `domain_clf`, `conformal_rate`, `alarms`, `fallback`,
+  `runner`, and `stages/monitor.py`.
+- Fairness mitigations M1-M4 (`models/fair.py`, `stages/fairness.py`).
+- The scoring API: request schema generated from the contract, artefact loading
+  with hash verification, SHAP reason codes, `stages/bench.py`.
+- The reporting layer: `evaluation/validation.py` (the two-page report),
+  `evaluation/model_card.py`, `evaluation/figures.py` (four figures),
+  `policy/cost.py`, and six more README tables.
+- The Streamlit demo, reading only precomputed artefacts.
+- `test_api`, `test_repro`, `test_regression` are now real: **294 tests, zero
+  skipped**.
+
+**Results** (all from `reports/metrics.json` and `reports/monitoring.json`)
+- **Detector calibration**: 200 clean windows give 4.0% watch and 0% alert,
+  against 3.9% expected for four detectors at the 99th percentile.
+- **The monitor found the conformal breach without labels**: month 6 window 0
+  shows a crossing rate of 2.43% against the 1.34% expected (p ~ 4e-9) and a
+  domain AUC of 0.758.
+- **Injected bugs, on a quiet stream** (DECISIONS D17): all three in-contract
+  bugs reach ALERT one window after injection. `income_x10` is rejected by the
+  contract and never scored. Detection cost while undetected: -12.6 points of TPR
+  for `swap_employment`, -8.3 for `mirror_income`, -0.4 for `all_mobile_valid`.
+- **Mitigations, month 6**: M1 drop age TPR 0.5690 / ratio 0.439; M2 FairGBM
+  0.5414 / 0.445; M3 fairlearn **0.0379** / 0.192; M4 policy only **0.5897** /
+  **0.450**.
+- **Latency**: p50 7.25 ms over HTTP without reason codes (target 15 ms), 151 ms
+  with them. Scoring alone is 5.42 ms, so the HTTP layer costs under 2 ms.
+- Validation report: 1,310 words, 5 findings (2 High, 2 Medium, 1 Low).
+
+**What didn't work**
+- **Both model-level fairness mitigations failed.** FairGBM's FPR constraint did
+  not separate from simply dropping age. fairlearn's ExponentiatedGradient
+  collapsed to flagging almost nobody and was still the least equal of the four.
+  The policy-only option won on both axes.
+- `psi_feature_max` is effectively dead weight: `velocity_4w` trends structurally
+  and swamps it (DECISIONS D18).
+- The first benchmark run reported a cheerful p50 of 0.66 ms while the service was
+  returning 503 to every request. It now refuses to measure a failing request.
+- Section 8.5's bug experiment could not attribute detection on month 6, because
+  month 6 alarms on its own drift (DECISIONS D17).
+
+**Known gap**
+- The validation report is ~1,310 words with 20 table rows, which exports to
+  roughly two and a half pages against section 14's two-page cap. Further cuts
+  would remove findings rather than prose.
+
+**Next step**
+- `make docker` (needs Docker Desktop running), then the README's final pass.
+- Two open decisions: MLflow logging, and whether to run the 30-trial champion
+  tuning.
+
+**Open questions for the owner**
+- The alpha targets and cost parameters remain placeholders and are now
+  load-bearing for the headline claim.
+- Kaggle licence check before the repo goes public.
+- Two outside reviews for `reports/reviews.md`, and the 2-minute demo walkthrough.
+
+---
+
 ## 2026-09-18 (late) — Champion, calibration, and the conformal policy
 
 **What changed**

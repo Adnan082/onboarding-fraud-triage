@@ -13,7 +13,10 @@ from pathlib import Path
 import hydra
 from omegaconf import DictConfig
 
+from triage.api.service import read_manifest
 from triage.evaluation.artefacts import read_metrics, render_readme_tables
+from triage.evaluation.figures import render_all as render_figures
+from triage.evaluation.model_card import render as render_card
 from triage.evaluation.tables import render_all
 from triage.evaluation.validation import collect_findings
 from triage.evaluation.validation import render as render_validation
@@ -40,8 +43,15 @@ def main(cfg: DictConfig) -> None:
         log.info("  %-16s %s", name, status)
     log.info("updated %s (%d table(s))", readme, len(replaced))
 
+    figures = render_figures(metrics, Path(cfg.paths.figures))
+    log.info("drew %d figure(s) in %s", len(figures), cfg.paths.figures)
+
     # The validation report is generated from the same artefacts, for the same
     # reason: a report that drifts from the numbers it describes is worse than none.
+    card_path = Path(cfg.paths.reports) / "model_card.md"
+    card_path.write_text(render_card(metrics, read_manifest()), encoding="utf-8")
+    log.info("wrote %s", card_path)
+
     report_path = Path(cfg.paths.reports) / "validation_report.md"
     report_path.write_text(render_validation(metrics), encoding="utf-8")
     findings = collect_findings(metrics)
