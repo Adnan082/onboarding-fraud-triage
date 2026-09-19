@@ -35,10 +35,88 @@ handle the workload, and does it fail safely when the data changes?*
 
 ---
 
-## How it decides
+## How it works
 
-Each application gets a calibrated fraud probability, and two thresholds turn that
-into a set of plausible labels. The set — not the score — picks the band.
+### What gets built, once
+
+Everything the system knows is learned from months 0 to 5, and frozen:
+
+```mermaid
+flowchart LR
+    raw["BAF applications<br/>1,000,000 rows<br/>8 months"]
+    contract["Frozen contract<br/>types, ranges,<br/>category sets"]
+    feats["Features<br/>sentinels flagged<br/>age dropped"]
+    model["LightGBM champion<br/>months 0 to 4"]
+    calib["Calibration<br/>fitted on cal_prob<br/>chosen on cal_tune"]
+    taus["Conformal thresholds<br/>fitted on cal_conf<br/>touched once"]
+
+    raw --> contract --> feats --> model --> calib --> taus
+    taus --> out(["models/manifest.json<br/>hashed, versioned"])
+```
+
+Each artefact is hashed into a manifest. The service verifies those hashes at
+startup and **refuses to serve on a mismatch** — a model nobody can identify is
+worse than no model, because every claim in the validation report is attached to
+that manifest.
+
+### What happens to an application
+
+```mermaid
+flowchart TB
+    app(["New application"]) --> check{"Passes the<br/>frozen contract?"}
+    check -->|"no"| reject["422 — rejected<br/>never scored"]
+    check -->|"yes"| score["Calibrated fraud<br/>probability p(x)"]
+    score --> band["Conformal set<br/>{legit} / both / {} / {fraud}"]
+    band --> out["approve · review · verify<br/>+ analyst reason codes"]
+
+    subgraph monitor ["Every 4,000 applications — no labels needed"]
+        det["PSI · domain classifier<br/>· conformal-rate test"]
+        alarm{"Same detector<br/>twice running?"}
+        fall["Tighten the alphas:<br/>more cases to a human"]
+        det --> alarm -->|"yes"| fall
+    end
+
+    score -.->|"scores only"| det
+    fall -.->|"monitor_state.json"| band
+```
+
+Three things are worth noticing in that picture. Validation happens **before**
+scoring, so a broken feed cannot reach the model. The monitor reads **scores, not
+outcomes**, so it works weeks before any fraud label exists. And its only lever is
+to send *more* work to humans — never to decide anything itself.
+
+### Step one — does the application even make sense?
+
+Before anything is scored, it is validated against a **contract frozen from the
+first verified load of the data**: types, ranges, category sets, and which
+negative numbers mean "missing" rather than a real value. An application that
+breaches it is rejected outright rather than scored.
+
+This is not ceremony. The monitoring experiments inject an upstream fault that
+multiplies income by ten, and the contract stops it at the door — it never reaches
+a detector, because it never reaches the model.
+
+### Step two — score it, without looking at age
+
+The champion is a LightGBM model trained on months 0 to 4. It never sees
+`customer_age`. The API accepts age and logs it so fairness can be measured, then
+drops it before the model sees anything.
+
+That choice costs almost nothing in detection — the detection table below shows
+the champion within a thousandth of AUC of the otherwise identical model that
+*does* see age — which tells you the information was never uniquely in that
+column. Other fields carry it, which is exactly why "just drop the protected
+attribute" is measured here rather than assumed to work.
+
+The raw score is then **calibrated**, because the decision policy reads
+probabilities rather than rankings. An uncalibrated gradient-boosted model can
+rank applications beautifully and still be badly wrong about *how likely* fraud
+actually is; the calibration table below shows exactly how wrong.
+
+### Step three — turn a probability into a decision
+
+This is the part that makes the project more than a classifier. Instead of one
+threshold, there are two, and they produce a **set** of plausible labels:
 
 ```text
                        p(x) <= tau_legit ?        p(x) >= tau_fraud ?
@@ -52,14 +130,82 @@ into a set of plausible labels. The set — not the score — picks the band.
                          through)       looks)          or a human)
 ```
 
-The two thresholds are set by **label-conditional conformal prediction**: a way to
-set thresholds so that a stated share of fraud is caught, as long as new
-applications look like the calibration data. It gives two guarantees:
+Read it as the model answering "which labels can I not rule out?"
+
+- **Only "legit" survives** → nothing suggests fraud → approve.
+- **Both survive** → the model cannot separate this case → a human looks at it.
+- **Only "fraud" survives** → ask for more checks.
+- **Neither survives** → the case looks unlike *anything* in calibration → also a
+  human, because an empty set is a confession of ignorance, not a verdict.
+
+There is **no automatic decline**. The strongest action available is a request for
+further checks.
+
+The two thresholds come from **label-conditional split conformal prediction**: a
+way of setting thresholds so that a stated share of fraud is caught, *as long as
+new applications look like the calibration data*. It offers two guarantees:
 
 - at most `alpha_fraud` of fraud is ever auto-approved;
 - at most `alpha_legit` of genuine applicants is sent for extra verification.
 
-There is **no automatic decline**. The riskiest band is "verify".
+That italicised condition is doing real work, and this project takes it seriously
+enough to test it. One of the two guarantees held on the test months and **one did
+not** — see *What didn't work*.
+
+### Why the data is split the way it is
+
+Every number depends on this, so it is worth being precise. Splits are by **month
+only** — never a random row split, which would let the model learn from its own
+future.
+
+```text
+  month   0     1     2     3     4   |        5        |   6        7
+        +-----------------------------+-----------------+------------------+
+        |        TRAIN                |   CALIBRATION   |   TEST           |
+        |  fits the model             |  split 3 ways   |  never touched   |
+        +-----------------------------+-----------------+------------------+
+                                       /       |       \
+                           cal_prob   /    cal_tune     \   cal_conf
+                        fits the         chooses the        sets the
+                        calibrator       alphas and         conformal
+                                         the threshold      thresholds
+```
+
+Month 5 is cut three ways for a reason that matters more than it looks. If the
+same data chose the alphas *and* produced the thresholds, the coverage guarantee
+would be a description of the past rather than a claim about the future.
+**`cal_conf` is touched exactly once**, at the very end, and nothing else is
+allowed to learn from it.
+
+Months 6 and 7 are reported **separately**, never only pooled, because a model can
+look stable on average while degrading month over month.
+
+### Step four — notice when the world moves
+
+The guarantees above hold while new applications resemble the calibration month.
+The monitor's job is to notice when they stop, **without waiting for fraud labels**
+— which in reality arrive weeks or months late, if at all.
+
+Every 4,000 applications (one simulated day), three detectors run:
+
+| Detector | The question it asks |
+|---|---|
+| **PSI**, on the score and each feature | has any single distribution shifted? |
+| **Domain classifier** | can a small model tell this window from the reference *at all*? |
+| **Conformal-rate test** | are the policy's own threshold-crossing rates still what calibration said? |
+
+Thresholds are not guessed. Each is set at the 99th percentile of 200 windows
+drawn from the calibration month — windows that are clean by construction — so the
+false-alarm rate is a measured property rather than a hope.
+
+A single window over threshold is a **watch**. The *same* detector over threshold
+twice running is an **alert**, which is what separates a blip from a break. On
+alert the policy switches to tighter alphas, sending more cases to a human, and
+the service picks that up on its next request. It is never cleared automatically.
+
+The most useful thing this monitor did was catch the guarantee breaking on month
+6 using no labels at all — the same failure the conformal results show, detected
+independently.
 
 ---
 
@@ -338,22 +484,87 @@ sampled run.
 
 ---
 
+## How the code is organised
+
+The shape follows the pipeline: each stage is a thin Hydra app over a library that
+holds the actual logic, so everything interesting is importable and tested rather
+than buried in a script.
+
+```
+src/triage/
+├── data/          load.py        download, checksum, convert to parquet
+│                  contract.py    the FROZEN schema; rejects bad input
+│                  split.py       time-based splits and simulated days
+├── features/      sentinels.py   negative values -> explicit missing flags
+│                  encode.py      one-hot / categories; age dropped here
+├── models/        baselines.py   B0 logistic regression, B1 LightGBM
+│                  champion.py    the deployed model + hashed manifest
+│                  calibrate.py   none / Platt / isotonic
+│                  fair.py        M2 FairGBM, M3 fairlearn
+├── uncertainty/   conformal.py   label-conditional split conformal, from scratch
+├── policy/        decide.py      conformal set -> approve / review / verify
+│                  sweep.py       the alpha grid and capacity selection
+│                  cost.py        illustrative cost frame
+├── fairness/      metrics.py     FPR ratio, age bands, relative likelihood
+│                  bootstrap.py   stratified percentile intervals
+├── monitoring/    psi.py/.sql    PSI in DuckDB, mirrored in pandas
+│                  domain_clf.py  the "can you tell these apart?" detector
+│                  conformal_rate.py  binomial test on crossing rates
+│                  alarms.py      watch / alert rules
+│                  fallback.py    the state the API reads
+├── explain/       reasons.py     SHAP on the uncalibrated margin
+├── evaluation/    metrics.py     every metric definition, in one place
+│                  protocols.py   the two evaluation protocols
+│                  artefacts.py   writes reports/metrics.json
+│                  tables.py      README tables
+│                  figures.py     the four figures
+│                  validation.py  the validation report
+│                  model_card.py  the model card
+├── api/           app.py         FastAPI: /score, /health, /version, /monitor
+│                  schemas.py     request model GENERATED from the contract
+│                  service.py     artefact loading with hash verification
+└── stages/        one per make target
+```
+
+### Where the guarantees live
+
+If you only read four files, read these:
+
+| File | Why it matters |
+|---|---|
+| [`uncertainty/conformal.py`](src/triage/uncertainty/conformal.py) | The guarantee itself. Written from scratch, because the off-the-shelf version is marginal and collapses at 1% prevalence |
+| [`data/contract.py`](src/triage/data/contract.py) | What "valid" means, frozen from the first verified load, and the reason a bad feed cannot reach the model |
+| [`data/split.py`](src/triage/data/split.py) | The three-way cut of month 5 that makes the guarantee a claim about the future rather than the past |
+| [`evaluation/artefacts.py`](src/triage/evaluation/artefacts.py) | Why no number in this README was typed by hand |
+
+### How a result gets here
+
+```text
+  make baseline ─┐
+  make train    ─┤
+  make conformal├─>  reports/metrics.json  ──>  make report ──┬─> README tables
+  make fairness ─┤                                            ├─> figures
+  make monitor  ─┤                                            ├─> validation report
+  make bench    ─┘                                            └─> model card
+```
+
+Stages write artefacts; `make report` renders them. Nothing else may put a number
+in the README, which is why a stale result is visible rather than plausible.
+
+---
+
 ## Repo map
 
 | Path | What's in it |
 |---|---|
 | `configs/` | Hydra config: data, features, models, calibration, policy, monitor |
-| `src/triage/data/` | Loading, the frozen data contract, time-based splits |
-| `src/triage/models/` | Baselines, champion, probability calibration, fairness mitigations |
-| `src/triage/uncertainty/` | Label-conditional conformal prediction, written from scratch |
-| `src/triage/policy/` | Set → band, the alpha sweep, the cost frame |
-| `src/triage/fairness/` | FPR by age group, bootstrap confidence intervals |
-| `src/triage/monitoring/` | PSI, domain classifier, conformal-rate test, alarms, fallback |
-| `src/triage/api/` | FastAPI scoring service |
-| `src/triage/stages/` | One Hydra app per Makefile stage |
+| `src/triage/` | The library, laid out above |
 | `experiments/` | Variant stress tests, injected data bugs |
-| `reports/` | Generated artefacts, the validation report and the model card |
-| `docs/` | Session notes and design decisions |
+| `tests/` | 294 tests, including a seeded BAF-shaped fixture so they need no data |
+| `reports/` | Generated artefacts, the validation report, the model card, figures |
+| `docs/` | Session notes and every design decision, as context → decision → consequences |
+| `app/demo.py` | One-screen Streamlit demo, reading only precomputed artefacts |
+| `docker/` | The service image |
 
 ---
 
