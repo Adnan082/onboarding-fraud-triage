@@ -61,8 +61,17 @@ def file_checksum(path: Path) -> str:
 
 
 def run_context(cfg: DictConfig) -> dict[str, Any]:
-    """Provenance stamped onto every artefact: config hash, git SHA and seed."""
-    return {"config_hash": config_hash(cfg), "git_sha": git_sha(), "seed": int(cfg.seed)}
+    """Provenance stamped onto every artefact: config hash, git SHA, seed, sampling.
+
+    ``sample_frac`` travels with the context so that artefact writing can refuse a
+    development run outright, rather than trusting everyone to remember.
+    """
+    return {
+        "config_hash": config_hash(cfg),
+        "git_sha": git_sha(),
+        "seed": int(cfg.seed),
+        "sample_frac": float(cfg.data.sample_frac),
+    }
 
 
 def with_model(cfg: DictConfig, name: str) -> DictConfig:

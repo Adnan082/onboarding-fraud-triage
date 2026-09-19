@@ -41,7 +41,7 @@
             "domain_auc": 0.7577693749999999,
             "level": "watch",
             "month": 6,
-            "psi_feature_max": 3.692315009430411,
+            "psi_feature_max": 3.6923150094304114,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.004582773309841798,
             "reasons": [
@@ -94,7 +94,7 @@
             "domain_auc": 0.76502125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6659850020698808,
+            "psi_feature_max": 3.6659850020698803,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.004475780337771475,
             "reasons": [
@@ -130,7 +130,7 @@
             "domain_auc": 0.7878753125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.744589819508941,
+            "psi_feature_max": 3.7445898195089407,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.003731176610754928,
             "reasons": [
@@ -202,7 +202,7 @@
             "domain_auc": 0.78362875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.8650500809507307,
+            "psi_feature_max": 3.865050080950731,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.007040669078458126,
             "reasons": [
@@ -220,7 +220,7 @@
             "domain_auc": 0.787678125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6608075284167083,
+            "psi_feature_max": 3.6608075284167088,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.003395427522244372,
             "reasons": [
@@ -292,7 +292,7 @@
             "domain_auc": 0.7809375,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.8942407053643513,
+            "psi_feature_max": 3.8942407053643517,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0031008448046486873,
             "reasons": [
@@ -310,7 +310,7 @@
             "domain_auc": 0.791573125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6164031742226963,
+            "psi_feature_max": 3.616403174222696,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.00376119326678896,
             "reasons": [
@@ -328,7 +328,7 @@
             "domain_auc": 0.7764281250000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.670788986139908,
+            "psi_feature_max": 3.6707889861399083,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0054201429128018595,
             "reasons": [
@@ -382,7 +382,7 @@
             "domain_auc": 0.78368625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6895499775464877,
+            "psi_feature_max": 3.6895499775464873,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.008163838226154678,
             "reasons": [
@@ -418,7 +418,7 @@
             "domain_auc": 0.78901875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7132558299593934,
+            "psi_feature_max": 3.713255829959394,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.004363377313687073,
             "reasons": [
@@ -436,7 +436,7 @@
             "domain_auc": 0.7875140624999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7794097348015416,
+            "psi_feature_max": 3.779409734801541,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0012171669973993836,
             "reasons": [
@@ -454,7 +454,7 @@
             "domain_auc": 0.7785465625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.632397018341788,
+            "psi_feature_max": 3.6323970183417877,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.003958598159519733,
             "reasons": [
@@ -472,7 +472,7 @@
             "domain_auc": 0.7870587500000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7413092626750775,
+            "psi_feature_max": 3.741309262675077,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0068587419968296065,
             "reasons": [
@@ -508,7 +508,7 @@
             "domain_auc": 0.7894668750000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.844646260599514,
+            "psi_feature_max": 3.8446462605995135,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0033283812130423846,
             "reasons": [
@@ -612,7 +612,7 @@
             "domain_auc": 0.76502125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6659850020698803,
+            "psi_feature_max": 3.6659850020698808,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.004475780337771475,
             "reasons": [
@@ -630,7 +630,7 @@
             "domain_auc": 0.7659940625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7843461908019593,
+            "psi_feature_max": 3.784346190801959,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.00710510423725585,
             "reasons": [
@@ -950,7 +950,7 @@
             "domain_auc": 0.7659940625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.784346190801959,
+            "psi_feature_max": 3.7843461908019593,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.00710510423725585,
             "reasons": [
@@ -968,7 +968,7 @@
             "domain_auc": 0.8478368749999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.74458981950894,
+            "psi_feature_max": 3.7445898195089407,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.011135479791950627,
             "reasons": [
@@ -1022,7 +1022,7 @@
             "domain_auc": 0.8436896874999998,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7783014595623303,
+            "psi_feature_max": 3.7783014595623308,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.010266009030409789,
             "reasons": [
@@ -1094,7 +1094,7 @@
             "domain_auc": 0.8482881250000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7942447569824913,
+            "psi_feature_max": 3.7942447569824918,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0089378355791726,
             "reasons": [
@@ -1184,7 +1184,7 @@
             "domain_auc": 0.83819,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.8659193050568437,
+            "psi_feature_max": 3.8659193050568432,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.015997867969538327,
             "reasons": [
@@ -1220,7 +1220,7 @@
             "domain_auc": 0.8452490625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6895499775464877,
+            "psi_feature_max": 3.689549977546487,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0066809646889984245,
             "reasons": [
@@ -1274,7 +1274,7 @@
             "domain_auc": 0.844735,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.779409734801541,
+            "psi_feature_max": 3.7794097348015407,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0062960979836447235,
             "reasons": [
@@ -1310,7 +1310,7 @@
             "domain_auc": 0.8479524999999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7413092626750775,
+            "psi_feature_max": 3.741309262675077,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.008472036459858142,
             "reasons": [
@@ -1397,7 +1397,7 @@
             "domain_auc": 0.7577693749999999,
             "level": "watch",
             "month": 6,
-            "psi_feature_max": 3.692315009430412,
+            "psi_feature_max": 3.6923150094304114,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.004582773309841798,
             "reasons": [
@@ -1414,7 +1414,7 @@
             "domain_auc": 0.7613459375,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.697996360001781,
+            "psi_feature_max": 3.6979963600017807,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0018814902118255692,
             "reasons": [
@@ -1450,7 +1450,7 @@
             "domain_auc": 0.76502125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6659850020698803,
+            "psi_feature_max": 3.6659850020698808,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.004475780337771475,
             "reasons": [
@@ -1468,7 +1468,7 @@
             "domain_auc": 0.7659940625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7843461908019593,
+            "psi_feature_max": 3.784346190801959,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.00710510423725585,
             "reasons": [
@@ -1486,7 +1486,7 @@
             "domain_auc": 0.9239103125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.744589819508941,
+            "psi_feature_max": 3.74458981950894,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.030727503371137225,
             "reasons": [
@@ -1558,7 +1558,7 @@
             "domain_auc": 0.9263337500000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.865050080950731,
+            "psi_feature_max": 3.8650500809507307,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.03489883476143031,
             "reasons": [
@@ -1576,7 +1576,7 @@
             "domain_auc": 0.9242021875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6608075284167088,
+            "psi_feature_max": 3.6608075284167083,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.027828286114435705,
             "reasons": [
@@ -1702,7 +1702,7 @@
             "domain_auc": 0.92139734375,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.865919305056843,
+            "psi_feature_max": 3.8659193050568437,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.03536047294233555,
             "reasons": [
@@ -1738,7 +1738,7 @@
             "domain_auc": 0.9228825,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6895499775464877,
+            "psi_feature_max": 3.6895499775464873,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02421802706393416,
             "reasons": [
@@ -1774,7 +1774,7 @@
             "domain_auc": 0.9259509375,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.713255829959393,
+            "psi_feature_max": 3.7132558299593934,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0301689195670344,
             "reasons": [
@@ -1792,7 +1792,7 @@
             "domain_auc": 0.923048125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7794097348015407,
+            "psi_feature_max": 3.779409734801541,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02276768316049637,
             "reasons": [
@@ -1846,7 +1846,7 @@
             "domain_auc": 0.9243121875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7557785818763807,
+            "psi_feature_max": 3.755778581876381,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.027330890841045234,
             "reasons": [
@@ -1864,7 +1864,7 @@
             "domain_auc": 0.924886875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.8446462605995135,
+            "psi_feature_max": 3.844646260599514,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.027369585554517135,
             "reasons": [
@@ -1882,8 +1882,8 @@
     },
     "context": {
       "config_hash": "2fe27330",
-      "generated_at": "2026-09-19T14:50:15.731795+00:00",
-      "git_sha": "927bedf6",
+      "generated_at": "2026-09-19T21:53:56.688300+00:00",
+      "git_sha": "a0c86b6a",
       "seed": 20260917
     },
     "fallback_state": {
@@ -1894,9 +1894,9 @@
       "last_window": 1,
       "month": 6,
       "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc",
-      "updated_at": "2026-09-19T14:50:15.729943+00:00"
+      "updated_at": "2026-09-19T21:53:56.686608+00:00"
     },
-    "model_version": "champion-unknown",
+    "model_version": "champion-927bedf6",
     "natural_drift": {
       "counts": {
         "alert": 50,
@@ -1915,7 +1915,7 @@
           "domain_auc": 0.7577693749999999,
           "level": "watch",
           "month": 6,
-          "psi_feature_max": 3.6923150094304114,
+          "psi_feature_max": 3.692315009430411,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.004582773309841798,
           "reasons": [
@@ -1932,7 +1932,7 @@
           "domain_auc": 0.7613459375,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.6979963600017816,
+          "psi_feature_max": 3.6979963600017807,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.0018814902118255692,
           "reasons": [
@@ -1968,7 +1968,7 @@
           "domain_auc": 0.76502125,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.6659850020698808,
+          "psi_feature_max": 3.665985002069881,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.004475780337771475,
           "reasons": [
@@ -1986,7 +1986,7 @@
           "domain_auc": 0.7659940625,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.784346190801959,
+          "psi_feature_max": 3.7843461908019593,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.00710510423725585,
           "reasons": [
@@ -2004,7 +2004,7 @@
           "domain_auc": 0.76804875,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.7445898195089407,
+          "psi_feature_max": 3.744589819508941,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.00375726837053353,
           "reasons": [
@@ -2022,7 +2022,7 @@
           "domain_auc": 0.7635246874999999,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.715139621883204,
+          "psi_feature_max": 3.7151396218832042,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.00621143722464981,
           "reasons": [
@@ -2040,7 +2040,7 @@
           "domain_auc": 0.76116625,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.7249744971134886,
+          "psi_feature_max": 3.724974497113488,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.005162684883795185,
           "reasons": [
@@ -2076,7 +2076,7 @@
           "domain_auc": 0.76475,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.865050080950731,
+          "psi_feature_max": 3.8650500809507307,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.006717698898452329,
           "reasons": [
@@ -2130,7 +2130,7 @@
           "domain_auc": 0.764325,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.7942447569824913,
+          "psi_feature_max": 3.7942447569824918,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.004140086807850392,
           "reasons": [
@@ -2148,7 +2148,7 @@
           "domain_auc": 0.765986875,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.901206756958432,
+          "psi_feature_max": 3.9012067569584326,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.003184144729495245,
           "reasons": [
@@ -2184,7 +2184,7 @@
           "domain_auc": 0.774615625,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.616403174222696,
+          "psi_feature_max": 3.6164031742226963,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.004538121770466302,
           "reasons": [
@@ -2202,7 +2202,7 @@
           "domain_auc": 0.7569678124999999,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.670788986139908,
+          "psi_feature_max": 3.6707889861399075,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.006058551124506432,
           "reasons": [
@@ -2238,7 +2238,7 @@
           "domain_auc": 0.76761375,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.7475607301406972,
+          "psi_feature_max": 3.747560730140697,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.006453636637740547,
           "reasons": [
@@ -2256,7 +2256,7 @@
           "domain_auc": 0.7647721875,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.6895499775464873,
+          "psi_feature_max": 3.6895499775464877,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.009231254078697484,
           "reasons": [
@@ -2292,7 +2292,7 @@
           "domain_auc": 0.7713643749999999,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.7132558299593934,
+          "psi_feature_max": 3.713255829959394,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.005626805346704184,
           "reasons": [
@@ -2328,7 +2328,7 @@
           "domain_auc": 0.7607421875,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.6323970183417877,
+          "psi_feature_max": 3.6323970183417886,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.0037358190947797457,
           "reasons": [
@@ -2346,7 +2346,7 @@
           "domain_auc": 0.768049375,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.741309262675077,
+          "psi_feature_max": 3.7413092626750775,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.007287523825159958,
           "reasons": [
@@ -2382,7 +2382,7 @@
           "domain_auc": 0.7694684375,
           "level": "alert",
           "month": 6,
-          "psi_feature_max": 3.844646260599514,
+          "psi_feature_max": 3.8446462605995135,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.0030118644933335133,
           "reasons": [
@@ -2400,7 +2400,7 @@
           "domain_auc": 0.98139734375,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.897835387397114,
+          "psi_feature_max": 3.8978353873971137,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.02953167709460402,
           "reasons": [
@@ -2436,7 +2436,7 @@
           "domain_auc": 0.9810874999999999,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.8603561506205732,
+          "psi_feature_max": 3.8603561506205737,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.03230795069058551,
           "reasons": [
@@ -2544,7 +2544,7 @@
           "domain_auc": 0.9822539062500001,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.9529643383979023,
+          "psi_feature_max": 3.9529643383979014,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.023310574761987498,
           "reasons": [
@@ -2616,7 +2616,7 @@
           "domain_auc": 0.9786249999999999,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.974739332368778,
+          "psi_feature_max": 3.9747393323687783,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.02206862188903739,
           "reasons": [
@@ -2706,7 +2706,7 @@
           "domain_auc": 0.980536875,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.9582315288086027,
+          "psi_feature_max": 3.9582315288086023,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.035166154509590784,
           "reasons": [
@@ -2760,7 +2760,7 @@
           "domain_auc": 0.9832184375,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.961891393576561,
+          "psi_feature_max": 3.9618913935765616,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.01696703073399646,
           "reasons": [
@@ -2796,7 +2796,7 @@
           "domain_auc": 0.97960453125,
           "level": "alert",
           "month": 7,
-          "psi_feature_max": 3.9831021813618115,
+          "psi_feature_max": 3.983102181361811,
           "psi_feature_max_name": "velocity_4w",
           "psi_score": 0.02484082422676981,
           "reasons": [
@@ -2825,7 +2825,7 @@
         }
       ]
     },
-    "seconds": 932.9323168169999,
+    "seconds": 973.7297486749994,
     "threshold_calibration": {
       "clean_windows": 200,
       "counts": {
@@ -2851,6 +2851,13 @@
           "watch": 1
         },
         "first_alert_window": 1,
+        "population": {
+          "n": 241672.0,
+          "prevalence": 0.010973550928531233,
+          "prevalence_older": 0.011128124923233134,
+          "prevalence_younger": 0.010815648813457243,
+          "share_older": 0.5053253997153166
+        },
         "windows": [
           {
             "bugged": false,
@@ -2896,7 +2903,7 @@
             "domain_auc": 0.7910831250000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.4728330258922218,
+            "psi_feature_max": 3.472833025892222,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.028137494731500852,
             "reasons": [
@@ -2914,7 +2921,7 @@
             "domain_auc": 0.7839603125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.642389165494572,
+            "psi_feature_max": 3.6423891654945715,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.024283194779000223,
             "reasons": [
@@ -3022,7 +3029,7 @@
             "domain_auc": 0.7789756250000002,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6526734900669835,
+            "psi_feature_max": 3.6526734900669844,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.026995095126321103,
             "reasons": [
@@ -3094,7 +3101,7 @@
             "domain_auc": 0.7778078125000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.5625607045301706,
+            "psi_feature_max": 3.56256070453017,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.020674029136868822,
             "reasons": [
@@ -3166,7 +3173,7 @@
             "domain_auc": 0.7804634374999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6843462011979486,
+            "psi_feature_max": 3.684346201197949,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.025733758345329087,
             "reasons": [
@@ -3220,7 +3227,7 @@
             "domain_auc": 0.7884196875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6485942728159184,
+            "psi_feature_max": 3.648594272815918,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.013208606676248152,
             "reasons": [
@@ -3256,7 +3263,7 @@
             "domain_auc": 0.78183375,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.687004681725001,
+            "psi_feature_max": 3.6870046817250013,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0325021966612202,
             "reasons": [
@@ -3274,7 +3281,7 @@
             "domain_auc": 0.775068125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.521378043384579,
+            "psi_feature_max": 3.5213780433845794,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.026933203606025243,
             "reasons": [
@@ -3292,7 +3299,7 @@
             "domain_auc": 0.78590375,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.704589545965332,
+            "psi_feature_max": 3.7045895459653315,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.021784539585392514,
             "reasons": [
@@ -3346,7 +3353,7 @@
             "domain_auc": 0.7786203125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6165263874132667,
+            "psi_feature_max": 3.616526387413267,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.020344902543608438,
             "reasons": [
@@ -3472,7 +3479,7 @@
             "domain_auc": 0.98181796875,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.8770623267687863,
+            "psi_feature_max": 3.877062326768786,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0196373746790123,
             "reasons": [
@@ -3526,7 +3533,7 @@
             "domain_auc": 0.98085140625,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.7386441490553532,
+            "psi_feature_max": 3.7386441490553537,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.00905051008912899,
             "reasons": [
@@ -3544,7 +3551,7 @@
             "domain_auc": 0.9795507812500001,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.715749065884716,
+            "psi_feature_max": 3.7157490658847165,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.010511600184684729,
             "reasons": [
@@ -3562,7 +3569,7 @@
             "domain_auc": 0.9821195312500001,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.8913113881551324,
+            "psi_feature_max": 3.891311388155132,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.010675152161588104,
             "reasons": [
@@ -3580,7 +3587,7 @@
             "domain_auc": 0.98042640625,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.778340671406767,
+            "psi_feature_max": 3.7783406714067667,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.008635282456951313,
             "reasons": [
@@ -3634,7 +3641,7 @@
             "domain_auc": 0.9802543749999998,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.800206496683758,
+            "psi_feature_max": 3.8002064966837588,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.009587566295912826,
             "reasons": [
@@ -3670,7 +3677,7 @@
             "domain_auc": 0.9834568750000001,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.884772652603019,
+            "psi_feature_max": 3.8847726526030186,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.017204136912459467,
             "reasons": [
@@ -3742,7 +3749,7 @@
             "domain_auc": 0.9822934374999999,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.800509610097736,
+            "psi_feature_max": 3.8005096100977354,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.011125192038359929,
             "reasons": [
@@ -3760,7 +3767,7 @@
             "domain_auc": 0.9814878125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.859173967934703,
+            "psi_feature_max": 3.8591739679347032,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.019377033164403104,
             "reasons": [
@@ -3832,7 +3839,7 @@
             "domain_auc": 0.9806934375,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.9149443482235426,
+            "psi_feature_max": 3.9149443482235435,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.013301035077695287,
             "reasons": [
@@ -3886,7 +3893,7 @@
             "domain_auc": 0.9800040625000002,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.7087485987829334,
+            "psi_feature_max": 3.708748598782934,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.019626698408021066,
             "reasons": [
@@ -3940,6 +3947,13 @@
           "watch": 1
         },
         "first_alert_window": 1,
+        "population": {
+          "n": 241672.0,
+          "prevalence": 0.010973550928531233,
+          "prevalence_older": 0.011053433114448065,
+          "prevalence_younger": 0.01089193394569091,
+          "share_older": 0.5053709159521996
+        },
         "windows": [
           {
             "bugged": false,
@@ -3967,7 +3981,7 @@
             "domain_auc": 0.786238125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.755067071661122,
+            "psi_feature_max": 3.7550670716611214,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02744193452974602,
             "reasons": [
@@ -4003,7 +4017,7 @@
             "domain_auc": 0.7857378125000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.701006272778545,
+            "psi_feature_max": 3.7010062727785447,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02659744423057178,
             "reasons": [
@@ -4039,7 +4053,7 @@
             "domain_auc": 0.774670625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6752531622953395,
+            "psi_feature_max": 3.67525316229534,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0264395143499694,
             "reasons": [
@@ -4075,7 +4089,7 @@
             "domain_auc": 0.7857149999999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.604904476182755,
+            "psi_feature_max": 3.6049044761827553,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02793941557250354,
             "reasons": [
@@ -4129,7 +4143,7 @@
             "domain_auc": 0.7915537500000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.669287125448789,
+            "psi_feature_max": 3.6692871254487893,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.011860626487784206,
             "reasons": [
@@ -4147,7 +4161,7 @@
             "domain_auc": 0.7774453125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6430726389552364,
+            "psi_feature_max": 3.643072638955236,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.026087546996012713,
             "reasons": [
@@ -4183,7 +4197,7 @@
             "domain_auc": 0.7905778124999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.6344320464779396,
+            "psi_feature_max": 3.63443204647794,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.018996821541615923,
             "reasons": [
@@ -4219,7 +4233,7 @@
             "domain_auc": 0.7852368750000001,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.7012139845559764,
+            "psi_feature_max": 3.701213984555977,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02892342034484835,
             "reasons": [
@@ -4255,7 +4269,7 @@
             "domain_auc": 0.7774403125,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.757317070037745,
+            "psi_feature_max": 3.7573170700377454,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.0215910707149763,
             "reasons": [
@@ -4309,7 +4323,7 @@
             "domain_auc": 0.777436875,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.683602851065519,
+            "psi_feature_max": 3.6836028510655185,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.019070291925252537,
             "reasons": [
@@ -4327,7 +4341,7 @@
             "domain_auc": 0.7797156249999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.706265532187361,
+            "psi_feature_max": 3.7062655321873605,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.019413710266905276,
             "reasons": [
@@ -4363,7 +4377,7 @@
             "domain_auc": 0.7830199999999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.561894606458711,
+            "psi_feature_max": 3.5618946064587114,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02026501263872499,
             "reasons": [
@@ -4435,7 +4449,7 @@
             "domain_auc": 0.7751728124999999,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.4920805823693537,
+            "psi_feature_max": 3.492080582369354,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.029743061692692356,
             "reasons": [
@@ -4525,7 +4539,7 @@
             "domain_auc": 0.7858790625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.710277174970933,
+            "psi_feature_max": 3.7102771749709325,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.02233884141775471,
             "reasons": [
@@ -4543,7 +4557,7 @@
             "domain_auc": 0.77562625,
             "level": "alert",
             "month": 6,
-            "psi_feature_max": 3.5708468848842383,
+            "psi_feature_max": 3.5708468848842374,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.023200132430775566,
             "reasons": [
@@ -4579,7 +4593,7 @@
             "domain_auc": 0.9813826562499999,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.8407201316465542,
+            "psi_feature_max": 3.8407201316465547,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.016584338873481236,
             "reasons": [
@@ -4597,7 +4611,7 @@
             "domain_auc": 0.98118703125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.8129217060210463,
+            "psi_feature_max": 3.812921706021046,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.013047435207707037,
             "reasons": [
@@ -4633,7 +4647,7 @@
             "domain_auc": 0.981465625,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.869670393441931,
+            "psi_feature_max": 3.8696703934419303,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.015514405737385568,
             "reasons": [
@@ -4687,7 +4701,7 @@
             "domain_auc": 0.9831878125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.874154191684165,
+            "psi_feature_max": 3.8741541916841653,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.01597115034398827,
             "reasons": [
@@ -4705,7 +4719,7 @@
             "domain_auc": 0.9803529687499999,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.9261568954906307,
+            "psi_feature_max": 3.9261568954906303,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.014141601602842712,
             "reasons": [
@@ -4741,7 +4755,7 @@
             "domain_auc": 0.98116015625,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.688812455694725,
+            "psi_feature_max": 3.6888124556947246,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.01168683870158095,
             "reasons": [
@@ -4759,7 +4773,7 @@
             "domain_auc": 0.9813415624999999,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.7014263476678813,
+            "psi_feature_max": 3.701426347667881,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.018529252235988523,
             "reasons": [
@@ -4795,7 +4809,7 @@
             "domain_auc": 0.9795284375,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.7831310173136385,
+            "psi_feature_max": 3.7831310173136394,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.019413879286978103,
             "reasons": [
@@ -4831,7 +4845,7 @@
             "domain_auc": 0.979551875,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.8172213323718482,
+            "psi_feature_max": 3.8172213323718487,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.013705468167146725,
             "reasons": [
@@ -4849,7 +4863,7 @@
             "domain_auc": 0.98029953125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.5850702812119226,
+            "psi_feature_max": 3.585070281211922,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.01265375412999071,
             "reasons": [
@@ -4867,7 +4881,7 @@
             "domain_auc": 0.97980984375,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.869935206268324,
+            "psi_feature_max": 3.8699352062683245,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.007795490687496461,
             "reasons": [
@@ -4903,7 +4917,7 @@
             "domain_auc": 0.98218203125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.668640716567936,
+            "psi_feature_max": 3.6686407165679356,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.010089372101416378,
             "reasons": [
@@ -4921,7 +4935,7 @@
             "domain_auc": 0.98188703125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.900578633811847,
+            "psi_feature_max": 3.9005786338118478,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.014214691164149923,
             "reasons": [
@@ -4939,7 +4953,7 @@
             "domain_auc": 0.9805015625000001,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.6843730415197475,
+            "psi_feature_max": 3.6843730415197466,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.012774215489405435,
             "reasons": [
@@ -4957,7 +4971,7 @@
             "domain_auc": 0.98311125,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.8281536208719857,
+            "psi_feature_max": 3.828153620871986,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.014984688585984006,
             "reasons": [
@@ -5011,7 +5025,7 @@
             "domain_auc": 0.9806946875,
             "level": "alert",
             "month": 7,
-            "psi_feature_max": 3.7830660208205087,
+            "psi_feature_max": 3.7830660208205096,
             "psi_feature_max_name": "velocity_4w",
             "psi_score": 0.011553013909300212,
             "reasons": [

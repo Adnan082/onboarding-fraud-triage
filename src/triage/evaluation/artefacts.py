@@ -44,13 +44,34 @@ def _json_safe(value: Any) -> Any:
 
 
 def update_section(
-    path: Path, section: str, payload: dict[str, Any], context: dict[str, Any]
+    path: Path,
+    section: str,
+    payload: dict[str, Any],
+    context: dict[str, Any],
+    *,
+    allow_sampled: bool = False,
 ) -> dict[str, Any]:
     """Merge one top-level section into ``metrics.json``, stamped with run context.
 
     Other sections are left exactly as they were, so one stage never overwrites
     another's results.
+
+    **A sampled run cannot write here.** ``data.sample_frac`` is for development,
+    and rule 6 says no reported number may come from one -- but an artefact on
+    disk looks identical either way, and a stage run with ``sample_frac=0.05``
+    will happily overwrite real results with development ones. So it is refused
+    rather than trusted. Pass ``allow_sampled=True`` only to write somewhere the
+    report never reads.
     """
+    fraction = float(context.get("sample_frac", 1.0))
+    if fraction < 1.0 and not allow_sampled:
+        raise ValueError(
+            f"refusing to write '{section}' to {path.name} from a sampled run "
+            f"(data.sample_frac={fraction}). Development runs must not overwrite "
+            "reported results (rule 6). Re-run without the override, or pass "
+            "allow_sampled=True to write somewhere the report does not read."
+        )
+
     metrics = read_metrics(path) if path.exists() else {}
     metrics[section] = _json_safe(
         {**payload, "context": {**context, "generated_at": datetime.now(UTC).isoformat()}}

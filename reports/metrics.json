@@ -3292,8 +3292,8 @@
     },
     "context": {
       "config_hash": "2fe27330",
-      "generated_at": "2026-09-19T14:50:15.736512+00:00",
-      "git_sha": "927bedf6",
+      "generated_at": "2026-09-19T21:53:56.693440+00:00",
+      "git_sha": "a0c86b6a",
       "seed": 20260917
     },
     "fallback_state": {
@@ -3304,9 +3304,9 @@
       "last_window": 1,
       "month": 6,
       "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc",
-      "updated_at": "2026-09-19T14:50:15.729943+00:00"
+      "updated_at": "2026-09-19T21:53:56.686608+00:00"
     },
-    "model_version": "champion-unknown",
+    "model_version": "champion-927bedf6",
     "natural_drift": {
       "counts": {
         "alert": 50,
@@ -3316,7 +3316,7 @@
       "first_alert_window": 1,
       "note": "months 6-7 as published: real population movement, not false alarms"
     },
-    "seconds": 932.9323168169999,
+    "seconds": 973.7297486749994,
     "threshold_calibration": {
       "clean_windows": 200,
       "counts": {
@@ -3341,7 +3341,14 @@
           "ok": 0,
           "watch": 1
         },
-        "first_alert_window": 1
+        "first_alert_window": 1,
+        "population": {
+          "n": 241672.0,
+          "prevalence": 0.010973550928531233,
+          "prevalence_older": 0.011128124923233134,
+          "prevalence_younger": 0.010815648813457243,
+          "share_older": 0.5053253997153166
+        }
       },
       "variant_v": {
         "counts": {
@@ -3349,7 +3356,14 @@
           "ok": 0,
           "watch": 1
         },
-        "first_alert_window": 1
+        "first_alert_window": 1,
+        "population": {
+          "n": 241672.0,
+          "prevalence": 0.010973550928531233,
+          "prevalence_older": 0.011053433114448065,
+          "prevalence_younger": 0.01089193394569091,
+          "share_older": 0.5053709159521996
+        }
       }
     },
     "window_size": 4000

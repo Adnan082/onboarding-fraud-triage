@@ -349,6 +349,81 @@ def mitigations_table(metrics: dict[str, Any]) -> str:
     return _table(header, rows) + note
 
 
+def monitoring_table(metrics: dict[str, Any]) -> str:
+    """Whether the monitor catches faults, and how fast."""
+    section = metrics.get("monitoring")
+    if not section:
+        return MISSING
+
+    names = {
+        "swap_employment": "Two employment codes swapped",
+        "mirror_income": "Income scale reversed",
+        "all_mobile_valid": "Mobile check always passes",
+        "income_x10": "Income multiplied by ten",
+    }
+    window = int(section["window_size"])
+
+    rows = []
+    for key, bug in sorted(section.get("bugs", {}).items()):
+        clean = bug.get("on_clean_stream", {})
+        delay = clean.get("detection_delay_windows")
+        caught_by = clean.get("detected_by") or "not detected"
+        change = bug.get("tpr_change")
+
+        if delay is None:
+            when = "never"
+        elif caught_by == "contract":
+            when = "before scoring"
+        else:
+            when = f"{delay} window ({delay * window:,} applications)"
+
+        rows.append(
+            [
+                names.get(key, f"`{key}`"),
+                "yes" if bug["in_contract"] else "**no**",
+                caught_by,
+                when,
+                "never scored" if change is None else f"{change * 100:+.1f} pts",
+            ]
+        )
+
+    header = [
+        "Injected fault",
+        "Legal under the contract?",
+        "Caught by",
+        "How long it ran",
+        "Detection cost",
+    ]
+
+    calibration = section["threshold_calibration"]
+    counts = calibration["counts"]
+    total = sum(counts.values())
+    watch_rate = counts["watch"] / total if total else 0.0
+    natural = section.get("natural_drift", {}).get("counts", {})
+
+    note = (
+        f"\n\n**False alarms.** Across {total} windows drawn from the calibration month — "
+        f"clean by construction — {counts['watch']} raised a watch ({watch_rate:.1%}) and "
+        f"{counts['alert']} an alert. For four detectors at a 99th-percentile threshold the "
+        "expected watch rate is 3.9%, so the false-alarm rate is a measured property rather "
+        "than a hope.\n\n"
+        "**Detection.** The three faults that are *legal* under the contract are the ones "
+        "worth catching, because no schema check can see them: the values stay in range and "
+        "only their meaning changes. Each reached an alert one window after injection, which "
+        "is the floor the two-consecutive-windows rule allows. The fourth is the control — "
+        "the contract rejects it before anything is scored.\n\n"
+        "Delays are measured on a stream drawn from the calibration month, which is quiet "
+        "without a fault. Section 8.5 injects into month 6, but month 6 is already alerting "
+        f"on its own drift ({natural.get('alert', 0)} of "
+        f"{sum(natural.values()) or '?'} windows), so a delay measured there could not be "
+        "attributed to the fault. Both experiments are in `reports/monitoring.json`.\n\n"
+        "**Natural drift is not a false alarm.** Months 6 and 7 really did move, and the "
+        "monitor saying so is it working. That same movement is why one half of the "
+        "conformal guarantee failed."
+    )
+    return _table(header, rows) + note
+
+
 def service_table(metrics: dict[str, Any]) -> str:
     """Latency, and what reason codes cost."""
     section = metrics.get("service")
@@ -438,6 +513,7 @@ RENDERERS = {
     "fairness": fairness_table,
     "age_bands": age_band_table,
     "mitigations": mitigations_table,
+    "monitoring": monitoring_table,
     "service": service_table,
     "data": data_table,
 }

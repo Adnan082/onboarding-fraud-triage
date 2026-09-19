@@ -56,6 +56,40 @@ def test_nan_is_written_as_null_not_as_a_number(tmp_path) -> None:
     assert json.loads(raw)["baselines"]["ok"] == 0.5
 
 
+def test_a_sampled_run_cannot_overwrite_reported_results(tmp_path) -> None:
+    """Rule 6, enforced rather than trusted.
+
+    A stage run with `data.sample_frac=0.05` writes artefacts that look exactly
+    like real ones. This happened during development: a smoke test silently
+    replaced a full monitoring run with a 5% sample. The context carries the
+    fraction, so the write is refused.
+    """
+    path = tmp_path / "metrics.json"
+    update_section(path, "baselines", {"value": "real"}, CONTEXT)
+
+    sampled = {**CONTEXT, "sample_frac": 0.05}
+    with pytest.raises(ValueError, match="sampled run"):
+        update_section(path, "baselines", {"value": "development"}, sampled)
+
+    assert read_metrics(path)["baselines"]["value"] == "real", "the real result survived"
+
+
+def test_a_sampled_run_may_write_somewhere_the_report_ignores(tmp_path) -> None:
+    """The escape hatch is explicit, not the default."""
+    path = tmp_path / "scratch.json"
+    sampled = {**CONTEXT, "sample_frac": 0.1}
+
+    update_section(path, "baselines", {"value": "dev"}, sampled, allow_sampled=True)
+    assert read_metrics(path)["baselines"]["context"]["sample_frac"] == 0.1
+
+
+def test_a_full_run_writes_normally(tmp_path) -> None:
+    """The guard must not obstruct the ordinary case."""
+    path = tmp_path / "metrics.json"
+    update_section(path, "baselines", {"value": 1}, {**CONTEXT, "sample_frac": 1.0})
+    assert read_metrics(path)["baselines"]["value"] == 1
+
+
 def test_missing_metrics_file_raises_rather_than_returning_empty(tmp_path) -> None:
     """A missing artefact is reported, never quietly treated as "no results"."""
     with pytest.raises(FileNotFoundError, match="run the make target"):

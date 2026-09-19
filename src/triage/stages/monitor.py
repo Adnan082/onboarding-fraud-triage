@@ -30,6 +30,7 @@ import pandas as pd
 from omegaconf import DictConfig
 
 from experiments.inject_bugs import apply_bug
+from experiments.stress_variants import population_summary, select_test_window, variant_names
 from triage.data.contract import check as contract_check
 from triage.data.load import load_interim
 from triage.data.split import deployment_protocol, simulated_windows
@@ -186,15 +187,14 @@ def main(cfg: DictConfig) -> None:
 
     # 4. the variants
     variants = {}
-    for variant in cfg.monitor.stress_variants:
-        other = load_interim(cfg, str(variant))
-        other = other[
-            other[cfg.data.time_column].isin(list(cfg.data.protocol.deployment.test_months))
-        ]
+    for variant in variant_names(cfg):
+        other = select_test_window(load_interim(cfg, variant), cfg)
         run, rows, _ = score_windows(other, f"{variant} (months 6-7)")
-        variants[str(variant)] = {
+        variants[variant] = {
             "counts": run.counts(),
             "first_alert_window": run.first_alert().window_id if run.first_alert() else None,
+            # Why this variant is a stress test at all: its population differs.
+            "population": population_summary(other, cfg),
             "windows": rows,
         }
 

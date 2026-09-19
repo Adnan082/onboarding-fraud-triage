@@ -376,7 +376,20 @@ The two model-level mitigations did not earn their place. Read the M3 row carefu
 ### Monitoring
 
 <!-- metrics:monitoring -->
-_Not generated yet. Run `make monitor`._
+| Injected fault | Legal under the contract? | Caught by | How long it ran | Detection cost |
+| --- | --- | --- | --- | --- |
+| Mobile check always passes | yes | monitor | 1 window (4,000 applications) | -0.4 pts |
+| Income multiplied by ten | **no** | contract | before scoring | never scored |
+| Income scale reversed | yes | monitor | 1 window (4,000 applications) | -8.3 pts |
+| Two employment codes swapped | yes | monitor | 1 window (4,000 applications) | -12.6 pts |
+
+**False alarms.** Across 200 windows drawn from the calibration month — clean by construction — 8 raised a watch (4.0%) and 0 an alert. For four detectors at a 99th-percentile threshold the expected watch rate is 3.9%, so the false-alarm rate is a measured property rather than a hope.
+
+**Detection.** The three faults that are *legal* under the contract are the ones worth catching, because no schema check can see them: the values stay in range and only their meaning changes. Each reached an alert one window after injection, which is the floor the two-consecutive-windows rule allows. The fourth is the control — the contract rejects it before anything is scored.
+
+Delays are measured on a stream drawn from the calibration month, which is quiet without a fault. Section 8.5 injects into month 6, but month 6 is already alerting on its own drift (50 of 51 windows), so a delay measured there could not be attributed to the fault. Both experiments are in `reports/monitoring.json`.
+
+**Natural drift is not a false alarm.** Months 6 and 7 really did move, and the monitor saying so is it working. That same movement is why one half of the conformal guarantee failed.
 <!-- /metrics:monitoring -->
 
 ### Service
