@@ -305,6 +305,50 @@ def coverage_by_age_table(metrics: dict[str, Any], month: str = "6") -> str:
     return _table(header, rows) + note
 
 
+def mitigations_table(metrics: dict[str, Any]) -> str:
+    """What each fairness mitigation bought, and what it cost."""
+    section = metrics.get("fairness")
+    if not section:
+        return MISSING
+
+    labels = {
+        "m1_drop_age": "M1 — drop age",
+        "m2_fairgbm": "M2 — FairGBM, FPR constraint",
+        "m3_fairlearn_eg": "M3 — fairlearn, FPR parity",
+        "m4_policy_only": "M4 — policy only, no model change",
+    }
+
+    rows = []
+    for row in section.get("tradeoff", []):
+        rows.append(
+            [
+                labels.get(row["experiment"], f"`{row['experiment']}`"),
+                str(row["month"]),
+                format_number(row["tpr"]),
+                format_number(row["fpr"]),
+                f"{format_number(row['fpr_ratio'])} "
+                f"({format_number(row['fpr_ratio_low'])}-{format_number(row['fpr_ratio_high'])})",
+            ]
+        )
+
+    skipped = [name for name, e in section["experiments"].items() if e.get("skipped")]
+    header = ["Mitigation", "Month", "Fraud caught", "Genuine stopped", "FPR ratio (95% CI)"]
+    note = (
+        "\n\nAll four use age at training or measurement time only; none uses it to decide "
+        "anything about an application. M1 and M2 are thresholded at 5% FPR on `cal_tune`. "
+        "M3 is a randomised classifier with a single operating point, so it is measured "
+        "where it sits rather than swept. M4 changes no model at all: an application counts "
+        "as stopped if the conformal policy sends it to review or verify.\n\n"
+        "The two model-level mitigations did not earn their place. Read the M3 row carefully: "
+        "at roughly 1% prevalence, the cheapest way to equalise false-positive rates between "
+        "groups is to stop flagging anyone, and that is close to what it did — while still "
+        "ending up the least equal of the four."
+    )
+    if skipped:
+        note += f"\n\nSkipped: {', '.join(skipped)}."
+    return _table(header, rows) + note
+
+
 def data_table(metrics: dict[str, Any]) -> str:
     """What the models were trained and evaluated on."""
     section = metrics.get("baselines")
@@ -342,6 +386,7 @@ RENDERERS = {
     "coverage_by_age": coverage_by_age_table,
     "fairness": fairness_table,
     "age_bands": age_band_table,
+    "mitigations": mitigations_table,
     "data": data_table,
 }
 

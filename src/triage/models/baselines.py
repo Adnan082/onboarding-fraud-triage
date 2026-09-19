@@ -52,7 +52,7 @@ class FittedModel:
         return np.asarray(self.estimator.predict_proba(self._prepare(frame))[:, 1], dtype=float)
 
 
-def _params(cfg: DictConfig) -> dict[str, Any]:
+def model_params(cfg: DictConfig) -> dict[str, Any]:
     """The model's constructor arguments, with ``${seed}`` and friends resolved."""
     from omegaconf import OmegaConf
 
@@ -73,7 +73,7 @@ def fit_b0(train: pd.DataFrame, cfg: DictConfig) -> FittedModel:
     pipeline = Pipeline(
         [
             ("encode", build_encoder(cfg, use_age=use_age)),
-            ("model", LogisticRegression(**_params(cfg))),
+            ("model", LogisticRegression(**model_params(cfg))),
         ]
     )
     pipeline.fit(prepare(train, cfg, use_age=use_age), labels)
@@ -94,7 +94,7 @@ def fit_b1(train: pd.DataFrame, cfg: DictConfig) -> FittedModel:
     use_age = bool(cfg.model.use_age)
     labels = train[cfg.data.label].to_numpy()
 
-    model = LGBMClassifier(**_params(cfg))
+    model = LGBMClassifier(**model_params(cfg))
     model.fit(lgbm_frame(train, cfg, use_age=use_age), labels)
 
     return FittedModel(

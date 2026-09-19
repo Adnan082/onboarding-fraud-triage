@@ -200,6 +200,25 @@ Both baselines see `customer_age` as a feature. The champion does not, and the m
 This is the gap the mitigation experiments (M1-M4) have to close, and the reason the champion never sees age.
 <!-- /metrics:age_bands -->
 
+#### What the mitigations bought
+
+<!-- metrics:mitigations -->
+| Mitigation | Month | Fraud caught | Genuine stopped | FPR ratio (95% CI) |
+| --- | --- | --- | --- | --- |
+| M1 — drop age | 6 | 0.569 | 0.0651 | 0.439 (0.418-0.46) |
+| M1 — drop age | 7 | 0.561 | 0.0509 | 0.444 (0.419-0.472) |
+| M2 — FairGBM, FPR constraint | 6 | 0.541 | 0.0616 | 0.445 (0.426-0.469) |
+| M2 — FairGBM, FPR constraint | 7 | 0.563 | 0.0568 | 0.473 (0.446-0.503) |
+| M3 — fairlearn, FPR parity | 6 | 0.0379 | 0.000525 | 0.192 (0.113-0.334) |
+| M3 — fairlearn, FPR parity | 7 | 0.042 | 0.000597 | 0.252 (0.147-0.463) |
+| M4 — policy only, no model change | 6 | 0.59 | 0.0714 | 0.45 (0.43-0.47) |
+| M4 — policy only, no model change | 7 | 0.583 | 0.0558 | 0.45 (0.426-0.478) |
+
+All four use age at training or measurement time only; none uses it to decide anything about an application. M1 and M2 are thresholded at 5% FPR on `cal_tune`. M3 is a randomised classifier with a single operating point, so it is measured where it sits rather than swept. M4 changes no model at all: an application counts as stopped if the conformal policy sends it to review or verify.
+
+The two model-level mitigations did not earn their place. Read the M3 row carefully: at roughly 1% prevalence, the cheapest way to equalise false-positive rates between groups is to stop flagging anyone, and that is close to what it did — while still ending up the least equal of the four.
+<!-- /metrics:mitigations -->
+
 ### Monitoring
 
 <!-- metrics:monitoring -->

@@ -15,6 +15,8 @@ from omegaconf import DictConfig
 
 from triage.evaluation.artefacts import read_metrics, render_readme_tables
 from triage.evaluation.tables import render_all
+from triage.evaluation.validation import collect_findings
+from triage.evaluation.validation import render as render_validation
 from triage.stages._base import CONFIG_PATH, start
 
 log = logging.getLogger("triage")
@@ -35,8 +37,20 @@ def main(cfg: DictConfig) -> None:
 
     for name in sorted(tables):
         status = "rendered" if name in replaced else "no marker in README"
-        log.info("  %-12s %s", name, status)
+        log.info("  %-16s %s", name, status)
     log.info("updated %s (%d table(s))", readme, len(replaced))
+
+    # The validation report is generated from the same artefacts, for the same
+    # reason: a report that drifts from the numbers it describes is worse than none.
+    report_path = Path(cfg.paths.reports) / "validation_report.md"
+    report_path.write_text(render_validation(metrics), encoding="utf-8")
+    findings = collect_findings(metrics)
+    log.info(
+        "wrote %s (%d finding(s): %s)",
+        report_path,
+        len(findings),
+        ", ".join(sorted({f["rating"] for f in findings})),
+    )
 
 
 if __name__ == "__main__":

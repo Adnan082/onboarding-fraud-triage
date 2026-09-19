@@ -1,0 +1,5028 @@
+{
+  "monitoring": {
+    "bugs": {
+      "all_mobile_valid": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 26,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "monitor",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": 5,
+        "first_rejected_window": null,
+        "in_contract": true,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 13,
+            "ok": 5,
+            "watch": 1
+          },
+          "detected": true,
+          "detected_by": "monitor",
+          "detection_delay_applications": 4000,
+          "detection_delay_windows": 1
+        },
+        "rejected_by_contract": false,
+        "tpr_after": 0.5648275862068965,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": -0.004137931034482789,
+        "windows": [
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02425,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0825,
+            "conformal_neglogp": 8.38300895369927,
+            "domain_auc": 0.7577693749999999,
+            "level": "watch",
+            "month": 6,
+            "psi_feature_max": 3.692315009430411,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004582773309841798,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 0
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0675,
+            "conformal_neglogp": 2.18368809636279,
+            "domain_auc": 0.7613459375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.697996360001781,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0018814902118255692,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 1
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.074,
+            "conformal_neglogp": 2.9702564139717675,
+            "domain_auc": 0.7680234374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.847738576826589,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0027752195714421256,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 2
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0195,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.079,
+            "conformal_neglogp": 5.3490840847086085,
+            "domain_auc": 0.76502125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6659850020698808,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004475780337771475,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 3
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08375,
+            "conformal_neglogp": 8.279318884696261,
+            "domain_auc": 0.7659940625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7843461908019593,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00710510423725585,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 4
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.07275,
+            "conformal_neglogp": 2.486683959112743,
+            "domain_auc": 0.7878753125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.744589819508941,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.003731176610754928,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 5
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01775,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0745,
+            "conformal_neglogp": 3.176011892296064,
+            "domain_auc": 0.7795096875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7151396218832042,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.005628078268987732,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 6
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.02275,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.082,
+            "conformal_neglogp": 7.123076779908803,
+            "domain_auc": 0.7807496875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7249744971134886,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0042329342432090855,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 7
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0175,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0755,
+            "conformal_neglogp": 3.6087964031714095,
+            "domain_auc": 0.78307375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7783014595623303,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.001859693002100598,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 8
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0175,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0785,
+            "conformal_neglogp": 5.078850614550668,
+            "domain_auc": 0.78362875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8650500809507307,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.007040669078458126,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 9
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0175,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0765,
+            "conformal_neglogp": 4.070095553641591,
+            "domain_auc": 0.787678125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6608075284167083,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.003395427522244372,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 10
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.07275,
+            "conformal_neglogp": 2.486683959112743,
+            "domain_auc": 0.783086875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6484967150809133,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0038871878580300917,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 11
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0795,
+            "conformal_neglogp": 5.626563949729158,
+            "domain_auc": 0.786865625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7942447569824918,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004104596279238475,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 12
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0155,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.07075,
+            "conformal_neglogp": 1.8035205315721077,
+            "domain_auc": 0.7862309375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.901206756958432,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.003124686282406713,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 13
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.02075,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08,
+            "conformal_neglogp": 5.911302892624986,
+            "domain_auc": 0.7809375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8942407053643513,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0031008448046486873,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 14
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.023,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07775,
+            "conformal_neglogp": 6.680954555543212,
+            "domain_auc": 0.791573125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6164031742226963,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00376119326678896,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 15
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01975,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07975,
+            "conformal_neglogp": 5.7680252752447085,
+            "domain_auc": 0.7764281250000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.670788986139908,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0054201429128018595,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 16
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01675,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.067,
+            "conformal_neglogp": 1.1030195133981615,
+            "domain_auc": 0.7812859375000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8659193050568432,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0029920650859056323,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 17
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.018,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.079,
+            "conformal_neglogp": 5.3490840847086085,
+            "domain_auc": 0.7876624999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7475607301406972,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004874118125671764,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 18
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08225,
+            "conformal_neglogp": 7.282761757281037,
+            "domain_auc": 0.78368625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6895499775464877,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008163838226154678,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 19
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0205,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.083,
+            "conformal_neglogp": 7.772795417276646,
+            "domain_auc": 0.7845446875000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.663220190909029,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.006600273909043635,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 20
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01675,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07675,
+            "conformal_neglogp": 4.189894808595223,
+            "domain_auc": 0.78901875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7132558299593934,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004363377313687073,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 21
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.017,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07725,
+            "conformal_neglogp": 4.434878781165193,
+            "domain_auc": 0.7875140624999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7794097348015416,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0012171669973993836,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 22
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01675,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.07275,
+            "conformal_neglogp": 2.486683959112743,
+            "domain_auc": 0.7785465625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.632397018341788,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.003958598159519733,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 23
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0805,
+            "conformal_neglogp": 6.203312809102038,
+            "domain_auc": 0.7870587500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7413092626750775,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0068587419968296065,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 24
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.02025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07875,
+            "conformal_neglogp": 5.213062375487265,
+            "domain_auc": 0.7855328125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.755778581876381,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0016612192491599564,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 25
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.023,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08025,
+            "conformal_neglogp": 6.680954555543212,
+            "domain_auc": 0.7894668750000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.844646260599514,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0033283812130423846,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 26
+          }
+        ]
+      },
+      "income_x10": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 4,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "contract",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": null,
+        "first_rejected_window": 5,
+        "in_contract": false,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 0,
+            "ok": 5,
+            "watch": 0
+          },
+          "detected": true,
+          "detected_by": "contract",
+          "detection_delay_applications": 0,
+          "detection_delay_windows": 0
+        },
+        "rejected_by_contract": true,
+        "tpr_after": null,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": null,
+        "windows": [
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02425,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0825,
+            "conformal_neglogp": 8.38300895369927,
+            "domain_auc": 0.7577693749999999,
+            "level": "watch",
+            "month": 6,
+            "psi_feature_max": 3.6923150094304114,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004582773309841798,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 0
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0675,
+            "conformal_neglogp": 2.18368809636279,
+            "domain_auc": 0.7613459375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6979963600017807,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0018814902118255692,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 1
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.074,
+            "conformal_neglogp": 2.9702564139717675,
+            "domain_auc": 0.7680234374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.847738576826589,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0027752195714421256,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 2
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0195,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.079,
+            "conformal_neglogp": 5.3490840847086085,
+            "domain_auc": 0.76502125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6659850020698803,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004475780337771475,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 3
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08375,
+            "conformal_neglogp": 8.279318884696261,
+            "domain_auc": 0.7659940625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7843461908019593,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00710510423725585,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 4
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 5
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 6
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 7
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 8
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 9
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 10
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 11
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 12
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 13
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 14
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 15
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 16
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 17
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 18
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 19
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 20
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 21
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 22
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 23
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 24
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 25
+          },
+          {
+            "bugged": true,
+            "contract_failures": [
+              "income: in_range(0.1, 0.9) (1)"
+            ],
+            "level": "contract_rejected",
+            "month": 6,
+            "window_id": 26
+          }
+        ]
+      },
+      "mirror_income": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 26,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "monitor",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": 5,
+        "first_rejected_window": null,
+        "in_contract": true,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 13,
+            "ok": 5,
+            "watch": 1
+          },
+          "detected": true,
+          "detected_by": "monitor",
+          "detection_delay_applications": 4000,
+          "detection_delay_windows": 1
+        },
+        "rejected_by_contract": false,
+        "tpr_after": 0.48551724137931035,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": -0.08344827586206899,
+        "windows": [
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02425,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0825,
+            "conformal_neglogp": 8.38300895369927,
+            "domain_auc": 0.7577693749999999,
+            "level": "watch",
+            "month": 6,
+            "psi_feature_max": 3.6923150094304114,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004582773309841798,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 0
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0675,
+            "conformal_neglogp": 2.18368809636279,
+            "domain_auc": 0.7613459375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6979963600017807,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0018814902118255692,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 1
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.074,
+            "conformal_neglogp": 2.9702564139717675,
+            "domain_auc": 0.7680234374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.847738576826589,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0027752195714421256,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 2
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0195,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.079,
+            "conformal_neglogp": 5.3490840847086085,
+            "domain_auc": 0.76502125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.665985002069881,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004475780337771475,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 3
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08375,
+            "conformal_neglogp": 8.279318884696261,
+            "domain_auc": 0.7659940625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.784346190801959,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00710510423725585,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 4
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0115,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06025,
+            "conformal_neglogp": 0.49212258743878323,
+            "domain_auc": 0.8478368749999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.74458981950894,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011135479791950627,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 5
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.013,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0555,
+            "conformal_neglogp": 0.9037420204928543,
+            "domain_auc": 0.8459759375000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7151396218832042,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0076144269408859955,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 6
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01325,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06725,
+            "conformal_neglogp": 0.8687769014599261,
+            "domain_auc": 0.8427800000000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7249744971134886,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.007759901016955931,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 7
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00975,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05825,
+            "conformal_neglogp": 1.2929153237484856,
+            "domain_auc": 0.8436896874999998,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7783014595623303,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010266009030409789,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 8
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.013,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06325,
+            "conformal_neglogp": 0.1806038039668924,
+            "domain_auc": 0.8438215625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8650500809507307,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010918345582653283,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 9
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01125,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06025,
+            "conformal_neglogp": 0.5859520638961893,
+            "domain_auc": 0.8485737499999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6608075284167083,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.006382570750483674,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 10
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01075,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06075,
+            "conformal_neglogp": 0.7937681380125798,
+            "domain_auc": 0.8430612500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6484967150809133,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008384867287635833,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 11
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.012,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05975,
+            "conformal_neglogp": 0.32398662613776963,
+            "domain_auc": 0.8482881250000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7942447569824913,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0089378355791726,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 12
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.009,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0525,
+            "conformal_neglogp": 1.7429345502948168,
+            "domain_auc": 0.8469050000000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.901206756958432,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00936113318612563,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 13
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0125,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0655,
+            "conformal_neglogp": 0.5203980134338372,
+            "domain_auc": 0.845233125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8942407053643517,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.007066080973918907,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 14
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01225,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.062,
+            "conformal_neglogp": 0.24938888534584627,
+            "domain_auc": 0.8536840625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.616403174222696,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008934924824565572,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 15
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01275,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06725,
+            "conformal_neglogp": 0.8687769014599261,
+            "domain_auc": 0.8407674999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6707889861399075,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01650761027870336,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 16
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00925,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05475,
+            "conformal_neglogp": 1.585586735406067,
+            "domain_auc": 0.83819,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8659193050568437,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.015997867969538327,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 17
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01325,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06425,
+            "conformal_neglogp": 0.3172231808011896,
+            "domain_auc": 0.8465590625000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7475607301406972,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004589861683894093,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 18
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0135,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06225,
+            "conformal_neglogp": 0.06570050159910151,
+            "domain_auc": 0.8452490625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6895499775464877,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0066809646889984245,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 19
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01325,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0635,
+            "conformal_neglogp": 0.21267094728316122,
+            "domain_auc": 0.8481349999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.663220190909029,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008883133843833359,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 20
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01025,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.059,
+            "conformal_neglogp": 1.0291784636355288,
+            "domain_auc": 0.8476809375000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7132558299593934,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010574474679557718,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 21
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0125,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06,
+            "conformal_neglogp": 0.18088715827215923,
+            "domain_auc": 0.844735,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.779409734801541,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0062960979836447235,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 22
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.013,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0555,
+            "conformal_neglogp": 0.9037420204928543,
+            "domain_auc": 0.8426084375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6323970183417877,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010328063412751559,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 23
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0115,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0615,
+            "conformal_neglogp": 0.49212258743878323,
+            "domain_auc": 0.8479524999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7413092626750775,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008472036459858142,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 24
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0115,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06575,
+            "conformal_neglogp": 0.5655171865857282,
+            "domain_auc": 0.84564625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.755778581876381,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.009135110039198292,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 25
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0145,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.06225,
+            "conformal_neglogp": 0.22004780850743097,
+            "domain_auc": 0.8539312499999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.844646260599514,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.007927002133837208,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 26
+          }
+        ]
+      },
+      "swap_employment": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 26,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "monitor",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": 5,
+        "first_rejected_window": null,
+        "in_contract": true,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 13,
+            "ok": 5,
+            "watch": 1
+          },
+          "detected": true,
+          "detected_by": "monitor",
+          "detection_delay_applications": 4000,
+          "detection_delay_windows": 1
+        },
+        "rejected_by_contract": false,
+        "tpr_after": 0.443448275862069,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": -0.12551724137931036,
+        "windows": [
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02425,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0825,
+            "conformal_neglogp": 8.38300895369927,
+            "domain_auc": 0.7577693749999999,
+            "level": "watch",
+            "month": 6,
+            "psi_feature_max": 3.692315009430412,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004582773309841798,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 0
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0675,
+            "conformal_neglogp": 2.18368809636279,
+            "domain_auc": 0.7613459375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.697996360001781,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0018814902118255692,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 1
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.074,
+            "conformal_neglogp": 2.9702564139717675,
+            "domain_auc": 0.7680234374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.847738576826589,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0027752195714421256,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 2
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0195,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.079,
+            "conformal_neglogp": 5.3490840847086085,
+            "domain_auc": 0.76502125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6659850020698803,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.004475780337771475,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 3
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08375,
+            "conformal_neglogp": 8.279318884696261,
+            "domain_auc": 0.7659940625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7843461908019593,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00710510423725585,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 4
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00925,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.051,
+            "conformal_neglogp": 2.1851379165308935,
+            "domain_auc": 0.9239103125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.744589819508941,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.030727503371137225,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 5
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01025,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05175,
+            "conformal_neglogp": 1.9335065977758337,
+            "domain_auc": 0.9275874999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7151396218832042,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.03660673777203022,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 6
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01275,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05525,
+            "conformal_neglogp": 0.9608283393309045,
+            "domain_auc": 0.9223259374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7249744971134886,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02829374236992957,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 7
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0085,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05375,
+            "conformal_neglogp": 2.079930475714282,
+            "domain_auc": 0.9223801562500002,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7783014595623303,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.031394513036039226,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 8
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00925,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05375,
+            "conformal_neglogp": 1.585586735406067,
+            "domain_auc": 0.9263337500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.865050080950731,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.03489883476143031,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 9
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01175,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05275,
+            "conformal_neglogp": 1.6220049415616633,
+            "domain_auc": 0.9242021875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6608075284167088,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.027828286114435705,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 10
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00975,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05125,
+            "conformal_neglogp": 2.0995356565096768,
+            "domain_auc": 0.9257693750000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6484967150809133,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.03138192516097889,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 11
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00875,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05325,
+            "conformal_neglogp": 1.9076989805883733,
+            "domain_auc": 0.9248896875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7942447569824918,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.029626835933005753,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 12
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.00775,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.051,
+            "conformal_neglogp": 2.6418709831103926,
+            "domain_auc": 0.9186325000000002,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.9012067569584326,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025996055221613804,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 13
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01125,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.053,
+            "conformal_neglogp": 1.5483791782060505,
+            "domain_auc": 0.9260631250000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8942407053643517,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.029369273172821512,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 14
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.012,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.054,
+            "conformal_neglogp": 1.270684159311083,
+            "domain_auc": 0.9258862500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.616403174222696,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.026852338185988346,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 15
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01225,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0555,
+            "conformal_neglogp": 0.9037420204928543,
+            "domain_auc": 0.9231084375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.670788986139908,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.035900854840987234,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 16
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.043,
+            "conformal_neglogp": 5.857626965619141,
+            "domain_auc": 0.92139734375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.865919305056843,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.03536047294233555,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 17
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01125,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0525,
+            "conformal_neglogp": 1.6973246158506925,
+            "domain_auc": 0.9265784374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7475607301406972,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019142899226685724,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 18
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0105,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0525,
+            "conformal_neglogp": 1.6973246158506925,
+            "domain_auc": 0.9228825,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6895499775464877,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02421802706393416,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 19
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.011,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0585,
+            "conformal_neglogp": 0.6864621413717451,
+            "domain_auc": 0.923565625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.663220190909029,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.027229905827588795,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 20
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05525,
+            "conformal_neglogp": 1.157465447146501,
+            "domain_auc": 0.9259509375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.713255829959393,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0301689195670344,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 21
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0125,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05025,
+            "conformal_neglogp": 2.452351783169963,
+            "domain_auc": 0.923048125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7794097348015407,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02276768316049637,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 22
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01075,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.049,
+            "conformal_neglogp": 2.9326500617600226,
+            "domain_auc": 0.9243184374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.632397018341788,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.03322325575417104,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 23
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01175,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0555,
+            "conformal_neglogp": 0.9037420204928543,
+            "domain_auc": 0.924144375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7413092626750775,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.030510385648584087,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 24
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.01175,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.05775,
+            "conformal_neglogp": 0.46090791560698274,
+            "domain_auc": 0.9243121875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7557785818763807,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.027330890841045234,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 25
+          },
+          {
+            "bugged": true,
+            "conformal_excluded_rate": 0.0145,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.0535,
+            "conformal_neglogp": 1.4061837440512182,
+            "domain_auc": 0.924886875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8446462605995135,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.027369585554517135,
+            "reasons": [
+              "over threshold: domain_auc, psi_score",
+              "two consecutive windows: domain_auc, psi_score"
+            ],
+            "window_id": 26
+          }
+        ]
+      }
+    },
+    "conformal_reference_rates": {
+      "excluded": 0.013427206437012824,
+      "fraud": 0.06145335680160925
+    },
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-19T14:50:15.731795+00:00",
+      "git_sha": "927bedf6",
+      "seed": 20260917
+    },
+    "fallback_state": {
+      "alpha_fraud": 0.15,
+      "alpha_legit": 0.05,
+      "drift_status": "alert",
+      "fallback_active": true,
+      "last_window": 1,
+      "month": 6,
+      "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc",
+      "updated_at": "2026-09-19T14:50:15.729943+00:00"
+    },
+    "model_version": "champion-unknown",
+    "natural_drift": {
+      "counts": {
+        "alert": 50,
+        "ok": 0,
+        "watch": 1
+      },
+      "first_alert_window": 1,
+      "note": "months 6-7 as published: real population movement, not false alarms",
+      "windows": [
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.02425,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.0825,
+          "conformal_neglogp": 8.38300895369927,
+          "domain_auc": 0.7577693749999999,
+          "level": "watch",
+          "month": 6,
+          "psi_feature_max": 3.6923150094304114,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.004582773309841798,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 0
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0185,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0675,
+          "conformal_neglogp": 2.18368809636279,
+          "domain_auc": 0.7613459375,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.6979963600017816,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0018814902118255692,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 1
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01875,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.074,
+          "conformal_neglogp": 2.9702564139717675,
+          "domain_auc": 0.7680234374999999,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.847738576826589,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0027752195714421256,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 2
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0195,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.079,
+          "conformal_neglogp": 5.3490840847086085,
+          "domain_auc": 0.76502125,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.6659850020698808,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.004475780337771475,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 3
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01925,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.08375,
+          "conformal_neglogp": 8.279318884696261,
+          "domain_auc": 0.7659940625,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.784346190801959,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.00710510423725585,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 4
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01925,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0735,
+          "conformal_neglogp": 2.7715586074824388,
+          "domain_auc": 0.76804875,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.7445898195089407,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.00375726837053353,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 5
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0185,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07575,
+          "conformal_neglogp": 3.7214413614745316,
+          "domain_auc": 0.7635246874999999,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.715139621883204,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.00621143722464981,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 6
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.023,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.0835,
+          "conformal_neglogp": 8.10864387759794,
+          "domain_auc": 0.76116625,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.7249744971134886,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.005162684883795185,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 7
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.018,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07625,
+          "conformal_neglogp": 3.9520884679396633,
+          "domain_auc": 0.76447,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.7783014595623303,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.002834852018285017,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 8
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0185,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07925,
+          "conformal_neglogp": 5.486917405972432,
+          "domain_auc": 0.76475,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.865050080950731,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.006717698898452329,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 9
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01825,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07875,
+          "conformal_neglogp": 5.213062375487265,
+          "domain_auc": 0.76881375,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.6608075284167088,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.005096935049894414,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 10
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01925,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07525,
+          "conformal_neglogp": 3.497933731197457,
+          "domain_auc": 0.7622125000000001,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.6484967150809133,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.004601191612750672,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 11
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.02,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.081,
+          "conformal_neglogp": 6.502604868016772,
+          "domain_auc": 0.764325,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.7942447569824913,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.004140086807850392,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 12
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.016,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.07225,
+          "conformal_neglogp": 2.3055044378621945,
+          "domain_auc": 0.765986875,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.901206756958432,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.003184144729495245,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 13
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.02075,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.0825,
+          "conformal_neglogp": 7.444275808197546,
+          "domain_auc": 0.7628981249999999,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.8942407053643517,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0035927948402478954,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 14
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.02375,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07875,
+          "conformal_neglogp": 7.678272625687116,
+          "domain_auc": 0.774615625,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.616403174222696,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.004538121770466302,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 15
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.02,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.08175,
+          "conformal_neglogp": 6.965219764577443,
+          "domain_auc": 0.7569678124999999,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.670788986139908,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.006058551124506432,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 16
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.017,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06825,
+          "conformal_neglogp": 1.2354686151033352,
+          "domain_auc": 0.7613378125000001,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.8659193050568437,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0032014318020896428,
+          "reasons": [
+            "over threshold: domain_auc",
+            "two consecutive windows: domain_auc"
+          ],
+          "window_id": 17
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0185,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.082,
+          "conformal_neglogp": 7.123076779908803,
+          "domain_auc": 0.76761375,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.7475607301406972,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.006453636637740547,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: domain_auc"
+          ],
+          "window_id": 18
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01925,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.0825,
+          "conformal_neglogp": 7.444275808197546,
+          "domain_auc": 0.7647721875,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.6895499775464873,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.009231254078697484,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 19
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.022,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.0845,
+          "conformal_neglogp": 8.802358163846828,
+          "domain_auc": 0.7633431250000001,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.663220190909029,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.007478196027906114,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 20
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01775,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07825,
+          "conformal_neglogp": 4.946447082607273,
+          "domain_auc": 0.7713643749999999,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.7132558299593934,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.005626805346704184,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 21
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01725,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.07825,
+          "conformal_neglogp": 4.946447082607273,
+          "domain_auc": 0.7676187500000001,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.779409734801541,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.002039356562174148,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 22
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01675,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.07375,
+          "conformal_neglogp": 2.87002697927838,
+          "domain_auc": 0.7607421875,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.6323970183417877,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0037358190947797457,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 23
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0195,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.082,
+          "conformal_neglogp": 7.123076779908803,
+          "domain_auc": 0.768049375,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.741309262675077,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.007287523825159958,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 24
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.02025,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.08075,
+          "conformal_neglogp": 6.352047899553485,
+          "domain_auc": 0.765975625,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.755778581876381,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0025933776500974602,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 25
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0235,
+          "conformal_flagged": 1.0,
+          "conformal_fraud_rate": 0.08125,
+          "conformal_neglogp": 7.337871316075332,
+          "domain_auc": 0.7694684375,
+          "level": "alert",
+          "month": 6,
+          "psi_feature_max": 3.844646260599514,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.0030118644933335133,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc",
+            "two consecutive windows: conformal_neglogp, domain_auc"
+          ],
+          "window_id": 26
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.017,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06375,
+          "conformal_neglogp": 1.2354686151033352,
+          "domain_auc": 0.98139734375,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.897835387397114,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02953167709460402,
+          "reasons": [
+            "over threshold: domain_auc, psi_score",
+            "two consecutive windows: domain_auc"
+          ],
+          "window_id": 27
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01775,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.068,
+          "conformal_neglogp": 1.676319126120004,
+          "domain_auc": 0.982351875,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.9946070784096834,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.03168497033248698,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 28
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0185,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06575,
+          "conformal_neglogp": 2.18368809636279,
+          "domain_auc": 0.9810874999999999,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.8603561506205732,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.03230795069058551,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 29
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.019,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.071,
+          "conformal_neglogp": 2.5595467574253523,
+          "domain_auc": 0.9817520312499999,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.876841485705207,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.023533957839782203,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc, psi_score",
+            "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+          ],
+          "window_id": 30
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0185,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.066,
+          "conformal_neglogp": 2.18368809636279,
+          "domain_auc": 0.9823379687500001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.004901612673816,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.03040969602730182,
+          "reasons": [
+            "over threshold: conformal_neglogp, domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+          ],
+          "window_id": 31
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01475,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.05975,
+          "conformal_neglogp": 0.29207840401920343,
+          "domain_auc": 0.9809318749999999,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.102743679364088,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.028383343416259234,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 32
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.015,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.05775,
+          "conformal_neglogp": 0.46090791560698274,
+          "domain_auc": 0.9800828125000001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.089647913403309,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02472503360974177,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 33
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01625,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06325,
+          "conformal_neglogp": 0.8594308102709476,
+          "domain_auc": 0.9819864062500001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.083069381739968,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.021326807590115734,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 34
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.016,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.061,
+          "conformal_neglogp": 0.7481182224388632,
+          "domain_auc": 0.9822539062500001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.9529643383979023,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.023310574761987498,
+          "reasons": [
+            "over threshold: domain_auc, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 35
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01825,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.069,
+          "conformal_neglogp": 2.007086612702067,
+          "domain_auc": 0.9802504687500001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.077008343430068,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.028292278247347428,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 36
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.015,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06425,
+          "conformal_neglogp": 0.3703039056495457,
+          "domain_auc": 0.9814074999999999,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.0660999503872155,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.021716833885101903,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 37
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0145,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.05925,
+          "conformal_neglogp": 0.23347417793925104,
+          "domain_auc": 0.9816470312500002,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.762999935661039,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.026080411110029535,
+          "reasons": [
+            "over threshold: domain_auc, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 38
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01425,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06425,
+          "conformal_neglogp": 0.3172231808011896,
+          "domain_auc": 0.9786249999999999,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.974739332368778,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02206862188903739,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 39
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01475,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.064,
+          "conformal_neglogp": 0.29207840401920343,
+          "domain_auc": 0.9799126562500001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.897917221933631,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.024922467103622076,
+          "reasons": [
+            "over threshold: domain_auc, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 40
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01725,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.06975,
+          "conformal_neglogp": 1.503087450109449,
+          "domain_auc": 0.9814425,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.132285108422019,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.016145084501335925,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 41
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0125,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0605,
+          "conformal_neglogp": 0.18088715827215923,
+          "domain_auc": 0.98327109375,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.995393124143624,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02233275895787915,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 42
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.013,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0605,
+          "conformal_neglogp": 0.08232880046382765,
+          "domain_auc": 0.9792718749999999,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.9801903626038486,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.029561170036510463,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 43
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01575,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0635,
+          "conformal_neglogp": 0.6436638914407441,
+          "domain_auc": 0.980536875,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.9582315288086027,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.035166154509590784,
+          "reasons": [
+            "over threshold: domain_auc, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 44
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01475,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.061,
+          "conformal_neglogp": 0.29207840401920343,
+          "domain_auc": 0.9829907812500001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.022524923465746,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.03113505424472143,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 45
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01225,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0595,
+          "conformal_neglogp": 0.24938888534584627,
+          "domain_auc": 0.9820359375000001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.059795121203729,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02401241068426094,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 46
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01525,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0695,
+          "conformal_neglogp": 1.4322037615398495,
+          "domain_auc": 0.9832184375,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.961891393576561,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.01696703073399646,
+          "reasons": [
+            "over threshold: domain_auc, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 47
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.0155,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0595,
+          "conformal_neglogp": 0.545958627551655,
+          "domain_auc": 0.9808153125000001,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.071573578851455,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.031631925597952824,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_score"
+          ],
+          "window_id": 48
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01575,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.0635,
+          "conformal_neglogp": 0.6436638914407441,
+          "domain_auc": 0.97960453125,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 3.9831021813618115,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02484082422676981,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 49
+        },
+        {
+          "bugged": false,
+          "conformal_excluded_rate": 0.01375,
+          "conformal_flagged": 0.0,
+          "conformal_fraud_rate": 0.05975,
+          "conformal_neglogp": 0.16898720789859265,
+          "domain_auc": 0.9796340625,
+          "level": "alert",
+          "month": 7,
+          "psi_feature_max": 4.099456129508276,
+          "psi_feature_max_name": "velocity_4w",
+          "psi_score": 0.02315702299898531,
+          "reasons": [
+            "over threshold: domain_auc, psi_feature_max, psi_score",
+            "two consecutive windows: domain_auc, psi_feature_max, psi_score"
+          ],
+          "window_id": 50
+        }
+      ]
+    },
+    "seconds": 932.9323168169999,
+    "threshold_calibration": {
+      "clean_windows": 200,
+      "counts": {
+        "alert": 0,
+        "ok": 192,
+        "watch": 8
+      },
+      "false_alarm_rate": 8,
+      "percentile": 99.0,
+      "source": "cal_prob + cal_tune"
+    },
+    "thresholds": {
+      "conformal_neglogp": 2.017340470611973,
+      "domain_auc": 0.519839434375,
+      "psi_feature_max": 3.9679496511333308,
+      "psi_score": 0.013872069162246462
+    },
+    "variants": {
+      "variant_iv": {
+        "counts": {
+          "alert": 59,
+          "ok": 0,
+          "watch": 1
+        },
+        "first_alert_window": 1,
+        "windows": [
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.027,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10125,
+            "conformal_neglogp": 24.82231817531863,
+            "domain_auc": 0.7747487500000001,
+            "level": "watch",
+            "month": 6,
+            "psi_feature_max": 3.703999451704446,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02176767597503431,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 0
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.029,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.115,
+            "conformal_neglogp": 44.226584388810494,
+            "domain_auc": 0.7919096875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7312820027794835,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.03378550086018596,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 1
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10225,
+            "conformal_neglogp": 26.042880641538954,
+            "domain_auc": 0.7910831250000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.4728330258922218,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.028137494731500852,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 2
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10275,
+            "conformal_neglogp": 26.664362161083638,
+            "domain_auc": 0.7839603125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.642389165494572,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.024283194779000223,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 3
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0245,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.097,
+            "conformal_neglogp": 19.96785868688797,
+            "domain_auc": 0.7809943750000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.601124794877008,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.020512513372126756,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 4
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.022,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0985,
+            "conformal_neglogp": 21.619683175768433,
+            "domain_auc": 0.7821109374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6554901891409735,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.020170999296266083,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 5
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.03075,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09725,
+            "conformal_neglogp": 20.47123772435912,
+            "domain_auc": 0.78719625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.573928145748174,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025804265268421795,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 6
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.026,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0995,
+            "conformal_neglogp": 22.758170077647506,
+            "domain_auc": 0.7825546874999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.554499759162402,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025448127261331346,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 7
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02775,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.095,
+            "conformal_neglogp": 17.869696665660072,
+            "domain_auc": 0.7767915625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6245061703789387,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.021040834497806474,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 8
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0225,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09875,
+            "conformal_neglogp": 21.901508765764962,
+            "domain_auc": 0.7789756250000002,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6526734900669835,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.026995095126321103,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 9
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.024,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10125,
+            "conformal_neglogp": 24.82231817531863,
+            "domain_auc": 0.7776765625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5580683625256833,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.030834237029606686,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 10
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02525,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09625,
+            "conformal_neglogp": 19.167089310750686,
+            "domain_auc": 0.7815487500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.617906498933679,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.028496435301166443,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 11
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.022,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10175,
+            "conformal_neglogp": 25.428866475373713,
+            "domain_auc": 0.7855678125000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5435604428885945,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019383644923871228,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 12
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02825,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1015,
+            "conformal_neglogp": 25.124659187074343,
+            "domain_auc": 0.7778078125000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5625607045301706,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.020674029136868822,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 13
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02525,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09775,
+            "conformal_neglogp": 20.7853876267871,
+            "domain_auc": 0.7914590625000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6380232916365003,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01789757466386116,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 14
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02625,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10275,
+            "conformal_neglogp": 26.664362161083638,
+            "domain_auc": 0.7908040625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.511113369203205,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.022627306258465776,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 15
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0295,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09775,
+            "conformal_neglogp": 20.7853876267871,
+            "domain_auc": 0.7795243749999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.676327841462113,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.022364216481310095,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 16
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.026,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1,
+            "conformal_neglogp": 23.338600345135273,
+            "domain_auc": 0.7804634374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6843462011979486,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025733758345329087,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 17
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10075,
+            "conformal_neglogp": 24.223234201210587,
+            "domain_auc": 0.78587,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.744728426013027,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.020998187183049518,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 18
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.026,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.097,
+            "conformal_neglogp": 19.96785868688797,
+            "domain_auc": 0.7766874999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.601071153290494,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01952913554819524,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 19
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02525,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09525,
+            "conformal_neglogp": 18.1254542665682,
+            "domain_auc": 0.7884196875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6485942728159184,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013208606676248152,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 20
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.03,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10225,
+            "conformal_neglogp": 26.042880641538954,
+            "domain_auc": 0.786764375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6298724594152736,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.027495161539891105,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 21
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0315,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.11275,
+            "conformal_neglogp": 40.66404423203898,
+            "domain_auc": 0.78183375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.687004681725001,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0325021966612202,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 22
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.027,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.105,
+            "conformal_neglogp": 29.55347491070014,
+            "domain_auc": 0.775068125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.521378043384579,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.026933203606025243,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 23
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02775,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10075,
+            "conformal_neglogp": 24.223234201210587,
+            "domain_auc": 0.78590375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.704589545965332,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.021784539585392514,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 24
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0245,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09175,
+            "conformal_neglogp": 14.713971353136802,
+            "domain_auc": 0.77957875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.809269686470106,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02108581658884187,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 25
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0265,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09375,
+            "conformal_neglogp": 16.61879994356981,
+            "domain_auc": 0.786405625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7533370755128543,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02013380109443038,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 26
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02325,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1025,
+            "conformal_neglogp": 26.35268789118531,
+            "domain_auc": 0.7786203125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6165263874132667,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.020344902543608438,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 27
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.028,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0985,
+            "conformal_neglogp": 21.619683175768433,
+            "domain_auc": 0.7885840624999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.718292823738706,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025478324853127846,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 28
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02675,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0985,
+            "conformal_neglogp": 21.619683175768433,
+            "domain_auc": 0.7805728125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6396145664457213,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019459490471719756,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 29
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.023,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10075,
+            "conformal_neglogp": 24.223234201210587,
+            "domain_auc": 0.7885225,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.639595549055926,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.024972360659236123,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 30
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02575,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10025,
+            "conformal_neglogp": 23.63161295749695,
+            "domain_auc": 0.7835650000000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.8524189136799563,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.022553182960614294,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 31
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02475,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10525,
+            "conformal_neglogp": 29.883828698078123,
+            "domain_auc": 0.78690125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.828122979769126,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.031125766173280695,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 32
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.028,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.096,
+            "conformal_neglogp": 18.90388925473062,
+            "domain_auc": 0.771308125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6151186535806743,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.021894387737831915,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 33
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08775,
+            "conformal_neglogp": 11.260257798794504,
+            "domain_auc": 0.98181796875,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8770623267687863,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0196373746790123,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 34
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.019,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0805,
+            "conformal_neglogp": 6.203312809102038,
+            "domain_auc": 0.979511875,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.6886749838254325,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010807723516410692,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 35
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01725,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.071,
+            "conformal_neglogp": 1.8828839553528798,
+            "domain_auc": 0.9823509375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.753279776691428,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0074848582466996464,
+            "reasons": [
+              "over threshold: domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 36
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07825,
+            "conformal_neglogp": 4.946447082607273,
+            "domain_auc": 0.98085140625,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7386441490553532,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.00905051008912899,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: domain_auc"
+            ],
+            "window_id": 37
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08125,
+            "conformal_neglogp": 6.654985006062279,
+            "domain_auc": 0.9795507812500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.715749065884716,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010511600184684729,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 38
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.023,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08525,
+            "conformal_neglogp": 9.341937164686861,
+            "domain_auc": 0.9821195312500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8913113881551324,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010675152161588104,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 39
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02075,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08375,
+            "conformal_neglogp": 8.279318884696261,
+            "domain_auc": 0.98042640625,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.778340671406767,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008635282456951313,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 40
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02375,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0885,
+            "conformal_neglogp": 11.87174285032028,
+            "domain_auc": 0.9819084374999999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.763434147840745,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010664797448108637,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 41
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01975,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08325,
+            "conformal_neglogp": 7.9398030425044785,
+            "domain_auc": 0.97893015625,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.849431560412315,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.008949733871855766,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 42
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08475,
+            "conformal_neglogp": 8.980378959343117,
+            "domain_auc": 0.9802543749999998,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.800206496683758,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.009587566295912826,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 43
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0775,
+            "conformal_neglogp": 4.560067784947786,
+            "domain_auc": 0.98021109375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.76197454576288,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.012475251225131006,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 44
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08625,
+            "conformal_neglogp": 10.087142110983484,
+            "domain_auc": 0.9834568750000001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.884772652603019,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.017204136912459467,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 45
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0195,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.081,
+            "conformal_neglogp": 6.502604868016772,
+            "domain_auc": 0.9800614062499999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.6618209493705964,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01346136466179329,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 46
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02275,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08525,
+            "conformal_neglogp": 9.341937164686861,
+            "domain_auc": 0.98182390625,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.9296342886500364,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01255318801110029,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 47
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08175,
+            "conformal_neglogp": 6.965219764577443,
+            "domain_auc": 0.9817554687500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7299444409118965,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011068581478151651,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 48
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02625,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.088,
+            "conformal_neglogp": 11.52223639029551,
+            "domain_auc": 0.9822934374999999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.800509610097736,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011125192038359929,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 49
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0235,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09275,
+            "conformal_neglogp": 15.651531876757565,
+            "domain_auc": 0.9814878125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.859173967934703,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019377033164403104,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 50
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02275,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08775,
+            "conformal_neglogp": 11.260257798794504,
+            "domain_auc": 0.9805150000000001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.985099236030746,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010874472401195589,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_feature_max",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 51
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02425,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.089,
+            "conformal_neglogp": 12.288642821085237,
+            "domain_auc": 0.9810818749999999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7593405279007115,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.016771134129862968,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 52
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09225,
+            "conformal_neglogp": 15.179039711902162,
+            "domain_auc": 0.98204171875,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7276988091192766,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.012215805635029449,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 53
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0895,
+            "conformal_neglogp": 12.712942561562189,
+            "domain_auc": 0.9806934375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.9149443482235426,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013301035077695287,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 54
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.083,
+            "conformal_neglogp": 7.772795417276646,
+            "domain_auc": 0.9807621874999999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8305209934810396,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.014499454270248688,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 55
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02625,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.098,
+            "conformal_neglogp": 21.0616228502372,
+            "domain_auc": 0.980673125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8747712561182004,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.023668746110828625,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 56
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08825,
+            "conformal_neglogp": 11.666066414935747,
+            "domain_auc": 0.9800040625000002,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7087485987829334,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019626698408021066,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 57
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02075,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08525,
+            "conformal_neglogp": 9.341937164686861,
+            "domain_auc": 0.9791409374999999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7585356429744685,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0127690989848023,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 58
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08125,
+            "conformal_neglogp": 6.654985006062279,
+            "domain_auc": 0.9826335937499999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.9366322623513343,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.007156125186082646,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 59
+          }
+        ]
+      },
+      "variant_v": {
+        "counts": {
+          "alert": 59,
+          "ok": 0,
+          "watch": 1
+        },
+        "first_alert_window": 1,
+        "windows": [
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0245,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1,
+            "conformal_neglogp": 23.338600345135273,
+            "domain_auc": 0.7820693750000001,
+            "level": "watch",
+            "month": 6,
+            "psi_feature_max": 3.5483865851911047,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.030718475301010774,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 0
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0275,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1015,
+            "conformal_neglogp": 25.124659187074343,
+            "domain_auc": 0.786238125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.755067071661122,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02744193452974602,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 1
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.027,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.102,
+            "conformal_neglogp": 25.73494023102682,
+            "domain_auc": 0.7809225,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.642855736422555,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.024092076487497747,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 2
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02325,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.103,
+            "conformal_neglogp": 26.97790362926488,
+            "domain_auc": 0.7857378125000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.701006272778545,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02659744423057178,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 3
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02575,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1025,
+            "conformal_neglogp": 26.35268789118531,
+            "domain_auc": 0.7796281250000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.50292541633019,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.026675698301657426,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 4
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10025,
+            "conformal_neglogp": 23.63161295749695,
+            "domain_auc": 0.774670625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6752531622953395,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0264395143499694,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 5
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02525,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10325,
+            "conformal_neglogp": 27.29331247074188,
+            "domain_auc": 0.7769543750000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5109006259540902,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025675545419799113,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 6
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.098,
+            "conformal_neglogp": 21.0616228502372,
+            "domain_auc": 0.7857149999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.604904476182755,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02793941557250354,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 7
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.024,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.099,
+            "conformal_neglogp": 22.18519829161745,
+            "domain_auc": 0.7868859374999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6156764891370687,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.023105732434033126,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 8
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.028,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10325,
+            "conformal_neglogp": 27.29331247074188,
+            "domain_auc": 0.7910362500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7123646792937155,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.030226486552479018,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 9
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.027,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0875,
+            "conformal_neglogp": 12.832032201405472,
+            "domain_auc": 0.7915537500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.669287125448789,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011860626487784206,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 10
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.024,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.099,
+            "conformal_neglogp": 22.18519829161745,
+            "domain_auc": 0.7774453125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6430726389552364,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.026087546996012713,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 11
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02575,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09575,
+            "conformal_neglogp": 18.64255025865106,
+            "domain_auc": 0.786179375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6728866724721008,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025011246884540733,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 12
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0235,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0955,
+            "conformal_neglogp": 18.383072029063072,
+            "domain_auc": 0.7905778124999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6344320464779396,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.018996821541615923,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 13
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02525,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0935,
+            "conformal_neglogp": 16.374196533195246,
+            "domain_auc": 0.7852637500000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.627868847367754,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01971744623472584,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 14
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02775,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10075,
+            "conformal_neglogp": 24.223234201210587,
+            "domain_auc": 0.7852368750000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7012139845559764,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02892342034484835,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 15
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0265,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0975,
+            "conformal_neglogp": 20.5110153631339,
+            "domain_auc": 0.7786128125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.642700833503353,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.027534409472290668,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 16
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02725,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09825,
+            "conformal_neglogp": 21.339721284476347,
+            "domain_auc": 0.7774403125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.757317070037745,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.0215910707149763,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 17
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.026,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10375,
+            "conformal_neglogp": 27.92973295894329,
+            "domain_auc": 0.7789303125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7167655474106915,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.017849758040776837,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 18
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02625,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09175,
+            "conformal_neglogp": 14.713971353136802,
+            "domain_auc": 0.7720646875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6703939546876097,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013266206104120305,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 19
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09425,
+            "conformal_neglogp": 17.11358168230005,
+            "domain_auc": 0.777436875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.683602851065519,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019070291925252537,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 20
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02575,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.101,
+            "conformal_neglogp": 24.521843245914855,
+            "domain_auc": 0.7797156249999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.706265532187361,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019413710266905276,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 21
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.03,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10575,
+            "conformal_neglogp": 30.55014289021778,
+            "domain_auc": 0.7843003125000001,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5593124592300693,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025931572086811284,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 22
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0225,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0925,
+            "conformal_neglogp": 15.4143576208458,
+            "domain_auc": 0.7830199999999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.561894606458711,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02026501263872499,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 23
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.03075,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10275,
+            "conformal_neglogp": 26.664362161083638,
+            "domain_auc": 0.7873340625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.7247598959352026,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.026332211917511887,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 24
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09325,
+            "conformal_neglogp": 16.13145096039331,
+            "domain_auc": 0.786165625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6475885093316123,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.021614783981352262,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 25
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02875,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1095,
+            "conformal_neglogp": 35.78588710363196,
+            "domain_auc": 0.7833325,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6460624904067656,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.028635681242994586,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 26
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02825,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.1035,
+            "conformal_neglogp": 27.61058885757624,
+            "domain_auc": 0.7751728124999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.4920805823693537,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.029743061692692356,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 27
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02725,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09375,
+            "conformal_neglogp": 16.61879994356981,
+            "domain_auc": 0.7819934375,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.65566006888786,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.022493884273205846,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 28
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02575,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09075,
+            "conformal_neglogp": 13.806092896754443,
+            "domain_auc": 0.7794603125,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.6828664194929206,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013842829479314084,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 29
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0285,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09725,
+            "conformal_neglogp": 20.23850580343776,
+            "domain_auc": 0.7844368749999999,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.545049331956405,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019861215200920868,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 30
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.092,
+            "conformal_neglogp": 14.945577756661564,
+            "domain_auc": 0.7824571875,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5694087370548924,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.025222333335801976,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 31
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0285,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.10075,
+            "conformal_neglogp": 24.223234201210587,
+            "domain_auc": 0.7858790625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.710277174970933,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.02233884141775471,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 32
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02175,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09475,
+            "conformal_neglogp": 17.61579891456077,
+            "domain_auc": 0.77562625,
+            "level": "alert",
+            "month": 6,
+            "psi_feature_max": 3.5708468848842383,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.023200132430775566,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 33
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01975,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0835,
+            "conformal_neglogp": 8.10864387759794,
+            "domain_auc": 0.9806998437500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.6978034591773516,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011055643609970061,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 34
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.023,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08725,
+            "conformal_neglogp": 10.861837561710963,
+            "domain_auc": 0.9813826562499999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8407201316465542,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.016584338873481236,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 35
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02025,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.07975,
+            "conformal_neglogp": 5.7680252752447085,
+            "domain_auc": 0.98118703125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8129217060210463,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013047435207707037,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 36
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0225,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08325,
+            "conformal_neglogp": 7.9398030425044785,
+            "domain_auc": 0.9809785937500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.890774452407917,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01052028036517935,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 37
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02175,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.09125,
+            "conformal_neglogp": 14.256323548148316,
+            "domain_auc": 0.981465625,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.869670393441931,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.015514405737385568,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 38
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02225,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0935,
+            "conformal_neglogp": 16.374196533195246,
+            "domain_auc": 0.98077859375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.711865387380251,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.015152642806085772,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 39
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02225,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08575,
+            "conformal_neglogp": 9.710856181840544,
+            "domain_auc": 0.9802795312500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8948036358314506,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.009605447254403716,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 40
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.019,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0895,
+            "conformal_neglogp": 12.712942561562189,
+            "domain_auc": 0.9831878125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.874154191684165,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01597115034398827,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 41
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.021,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08625,
+            "conformal_neglogp": 10.087142110983484,
+            "domain_auc": 0.9803529687499999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.9261568954906307,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.014141601602842712,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 42
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01925,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0855,
+            "conformal_neglogp": 9.525476182942924,
+            "domain_auc": 0.9800871875,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7960873995492825,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01668419804223976,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc, psi_score"
+            ],
+            "window_id": 43
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02875,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.089,
+            "conformal_neglogp": 16.170528183757344,
+            "domain_auc": 0.98116015625,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.688812455694725,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01168683870158095,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 44
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0185,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08475,
+            "conformal_neglogp": 8.980378959343117,
+            "domain_auc": 0.9813415624999999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7014263476678813,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.018529252235988523,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 45
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02125,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.086,
+            "conformal_neglogp": 9.898077913621375,
+            "domain_auc": 0.9814098437500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.757463616219566,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011947263341408032,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 46
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.019,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.083,
+            "conformal_neglogp": 7.772795417276646,
+            "domain_auc": 0.9795284375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7831310173136385,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.019413879286978103,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 47
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.017,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08325,
+            "conformal_neglogp": 7.9398030425044785,
+            "domain_auc": 0.9803087500000001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.758514625279263,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013467516094172,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 48
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.023,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08725,
+            "conformal_neglogp": 10.861837561710963,
+            "domain_auc": 0.979551875,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8172213323718482,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.013705468167146725,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 49
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0255,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08825,
+            "conformal_neglogp": 11.666066414935747,
+            "domain_auc": 0.98029953125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.5850702812119226,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01265375412999071,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 50
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.017,
+            "conformal_flagged": 0.0,
+            "conformal_fraud_rate": 0.073,
+            "conformal_neglogp": 2.5798908309980173,
+            "domain_auc": 0.97980984375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.869935206268324,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.007795490687496461,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 51
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02075,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.078,
+            "conformal_neglogp": 4.815850002495901,
+            "domain_auc": 0.9826309375,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8062680895035577,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.01176832271597378,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 52
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.024,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.087,
+            "conformal_neglogp": 10.665396543795572,
+            "domain_auc": 0.98218203125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.668640716567936,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010089372101416378,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 53
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02175,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0905,
+            "conformal_neglogp": 13.58375789850157,
+            "domain_auc": 0.98188703125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.900578633811847,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.014214691164149923,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 54
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.02325,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08775,
+            "conformal_neglogp": 11.260257798794504,
+            "domain_auc": 0.9805015625000001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.6843730415197475,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.012774215489405435,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 55
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01875,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.0805,
+            "conformal_neglogp": 6.203312809102038,
+            "domain_auc": 0.98311125,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8281536208719857,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.014984688585984006,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc, psi_score",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 56
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.01975,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.079,
+            "conformal_neglogp": 5.3490840847086085,
+            "domain_auc": 0.9803226562499999,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.6627897492750447,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.010522493955210327,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 57
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.0235,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.08325,
+            "conformal_neglogp": 7.9398030425044785,
+            "domain_auc": 0.9798932812500001,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.8085721412076246,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.012720580193541494,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 58
+          },
+          {
+            "bugged": false,
+            "conformal_excluded_rate": 0.018,
+            "conformal_flagged": 1.0,
+            "conformal_fraud_rate": 0.085,
+            "conformal_neglogp": 9.160238354613178,
+            "domain_auc": 0.9806946875,
+            "level": "alert",
+            "month": 7,
+            "psi_feature_max": 3.7830660208205087,
+            "psi_feature_max_name": "velocity_4w",
+            "psi_score": 0.011553013909300212,
+            "reasons": [
+              "over threshold: conformal_neglogp, domain_auc",
+              "two consecutive windows: conformal_neglogp, domain_auc"
+            ],
+            "window_id": 59
+          }
+        ]
+      }
+    },
+    "window_size": 4000
+  }
+}

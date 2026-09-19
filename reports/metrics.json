@@ -1620,8 +1620,8 @@
     },
     "context": {
       "config_hash": "2fe27330",
-      "generated_at": "2026-09-18T16:58:21.945257+00:00",
-      "git_sha": "unknown",
+      "generated_at": "2026-09-19T14:57:23.971008+00:00",
+      "git_sha": "927bedf6",
       "seed": 20260917
     },
     "discrimination_cal_tune": {
@@ -1631,7 +1631,7 @@
       "roc_auc": 0.8962073008000953,
       "tpr_at_0.05_fpr": 0.5392781316348195
     },
-    "model_version": "champion-unknown",
+    "model_version": "champion-927bedf6",
     "months": {
       "6": {
         "calibration": {
@@ -2176,7 +2176,7 @@
         ]
       }
     },
-    "seconds": 31.56867355999998,
+    "seconds": 31.191814123000768,
     "split_sizes": {
       "cal_conf": 39770,
       "cal_prob": 39782,
@@ -2187,6 +2187,1172 @@
     },
     "threshold": 0.04199414243978042,
     "threshold_set_on": "cal_tune"
+  },
+  "fairness": {
+    "age_cut": 50,
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-19T14:55:45.202182+00:00",
+      "git_sha": "927bedf6",
+      "seed": 20260917
+    },
+    "experiments": {
+      "m1_drop_age": {
+        "description": "The champion: LightGBM trained without customer_age.",
+        "kind": "scored",
+        "months": {
+          "6": {
+            "discrimination": {
+              "n": 108168.0,
+              "pr_auc": 0.16547523022494381,
+              "prevalence": 0.013405073589231566,
+              "roc_auc": 0.8862195887194804,
+              "tpr_at_0.05_fpr": 0.5075862068965518
+            },
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 52,
+                  "fpr": 0.02410755679184052,
+                  "n": 2166,
+                  "n_genuine": 2157
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 737,
+                  "fpr": 0.029286707728988674,
+                  "n": 25318,
+                  "n_genuine": 25165
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1465,
+                  "fpr": 0.04779771615008157,
+                  "n": 30959,
+                  "n_genuine": 30650
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 2252,
+                  "fpr": 0.07984399929090587,
+                  "n": 28613,
+                  "n_genuine": 28205
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 1803,
+                  "fpr": 0.1157475765551775,
+                  "n": 15951,
+                  "n_genuine": 15577
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 495,
+                  "fpr": 0.12968299711815562,
+                  "n": 3963,
+                  "n_genuine": 3817
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 111,
+                  "fpr": 0.11909871244635194,
+                  "n": 975,
+                  "n_genuine": 932
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 34,
+                  "fpr": 0.16831683168316833,
+                  "n": 210,
+                  "n_genuine": 202
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 3,
+                  "fpr": 0.23076923076923078,
+                  "n": 13,
+                  "n_genuine": 13
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 2446,
+                  "fpr": 0.1190789153400516,
+                  "group": "age>=50",
+                  "n": 21112,
+                  "n_genuine": 20541
+                },
+                {
+                  "false_alarms": 4506,
+                  "fpr": 0.05228773338593824,
+                  "group": "age<50",
+                  "n": 87056,
+                  "n_genuine": 86177
+                }
+              ],
+              "fpr_ratio": 0.4391015255439728,
+              "fpr_ratio_ci": {
+                "ci_high": 0.45954975008320287,
+                "ci_low": 0.4178973199592807,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.4391015255439728,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.0718974188299682,
+              "fpr": 0.06514364961862104,
+              "n": 108168.0,
+              "n_flagged": 7777.0,
+              "n_fraud": 1450.0,
+              "precision": 0.10608203677510608,
+              "threshold": 0.04199414243978042,
+              "tpr": 0.5689655172413793
+            }
+          },
+          "7": {
+            "discrimination": {
+              "n": 96843.0,
+              "pr_auc": 0.2041893413998775,
+              "prevalence": 0.014745515938167962,
+              "roc_auc": 0.8892554800047147,
+              "tpr_at_0.05_fpr": 0.5574229691876751
+            },
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 61,
+                  "fpr": 0.020911895783339046,
+                  "n": 2930,
+                  "n_genuine": 2917
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 522,
+                  "fpr": 0.025015574831072987,
+                  "n": 21023,
+                  "n_genuine": 20867
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1347,
+                  "fpr": 0.042149070655234995,
+                  "n": 32363,
+                  "n_genuine": 31958
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 1719,
+                  "fpr": 0.06268232205367562,
+                  "n": 27860,
+                  "n_genuine": 27424
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 873,
+                  "fpr": 0.0921955855950998,
+                  "n": 9725,
+                  "n_genuine": 9469
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 287,
+                  "fpr": 0.12109704641350211,
+                  "n": 2501,
+                  "n_genuine": 2370
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 41,
+                  "fpr": 0.12094395280235988,
+                  "n": 364,
+                  "n_genuine": 339
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 8,
+                  "fpr": 0.11764705882352941,
+                  "n": 74,
+                  "n_genuine": 68
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 2,
+                  "fpr": 0.6666666666666666,
+                  "n": 3,
+                  "n_genuine": 3
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 1211,
+                  "fpr": 0.09886521348681525,
+                  "group": "age>=50",
+                  "n": 12667,
+                  "n_genuine": 12249
+                },
+                {
+                  "false_alarms": 3649,
+                  "fpr": 0.043876103215256236,
+                  "group": "age<50",
+                  "n": 84176,
+                  "n_genuine": 83166
+                }
+              ],
+              "fpr_ratio": 0.4437971827280542,
+              "fpr_ratio_ci": {
+                "ci_high": 0.47224367802551387,
+                "ci_low": 0.41914328498712417,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.4437971827280542,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.058455438183451565,
+              "fpr": 0.0509353875176859,
+              "n": 96843.0,
+              "n_flagged": 5661.0,
+              "n_fraud": 1428.0,
+              "precision": 0.14149443561208266,
+              "threshold": 0.04199414243978042,
+              "tpr": 0.5609243697478992
+            }
+          }
+        },
+        "threshold": 0.04199414243978042,
+        "threshold_set_on": "cal_tune"
+      },
+      "m2_fairgbm": {
+        "description": "FairGBM with constraint_type=FPR on the age group, applied during training.",
+        "kind": "scored",
+        "months": {
+          "6": {
+            "discrimination": {
+              "n": 108168.0,
+              "pr_auc": 0.15153412511674746,
+              "prevalence": 0.013405073589231566,
+              "roc_auc": 0.8839998746293001,
+              "tpr_at_0.05_fpr": 0.49586206896551727
+            },
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 56,
+                  "fpr": 0.025961984237366714,
+                  "n": 2166,
+                  "n_genuine": 2157
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 734,
+                  "fpr": 0.029167494536061992,
+                  "n": 25318,
+                  "n_genuine": 25165
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1344,
+                  "fpr": 0.04384991843393148,
+                  "n": 30959,
+                  "n_genuine": 30650
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 2151,
+                  "fpr": 0.0762630739230633,
+                  "n": 28613,
+                  "n_genuine": 28205
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 1706,
+                  "fpr": 0.10952044681260834,
+                  "n": 15951,
+                  "n_genuine": 15577
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 460,
+                  "fpr": 0.12051349227141735,
+                  "n": 3963,
+                  "n_genuine": 3817
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 99,
+                  "fpr": 0.10622317596566523,
+                  "n": 975,
+                  "n_genuine": 932
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 25,
+                  "fpr": 0.12376237623762376,
+                  "n": 210,
+                  "n_genuine": 202
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 3,
+                  "fpr": 0.23076923076923078,
+                  "n": 13,
+                  "n_genuine": 13
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 2293,
+                  "fpr": 0.11163039774110316,
+                  "group": "age>=50",
+                  "n": 21112,
+                  "n_genuine": 20541
+                },
+                {
+                  "false_alarms": 4285,
+                  "fpr": 0.04972324402102649,
+                  "group": "age<50",
+                  "n": 87056,
+                  "n_genuine": 86177
+                }
+              ],
+              "fpr_ratio": 0.44542745548883783,
+              "fpr_ratio_ci": {
+                "ci_high": 0.4689676025772782,
+                "ci_low": 0.42573797928286367,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.44542745548883783,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.06807003919828415,
+              "fpr": 0.061639086189771174,
+              "n": 108168.0,
+              "n_flagged": 7363.0,
+              "n_fraud": 1450.0,
+              "precision": 0.10661415184028249,
+              "threshold": 0.028274279366799812,
+              "tpr": 0.5413793103448276
+            }
+          },
+          "7": {
+            "discrimination": {
+              "n": 96843.0,
+              "pr_auc": 0.18061233479752944,
+              "prevalence": 0.014745515938167962,
+              "roc_auc": 0.886647713636626,
+              "tpr_at_0.05_fpr": 0.5378151260504201
+            },
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 84,
+                  "fpr": 0.028796708947548853,
+                  "n": 2930,
+                  "n_genuine": 2917
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 585,
+                  "fpr": 0.0280346959313749,
+                  "n": 21023,
+                  "n_genuine": 20867
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1548,
+                  "fpr": 0.048438575630515054,
+                  "n": 32363,
+                  "n_genuine": 31958
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 1918,
+                  "fpr": 0.069938739789965,
+                  "n": 27860,
+                  "n_genuine": 27424
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 948,
+                  "fpr": 0.10011616855000528,
+                  "n": 9725,
+                  "n_genuine": 9469
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 295,
+                  "fpr": 0.12447257383966245,
+                  "n": 2501,
+                  "n_genuine": 2370
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 36,
+                  "fpr": 0.10619469026548672,
+                  "n": 364,
+                  "n_genuine": 339
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 7,
+                  "fpr": 0.10294117647058823,
+                  "n": 74,
+                  "n_genuine": 68
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 2,
+                  "fpr": 0.6666666666666666,
+                  "n": 3,
+                  "n_genuine": 3
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 1288,
+                  "fpr": 0.10515144093395379,
+                  "group": "age>=50",
+                  "n": 12667,
+                  "n_genuine": 12249
+                },
+                {
+                  "false_alarms": 4135,
+                  "fpr": 0.0497198374335666,
+                  "group": "age<50",
+                  "n": 84176,
+                  "n_genuine": 83166
+                }
+              ],
+              "fpr_ratio": 0.4728402862762091,
+              "fpr_ratio_ci": {
+                "ci_high": 0.5027640647983951,
+                "ci_low": 0.44572938945981777,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.4728402862762091,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.06429994940264139,
+              "fpr": 0.056835927265105064,
+              "n": 96843.0,
+              "n_flagged": 6227.0,
+              "n_fraud": 1428.0,
+              "precision": 0.12911514372892244,
+              "threshold": 0.028274279366799812,
+              "tpr": 0.5630252100840336
+            }
+          }
+        },
+        "threshold": 0.028274279366799812,
+        "threshold_set_on": "cal_tune"
+      },
+      "m3_fairlearn_eg": {
+        "description": "ExponentiatedGradient with FalsePositiveRateParity, age as a training constraint.",
+        "kind": "point",
+        "months": {
+          "6": {
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 0,
+                  "fpr": 0.0,
+                  "n": 2166,
+                  "n_genuine": 2157
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 2,
+                  "fpr": 7.947546195112258e-05,
+                  "n": 25318,
+                  "n_genuine": 25165
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 10,
+                  "fpr": 0.0003262642740619902,
+                  "n": 30959,
+                  "n_genuine": 30650
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 13,
+                  "fpr": 0.0004609111859599362,
+                  "n": 28613,
+                  "n_genuine": 28205
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 21,
+                  "fpr": 0.0013481414906593055,
+                  "n": 15951,
+                  "n_genuine": 15577
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 7,
+                  "fpr": 0.0018339009693476552,
+                  "n": 3963,
+                  "n_genuine": 3817
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 2,
+                  "fpr": 0.002145922746781116,
+                  "n": 975,
+                  "n_genuine": 932
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 1,
+                  "fpr": 0.0049504950495049506,
+                  "n": 210,
+                  "n_genuine": 202
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 0,
+                  "fpr": 0.0,
+                  "n": 13,
+                  "n_genuine": 13
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 31,
+                  "fpr": 0.0015091767684143908,
+                  "group": "age>=50",
+                  "n": 21112,
+                  "n_genuine": 20541
+                },
+                {
+                  "false_alarms": 25,
+                  "fpr": 0.00029010060689046963,
+                  "group": "age<50",
+                  "n": 87056,
+                  "n_genuine": 86177
+                }
+              ],
+              "fpr_ratio": 0.19222440535926247,
+              "fpr_ratio_ci": {
+                "ci_high": 0.33370156770367965,
+                "ci_low": 0.11255806847147924,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.19222440535926247,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.0010261814954515198,
+              "fpr": 0.0005247474652823328,
+              "n": 108168.0,
+              "tpr": 0.03793103448275862
+            }
+          },
+          "7": {
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 0,
+                  "fpr": 0.0,
+                  "n": 2930,
+                  "n_genuine": 2917
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 3,
+                  "fpr": 0.0001437676714429482,
+                  "n": 21023,
+                  "n_genuine": 20867
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 12,
+                  "fpr": 0.0003754928343450779,
+                  "n": 32363,
+                  "n_genuine": 31958
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 21,
+                  "fpr": 0.0007657526254375729,
+                  "n": 27860,
+                  "n_genuine": 27424
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 14,
+                  "fpr": 0.0014785088182490231,
+                  "n": 9725,
+                  "n_genuine": 9469
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 6,
+                  "fpr": 0.002531645569620253,
+                  "n": 2501,
+                  "n_genuine": 2370
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 1,
+                  "fpr": 0.0029498525073746312,
+                  "n": 364,
+                  "n_genuine": 339
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 0,
+                  "fpr": 0.0,
+                  "n": 74,
+                  "n_genuine": 68
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 0,
+                  "fpr": 0.0,
+                  "n": 3,
+                  "n_genuine": 3
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 21,
+                  "fpr": 0.0017144256674014205,
+                  "group": "age>=50",
+                  "n": 12667,
+                  "n_genuine": 12249
+                },
+                {
+                  "false_alarms": 36,
+                  "fpr": 0.0004328692013563235,
+                  "group": "age<50",
+                  "n": 84176,
+                  "n_genuine": 83166
+                }
+              ],
+              "fpr_ratio": 0.2524864213054098,
+              "fpr_ratio_ci": {
+                "ci_high": 0.46289177239325136,
+                "ci_low": 0.14728374576148906,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.2524864213054098,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.0012081410117406523,
+              "fpr": 0.0005973903474296494,
+              "n": 96843.0,
+              "tpr": 0.04201680672268908
+            }
+          }
+        },
+        "note": "a randomised classifier at one operating point: no threshold to sweep"
+      },
+      "m4_policy_only": {
+        "description": "No model change: an application counts as stopped if the conformal policy sends it to review or verify rather than approving it.",
+        "kind": "point",
+        "months": {
+          "6": {
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 62,
+                  "fpr": 0.028743625405656004,
+                  "n": 2166,
+                  "n_genuine": 2157
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 836,
+                  "fpr": 0.033220743095569244,
+                  "n": 25318,
+                  "n_genuine": 25165
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1633,
+                  "fpr": 0.053278955954323,
+                  "n": 30959,
+                  "n_genuine": 30650
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 2452,
+                  "fpr": 0.08693494061336643,
+                  "n": 28613,
+                  "n_genuine": 28205
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 1954,
+                  "fpr": 0.1254413558451563,
+                  "n": 15951,
+                  "n_genuine": 15577
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 529,
+                  "fpr": 0.13859051611212994,
+                  "n": 3963,
+                  "n_genuine": 3817
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 119,
+                  "fpr": 0.1276824034334764,
+                  "n": 975,
+                  "n_genuine": 932
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 35,
+                  "fpr": 0.17326732673267325,
+                  "n": 210,
+                  "n_genuine": 202
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 3,
+                  "fpr": 0.23076923076923078,
+                  "n": 13,
+                  "n_genuine": 13
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 2640,
+                  "fpr": 0.12852344092303197,
+                  "group": "age>=50",
+                  "n": 21112,
+                  "n_genuine": 20541
+                },
+                {
+                  "false_alarms": 4983,
+                  "fpr": 0.05782285296540841,
+                  "group": "age<50",
+                  "n": 87056,
+                  "n_genuine": 86177
+                }
+              ],
+              "fpr_ratio": 0.44990122074335387,
+              "fpr_ratio_ci": {
+                "ci_high": 0.47024232197485405,
+                "ci_low": 0.43041407046514213,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.44990122074335387,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.07837807854448635,
+              "fpr": 0.07143124871155757,
+              "n": 108168.0,
+              "tpr": 0.5896551724137931
+            }
+          },
+          "7": {
+            "fairness": {
+              "by_band": [
+                {
+                  "band": "10-19",
+                  "false_alarms": 69,
+                  "fpr": 0.023654439492629412,
+                  "n": 2930,
+                  "n_genuine": 2917
+                },
+                {
+                  "band": "20-29",
+                  "false_alarms": 578,
+                  "fpr": 0.02769923803134135,
+                  "n": 21023,
+                  "n_genuine": 20867
+                },
+                {
+                  "band": "30-39",
+                  "false_alarms": 1490,
+                  "fpr": 0.046623693597847175,
+                  "n": 32363,
+                  "n_genuine": 31958
+                },
+                {
+                  "band": "40-49",
+                  "false_alarms": 1872,
+                  "fpr": 0.06826137689614936,
+                  "n": 27860,
+                  "n_genuine": 27424
+                },
+                {
+                  "band": "50-59",
+                  "false_alarms": 949,
+                  "fpr": 0.10022177632273735,
+                  "n": 9725,
+                  "n_genuine": 9469
+                },
+                {
+                  "band": "60-69",
+                  "false_alarms": 307,
+                  "fpr": 0.12953586497890296,
+                  "n": 2501,
+                  "n_genuine": 2370
+                },
+                {
+                  "band": "70-79",
+                  "false_alarms": 44,
+                  "fpr": 0.12979351032448377,
+                  "n": 364,
+                  "n_genuine": 339
+                },
+                {
+                  "band": "80-89",
+                  "false_alarms": 10,
+                  "fpr": 0.14705882352941177,
+                  "n": 74,
+                  "n_genuine": 68
+                },
+                {
+                  "band": "90-99",
+                  "false_alarms": 2,
+                  "fpr": 0.6666666666666666,
+                  "n": 3,
+                  "n_genuine": 3
+                }
+              ],
+              "by_group": [
+                {
+                  "false_alarms": 1312,
+                  "fpr": 0.10711078455384113,
+                  "group": "age>=50",
+                  "n": 12667,
+                  "n_genuine": 12249
+                },
+                {
+                  "false_alarms": 4009,
+                  "fpr": 0.04820479522881947,
+                  "group": "age<50",
+                  "n": 84176,
+                  "n_genuine": 83166
+                }
+              ],
+              "fpr_ratio": 0.4500461408215013,
+              "fpr_ratio_ci": {
+                "ci_high": 0.4783166820402563,
+                "ci_low": 0.42578121072052255,
+                "level": 0.95,
+                "n_resamples": 1000.0,
+                "point": 0.4500461408215013,
+                "seed": 20260917.0
+              }
+            },
+            "realised": {
+              "flag_rate": 0.06354615201924765,
+              "fpr": 0.05576691295917833,
+              "n": 96843.0,
+              "tpr": 0.5833333333333334
+            }
+          }
+        },
+        "note": "a randomised classifier at one operating point: no threshold to sweep"
+      }
+    },
+    "model_version": "champion-unknown",
+    "seconds": 273.48953247400004,
+    "target_fpr": 0.05,
+    "tradeoff": [
+      {
+        "experiment": "m1_drop_age",
+        "fpr": 0.06514364961862104,
+        "fpr_ratio": 0.4391015255439728,
+        "fpr_ratio_high": 0.45954975008320287,
+        "fpr_ratio_low": 0.4178973199592807,
+        "kind": "scored",
+        "month": 6,
+        "tpr": 0.5689655172413793
+      },
+      {
+        "experiment": "m1_drop_age",
+        "fpr": 0.0509353875176859,
+        "fpr_ratio": 0.4437971827280542,
+        "fpr_ratio_high": 0.47224367802551387,
+        "fpr_ratio_low": 0.41914328498712417,
+        "kind": "scored",
+        "month": 7,
+        "tpr": 0.5609243697478992
+      },
+      {
+        "experiment": "m2_fairgbm",
+        "fpr": 0.061639086189771174,
+        "fpr_ratio": 0.44542745548883783,
+        "fpr_ratio_high": 0.4689676025772782,
+        "fpr_ratio_low": 0.42573797928286367,
+        "kind": "scored",
+        "month": 6,
+        "tpr": 0.5413793103448276
+      },
+      {
+        "experiment": "m2_fairgbm",
+        "fpr": 0.056835927265105064,
+        "fpr_ratio": 0.4728402862762091,
+        "fpr_ratio_high": 0.5027640647983951,
+        "fpr_ratio_low": 0.44572938945981777,
+        "kind": "scored",
+        "month": 7,
+        "tpr": 0.5630252100840336
+      },
+      {
+        "experiment": "m3_fairlearn_eg",
+        "fpr": 0.0005247474652823328,
+        "fpr_ratio": 0.19222440535926247,
+        "fpr_ratio_high": 0.33370156770367965,
+        "fpr_ratio_low": 0.11255806847147924,
+        "kind": "point",
+        "month": 6,
+        "tpr": 0.03793103448275862
+      },
+      {
+        "experiment": "m3_fairlearn_eg",
+        "fpr": 0.0005973903474296494,
+        "fpr_ratio": 0.2524864213054098,
+        "fpr_ratio_high": 0.46289177239325136,
+        "fpr_ratio_low": 0.14728374576148906,
+        "kind": "point",
+        "month": 7,
+        "tpr": 0.04201680672268908
+      },
+      {
+        "experiment": "m4_policy_only",
+        "fpr": 0.07143124871155757,
+        "fpr_ratio": 0.44990122074335387,
+        "fpr_ratio_high": 0.47024232197485405,
+        "fpr_ratio_low": 0.43041407046514213,
+        "kind": "point",
+        "month": 6,
+        "tpr": 0.5896551724137931
+      },
+      {
+        "experiment": "m4_policy_only",
+        "fpr": 0.05576691295917833,
+        "fpr_ratio": 0.4500461408215013,
+        "fpr_ratio_high": 0.4783166820402563,
+        "fpr_ratio_low": 0.42578121072052255,
+        "kind": "point",
+        "month": 7,
+        "tpr": 0.5833333333333334
+      }
+    ],
+    "tradeoff_csv": "reports/tables/fairness_tradeoff.csv"
+  },
+  "monitoring": {
+    "bugs": {
+      "all_mobile_valid": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 26,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "monitor",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": 5,
+        "first_rejected_window": null,
+        "in_contract": true,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 13,
+            "ok": 5,
+            "watch": 1
+          },
+          "detected": true,
+          "detected_by": "monitor",
+          "detection_delay_applications": 4000,
+          "detection_delay_windows": 1
+        },
+        "rejected_by_contract": false,
+        "tpr_after": 0.5648275862068965,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": -0.004137931034482789
+      },
+      "income_x10": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 4,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "contract",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": null,
+        "first_rejected_window": 5,
+        "in_contract": false,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 0,
+            "ok": 5,
+            "watch": 0
+          },
+          "detected": true,
+          "detected_by": "contract",
+          "detection_delay_applications": 0,
+          "detection_delay_windows": 0
+        },
+        "rejected_by_contract": true,
+        "tpr_after": null,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": null
+      },
+      "mirror_income": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 26,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "monitor",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": 5,
+        "first_rejected_window": null,
+        "in_contract": true,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 13,
+            "ok": 5,
+            "watch": 1
+          },
+          "detected": true,
+          "detected_by": "monitor",
+          "detection_delay_applications": 4000,
+          "detection_delay_windows": 1
+        },
+        "rejected_by_contract": false,
+        "tpr_after": 0.48551724137931035,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": -0.08344827586206899
+      },
+      "swap_employment": {
+        "already_alerting_before_bug": true,
+        "counts": {
+          "alert": 26,
+          "ok": 0,
+          "watch": 1
+        },
+        "detected": true,
+        "detected_by": "monitor",
+        "detection_delay_applications": 0,
+        "detection_delay_windows": 0,
+        "first_alert_window": 5,
+        "first_rejected_window": null,
+        "in_contract": true,
+        "on_clean_stream": {
+          "baseline_quiet": true,
+          "counts": {
+            "alert": 13,
+            "ok": 5,
+            "watch": 1
+          },
+          "detected": true,
+          "detected_by": "monitor",
+          "detection_delay_applications": 4000,
+          "detection_delay_windows": 1
+        },
+        "rejected_by_contract": false,
+        "tpr_after": 0.443448275862069,
+        "tpr_before": 0.5689655172413793,
+        "tpr_change": -0.12551724137931036
+      }
+    },
+    "conformal_reference_rates": {
+      "excluded": 0.013427206437012824,
+      "fraud": 0.06145335680160925
+    },
+    "context": {
+      "config_hash": "2fe27330",
+      "generated_at": "2026-09-19T14:50:15.736512+00:00",
+      "git_sha": "927bedf6",
+      "seed": 20260917
+    },
+    "fallback_state": {
+      "alpha_fraud": 0.15,
+      "alpha_legit": 0.05,
+      "drift_status": "alert",
+      "fallback_active": true,
+      "last_window": 1,
+      "month": 6,
+      "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc",
+      "updated_at": "2026-09-19T14:50:15.729943+00:00"
+    },
+    "model_version": "champion-unknown",
+    "natural_drift": {
+      "counts": {
+        "alert": 50,
+        "ok": 0,
+        "watch": 1
+      },
+      "first_alert_window": 1,
+      "note": "months 6-7 as published: real population movement, not false alarms"
+    },
+    "seconds": 932.9323168169999,
+    "threshold_calibration": {
+      "clean_windows": 200,
+      "counts": {
+        "alert": 0,
+        "ok": 192,
+        "watch": 8
+      },
+      "false_alarm_rate": 8,
+      "percentile": 99.0,
+      "source": "cal_prob + cal_tune"
+    },
+    "thresholds": {
+      "conformal_neglogp": 2.017340470611973,
+      "domain_auc": 0.519839434375,
+      "psi_feature_max": 3.9679496511333308,
+      "psi_score": 0.013872069162246462
+    },
+    "variants": {
+      "variant_iv": {
+        "counts": {
+          "alert": 59,
+          "ok": 0,
+          "watch": 1
+        },
+        "first_alert_window": 1
+      },
+      "variant_v": {
+        "counts": {
+          "alert": 59,
+          "ok": 0,
+          "watch": 1
+        },
+        "first_alert_window": 1
+      }
+    },
+    "window_size": 4000
   },
   "policy": {
     "calibration": "platt",
@@ -2204,8 +3370,8 @@
     },
     "context": {
       "config_hash": "2fe27330",
-      "generated_at": "2026-09-18T17:00:08.809817+00:00",
-      "git_sha": "unknown",
+      "generated_at": "2026-09-19T14:50:41.935418+00:00",
+      "git_sha": "927bedf6",
       "seed": 20260917
     },
     "grid": [
@@ -2879,7 +4045,8 @@
         "verify_share": 0.015643877203308447
       }
     },
-    "seconds": 1.9957138080001187,
+    "outcomes_csv": "reports/tables/policy_outcomes.csv",
+    "seconds": 3.505973212999379,
     "thresholds": {
       "alpha_fraud": 0.45,
       "alpha_legit": 0.01,

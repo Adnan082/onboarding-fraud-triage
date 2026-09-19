@@ -1,0 +1,4 @@
+{"event": "fallback_activated", "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc", "window_id": 1, "month": 6, "at": "2026-09-19T14:14:39.277796+00:00"}
+{"event": "fallback_activated", "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc", "window_id": 1, "month": 6, "at": "2026-09-19T14:16:35.441735+00:00"}
+{"event": "fallback_activated", "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc", "window_id": 1, "month": 6, "at": "2026-09-19T14:31:01.626099+00:00"}
+{"event": "fallback_activated", "reason": "natural drift: over threshold: conformal_neglogp, domain_auc; two consecutive windows: conformal_neglogp, domain_auc", "window_id": 1, "month": 6, "at": "2026-09-19T14:50:15.730346+00:00"}

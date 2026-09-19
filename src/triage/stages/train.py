@@ -27,6 +27,8 @@ from triage.data.split import deployment_protocol
 from triage.evaluation.artefacts import update_section
 from triage.evaluation.metrics import calibration_by_age, discrimination, threshold_at_fpr
 from triage.evaluation.protocols import evaluate_slice
+from triage.explain.reasons import training_medians
+from triage.features.encode import lgbm_frame
 from triage.models.calibrate import fit_all, reliability_curve, select
 from triage.models.champion import fit, save
 from triage.stages._base import CONFIG_PATH, start
@@ -111,7 +113,10 @@ def main(cfg: DictConfig) -> None:
             summary["calibration"]["overall"]["brier"],
         )
 
-    # 5. artefacts, with the hashes the API checks at startup
+    # 5. artefacts, with the hashes the API checks at startup.
+    # The training medians travel with the model: reason codes say "high" or "low"
+    # relative to the population the model learned from, and the API has no access
+    # to the training data to work that out for itself.
     manifest = save(
         model,
         calibrator,
@@ -120,6 +125,9 @@ def main(cfg: DictConfig) -> None:
             "threshold": threshold,
             "threshold_set_on": "cal_tune",
             "split_sizes": splits.sizes(),
+            "training_medians": training_medians(
+                lgbm_frame(frame.loc[splits.train], cfg, use_age=False)
+            ),
         },
     )
 
