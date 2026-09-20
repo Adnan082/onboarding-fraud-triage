@@ -30,7 +30,7 @@ def variant_names(cfg: DictConfig) -> list[str]:
     return [str(name) for name in cfg.monitor.stress_variants]
 
 
-def test_months(cfg: DictConfig) -> list[int]:
+def held_out_months(cfg: DictConfig) -> list[int]:
     """The months to score. The same held-out months used everywhere else."""
     return [int(month) for month in cfg.data.protocol.deployment.test_months]
 
@@ -42,7 +42,7 @@ def select_test_window(frame: pd.DataFrame, cfg: DictConfig) -> pd.DataFrame:
     population the model learned from against one it did not, and confuse a
     difference in *population* with a difference in *time*.
     """
-    months = test_months(cfg)
+    months = held_out_months(cfg)
     selected = frame[frame[cfg.data.time_column].isin(months)]
     if selected.empty:
         raise ValueError(f"no rows for months {months}: cannot stress test this variant")

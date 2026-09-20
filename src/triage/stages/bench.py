@@ -31,7 +31,7 @@ from omegaconf import DictConfig
 
 from triage.data.contract import CONTRACT
 from triage.evaluation.artefacts import update_section
-from triage.stages._base import CONFIG_PATH, start
+from triage.stages._base import CONFIG_PATH, stage_run
 
 log = logging.getLogger("triage")
 
@@ -113,82 +113,81 @@ def docker_image_size() -> dict[str, Any]:
 @hydra.main(version_base="1.3", config_path=CONFIG_PATH, config_name="config")
 def main(cfg: DictConfig) -> None:
     """Entry point for ``make bench``."""
-    context = start(cfg, "bench")
+    with stage_run(cfg, "bench") as context:
+        from triage.api.app import app
+        from triage.api.service import ScoringService
 
-    from triage.api.app import app
-    from triage.api.service import ScoringService
+        features = example_application()
+        # Pass the stage's own config: Hydra is already initialised here, so the
+        # service must not compose a second one.
+        service = ScoringService.load(cfg)
+        log.info("benchmarking %s on CPU", service.manifest["model_version"])
 
-    features = example_application()
-    # Pass the stage's own config: Hydra is already initialised here, so the
-    # service must not compose a second one.
-    service = ScoringService.load(cfg)
-    log.info("benchmarking %s on CPU", service.manifest["model_version"])
+        results: dict[str, Any] = {}
 
-    results: dict[str, Any] = {}
-
-    for explain in (True, False):
-        label = "with_shap" if explain else "without_shap"
-        # Bind the loop variable: a late-binding closure here would silently
-        # benchmark the wrong configuration if this were ever deferred.
-        samples = time_calls(
-            lambda wanted=explain: service.score(features, explain=wanted), REQUESTS, WARMUP
-        )
-        results[f"scoring_{label}"] = percentiles(samples)
-        log.info(
-            "  scoring %-13s p50 %.2f ms, p99 %.2f ms",
-            label,
-            results[f"scoring_{label}"]["p50_ms"],
-            results[f"scoring_{label}"]["p99_ms"],
-        )
-
-    with TestClient(app) as client:
         for explain in (True, False):
             label = "with_shap" if explain else "without_shap"
-            url = f"/score?explain={'true' if explain else 'false'}"
-            body = {"features": features}
+            # Bind the loop variable: a late-binding closure here would silently
+            # benchmark the wrong configuration if this were ever deferred.
+            samples = time_calls(
+                lambda wanted=explain: service.score(features, explain=wanted), REQUESTS, WARMUP
+            )
+            results[f"scoring_{label}"] = percentiles(samples)
+            log.info(
+                "  scoring %-13s p50 %.2f ms, p99 %.2f ms",
+                label,
+                results[f"scoring_{label}"]["p50_ms"],
+                results[f"scoring_{label}"]["p99_ms"],
+            )
 
-            # Never benchmark an error path: a 503 is fast and means nothing.
-            probe = client.post(url, json=body)
-            if probe.status_code != 200:
-                raise RuntimeError(
-                    f"the service returned {probe.status_code} for {url}: "
-                    f"{probe.text[:200]}. Refusing to report latency for a failing request."
+        with TestClient(app) as client:
+            for explain in (True, False):
+                label = "with_shap" if explain else "without_shap"
+                url = f"/score?explain={'true' if explain else 'false'}"
+                body = {"features": features}
+
+                # Never benchmark an error path: a 503 is fast and means nothing.
+                probe = client.post(url, json=body)
+                if probe.status_code != 200:
+                    raise RuntimeError(
+                        f"the service returned {probe.status_code} for {url}: "
+                        f"{probe.text[:200]}. Refusing to report latency for a failing request."
+                    )
+
+                samples = time_calls(
+                    lambda where=url, payload=body: client.post(where, json=payload),
+                    REQUESTS,
+                    WARMUP,
+                )
+                results[f"http_{label}"] = percentiles(samples)
+                log.info(
+                    "  http    %-13s p50 %.2f ms, p99 %.2f ms",
+                    label,
+                    results[f"http_{label}"]["p50_ms"],
+                    results[f"http_{label}"]["p99_ms"],
                 )
 
-            samples = time_calls(
-                lambda where=url, payload=body: client.post(where, json=payload),
-                REQUESTS,
-                WARMUP,
-            )
-            results[f"http_{label}"] = percentiles(samples)
-            log.info(
-                "  http    %-13s p50 %.2f ms, p99 %.2f ms",
-                label,
-                results[f"http_{label}"]["p50_ms"],
-                results[f"http_{label}"]["p99_ms"],
-            )
+        image = docker_image_size()
+        if image["available"]:
+            log.info("  docker image %s: %.1f MB", image["image"], image["size_mb"])
+        else:
+            log.info("  docker image: %s", image["reason"])
 
-    image = docker_image_size()
-    if image["available"]:
-        log.info("  docker image %s: %.1f MB", image["image"], image["size_mb"])
-    else:
-        log.info("  docker image: %s", image["reason"])
-
-    payload = {
-        "model_version": service.manifest["model_version"],
-        "requests": REQUESTS,
-        "warmup": WARMUP,
-        "device": "cpu",
-        "target_p50_ms": 15.0,
-        "latency": results,
-        "docker": image,
-        "note": (
-            "Sequential, single process, in-process HTTP client (no network). "
-            "Reason codes dominate: compare with_shap against without_shap."
-        ),
-    }
-    update_section(Path(cfg.paths.metrics), "service", payload, context)
-    log.info("wrote %s -> service", cfg.paths.metrics)
+        payload = {
+            "model_version": service.manifest["model_version"],
+            "requests": REQUESTS,
+            "warmup": WARMUP,
+            "device": "cpu",
+            "target_p50_ms": 15.0,
+            "latency": results,
+            "docker": image,
+            "note": (
+                "Sequential, single process, in-process HTTP client (no network). "
+                "Reason codes dominate: compare with_shap against without_shap."
+            ),
+        }
+        update_section(Path(cfg.paths.metrics), "service", payload, context)
+        log.info("wrote %s -> service", cfg.paths.metrics)
 
 
 if __name__ == "__main__":

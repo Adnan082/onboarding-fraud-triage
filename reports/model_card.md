@@ -107,4 +107,4 @@ refuses to serve on a mismatch.
   claimed.
 - **Age disparity is unresolved.** It is measured, reported, and not fixed.
 
-_Generated 2026-09-19._
+_Generated 2026-09-20._

@@ -19,12 +19,14 @@ from pathlib import Path
 from typing import Any
 
 import joblib
+import numpy as np
 import pandas as pd
+from lightgbm import LGBMClassifier
 from omegaconf import DictConfig, OmegaConf
 
 from triage.config import file_checksum, git_sha, run_context
-from triage.features.encode import feature_columns
-from triage.models.baselines import FittedModel
+from triage.features.encode import feature_columns, lgbm_frame
+from triage.models.baselines import FittedModel, model_params
 from triage.models.baselines import fit as fit_baseline
 from triage.models.calibrate import Calibrator
 
@@ -48,9 +50,100 @@ def fit(train: pd.DataFrame, cfg: DictConfig) -> FittedModel:
     return fit_baseline(train, cfg)
 
 
-def tune(train: pd.DataFrame, valid: pd.DataFrame, cfg: DictConfig) -> dict:
-    """Tune on months 0-3 against month 4, at most 30 trials, then refit on 0-4."""
-    raise NotImplementedError("TODO(week 2): <= 30 trials, month 4 as validation")
+def tune(train: pd.DataFrame, valid: pd.DataFrame, cfg: DictConfig) -> dict[str, Any]:
+    """Tune on months 0-3, score on month 4, at most 30 trials (section 8.1).
+
+    Random search over a small grid, seeded. Random search rather than a smarter
+    optimiser because with 30 trials the search budget is the binding constraint,
+    not the search strategy, and a seeded random search is trivially reproducible.
+
+    Month 4 is the validation month and months 5 to 7 are untouched: the tuning
+    never sees the calibration month, let alone the test months. The caller refits
+    on months 0-4 with whatever this returns.
+
+    Returns the best parameters and every trial, so a reviewer can see the spread
+    rather than take the winner on trust.
+    """
+    from triage.evaluation.metrics import tpr_at_fpr
+
+    tuning = cfg.model.tuning
+    max_trials = int(tuning.max_trials)
+    target_fpr = float(cfg.data.protocol.paper.threshold_fpr)
+    rng = np.random.default_rng(int(cfg.seed))
+
+    base = model_params(cfg)
+    grid: dict[str, list[Any]] = {
+        "n_estimators": [200, 350, 500, 700, 1000],
+        "learning_rate": [0.02, 0.03, 0.05, 0.08, 0.12],
+        "num_leaves": [15, 31, 63, 127],
+        "min_child_samples": [20, 50, 100, 200, 400],
+        "colsample_bytree": [0.6, 0.7, 0.8, 0.9, 1.0],
+        "subsample": [0.7, 0.8, 0.9, 1.0],
+    }
+
+    valid_labels = valid[cfg.data.label].to_numpy()
+    train_features = lgbm_frame(train, cfg, use_age=False)
+    valid_features = lgbm_frame(valid, cfg, use_age=False)
+    train_labels = train[cfg.data.label].to_numpy()
+
+    def score_of(params: dict[str, Any]) -> float:
+        model = LGBMClassifier(**params)
+        model.fit(train_features, train_labels)
+        scores = np.asarray(model.predict_proba(valid_features))[:, 1]
+        return float(tpr_at_fpr(valid_labels, scores, target_fpr))
+
+    seen: set[tuple] = set()
+    trials: list[dict[str, Any]] = []
+
+    # Trial -1 is the configured parameters. Without it "best of 30" says nothing
+    # about whether the search was worth running: a search that loses to the
+    # defaults is a finding, and this is how it becomes visible.
+    incumbent = {key: base[key] for key in grid if key in base}
+    incumbent_score = score_of(base)
+    seen.add(tuple(sorted(incumbent.items())))
+    trials.append({"trial": -1, "params": incumbent, str(tuning.metric): incumbent_score})
+    log.info("  incumbent (configured params): %s = %.4f", tuning.metric, incumbent_score)
+
+    for trial in range(max_trials):
+        candidate = {name: rng.choice(values).item() for name, values in grid.items()}
+        key = tuple(sorted(candidate.items()))
+        if key in seen:
+            continue  # a repeat would spend a trial saying nothing
+        seen.add(key)
+
+        score = score_of({**base, **candidate})
+        trials.append({"trial": trial, "params": candidate, str(tuning.metric): score})
+        log.info("  trial %2d: %s = %.4f", trial, tuning.metric, score)
+
+    if not trials:
+        raise ValueError("no tuning trials completed")
+
+    best = max(trials, key=lambda row: row[str(tuning.metric)])
+    if best["trial"] == -1:
+        log.warning(
+            "%d trials of random search did not beat the configured parameters "
+            "(%s = %.4f): keeping them",
+            len(trials) - 1,
+            tuning.metric,
+            incumbent_score,
+        )
+    log.info(
+        "best of %d trials: %s = %.4f with %s",
+        len(trials),
+        tuning.metric,
+        best[str(tuning.metric)],
+        best["params"],
+    )
+    return {
+        "best_params": {**incumbent, **best["params"]},
+        "best_score": best[str(tuning.metric)],
+        "beat_incumbent": bool(best["trial"] != -1),
+        "incumbent_score": incumbent_score,
+        "metric": str(tuning.metric),
+        "n_trials": len(trials) - 1,
+        "validation_month": int(cfg.data.protocol.champion_tuning.valid_month),
+        "trials": trials,
+    }
 
 
 def model_version() -> str:

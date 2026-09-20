@@ -13,9 +13,9 @@ import pytest
 from hydra import compose, initialize_config_dir
 
 from experiments.stress_variants import (
+    held_out_months,
     population_summary,
     select_test_window,
-    test_months,
     variant_names,
 )
 
@@ -35,7 +35,7 @@ def test_the_configured_variants_are_the_ones_section_7_names(cfg) -> None:
 
 def test_only_the_held_out_months_are_scored(fixture_frame: pd.DataFrame, cfg) -> None:
     """Scoring a variant's training months would confuse population with time."""
-    assert test_months(cfg) == [6, 7]
+    assert held_out_months(cfg) == [6, 7]
 
     selected = select_test_window(fixture_frame, cfg)
     assert set(selected["month"].unique()) == {6, 7}

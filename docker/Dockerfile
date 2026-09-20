@@ -22,6 +22,9 @@ RUN uv sync --frozen --no-dev --no-install-project --extra fairgbm
 
 COPY src ./src
 COPY configs ./configs
+# pyproject declares `readme = "README.md"`, so installing the project itself
+# needs that file present -- without it hatchling fails the build.
+COPY README.md ./
 RUN uv sync --frozen --no-dev --extra fairgbm
 
 # Model artefacts are mounted at run time; they are not baked into the image.

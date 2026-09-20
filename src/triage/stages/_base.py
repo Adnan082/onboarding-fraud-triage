@@ -7,6 +7,6 @@ exactly the same seeding and provenance logging.
 
 from __future__ import annotations
 
-from triage.runtime import CONFIG_PATH, log, start
+from triage.runtime import CONFIG_PATH, log, stage_run, start
 
-__all__ = ["CONFIG_PATH", "log", "start"]
+__all__ = ["CONFIG_PATH", "log", "stage_run", "start"]
