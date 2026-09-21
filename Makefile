@@ -70,8 +70,15 @@ serve:  ## Run the scoring API
 bench:  ## Latency benchmark -> reports/metrics.json:service
 	$(STAGE).bench $(ARGS)
 
-demo:  ## One-screen Streamlit demo (reads precomputed artefacts only)
-	$(RUN) streamlit run app/demo.py
+# The demo's second tab scores a live application, which it does by posting to
+# the API rather than loading the model itself -- so the screen shows what the
+# service really returns, and section 12's "no heavy computation" still holds.
+# Both start here so a demo is one command; the trap stops the API on the way out.
+demo:  ## Streamlit demo (starts the scoring API alongside it)
+	@$(RUN) uvicorn triage.api.app:app --port $(PORT) --log-level warning & \
+	  api=$$!; \
+	  trap 'kill $$api 2>/dev/null || true' EXIT INT TERM; \
+	  $(RUN) streamlit run app/demo.py
 
 test:  ## Fast, data-free tests
 	$(RUN) pytest -m "not data"

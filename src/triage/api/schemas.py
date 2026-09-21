@@ -60,6 +60,31 @@ def build_features_model() -> type[BaseModel]:
 ApplicationFeatures = build_features_model()
 
 
+def request_fields() -> dict[str, ColumnSpec]:
+    """The contract columns a scoring request carries, in contract order."""
+    return {name: spec for name, spec in CONTRACT.items() if name not in EXCLUDED_FROM_REQUEST}
+
+
+def example_application() -> dict[str, Any]:
+    """One legal application, generated from the contract.
+
+    The midpoint of every range and the first level of every category set. It is
+    not a realistic applicant and is not meant to be -- it is a starting point
+    that is guaranteed to pass validation, which is what both the latency
+    benchmark and the demo's form need.
+    """
+    payload: dict[str, Any] = {}
+    for name, spec in request_fields().items():
+        if spec.levels:
+            payload[name] = spec.levels[0]
+        else:
+            low = float(spec.lo if spec.lo is not None else 0.0)
+            high = float(spec.hi if spec.hi is not None else 1.0)
+            middle = low + (high - low) / 2
+            payload[name] = int(middle) if spec.kind == "int" else middle
+    return payload
+
+
 class Reason(BaseModel):
     """One analyst-facing reason code. Never shown to an applicant."""
 

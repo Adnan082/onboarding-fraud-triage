@@ -523,8 +523,16 @@ make all        # data -> contract -> evaluate -> report -> bench -> test
 ```
 
 Useful targets: `make test` (fast, needs no data), `make lint`, `make coverage`,
-`make serve` (API on :8000), `make demo` (Streamlit), `make docker`. Run
-`make help` for the full list.
+`make serve` (API on :8000), `make demo`, `make docker`. Run `make help` for the
+full list.
+
+`make demo` opens two screens and starts the API alongside them. The first is the
+capacity trade-off, read from artefacts. The second scores **one application you
+can edit**, by posting it to the running service — so what you see is what the
+API returns, contract validation and all, rather than a second implementation
+that could drift from it. The form is built from the frozen contract, so a value
+the API would reject cannot be typed in. Three presets are provided; they are
+named for what they contain rather than what they score.
 
 `make coverage` gates the four packages where a silent mistake would be worst —
 the conformal guarantee, the fairness metrics, the detectors and the decision
@@ -626,7 +634,7 @@ in the README, which is why a stale result is visible rather than plausible.
 | `tests/` | The suite. Almost all of it runs with no data at all, against a seeded BAF-shaped fixture |
 | `reports/` | Generated artefacts, the validation report, the model card, figures |
 | `docs/` | Session notes and every design decision, as context → decision → consequences |
-| `app/demo.py` | One-screen Streamlit demo, reading only precomputed artefacts |
+| `app/demo.py` | Streamlit demo: the capacity trade-off from artefacts, and a live application scored by the API |
 | `docker/` | The service image |
 
 ---

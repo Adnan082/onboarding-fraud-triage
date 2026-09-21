@@ -424,3 +424,35 @@ section 8.1 asks for and because both held-out months moved the same way, not
 because one validation month proved anything. A reviewer who reads the spread
 (0.500 to 0.579) and calls it noise is making a defensible reading, which is why
 the spread is published rather than the winner alone.
+
+---
+
+## D23 — 2026-09-21 — The demo scores live applications, but through the API
+
+**Context.** Section 12 specifies a one-screen demo that reads only precomputed
+aggregates and does no heavy computation. That screen answers "what does this
+policy cost the review team", which is the right question for an assessor but
+never shows a single application being decided — the thing the project actually
+does.
+
+**Decision.** A second tab scores one application that the viewer can edit, and
+it does so by **posting to the running service** rather than loading the model
+into Streamlit. Section 12's constraint survives intact: the app still computes
+nothing. Two things follow from that choice that a local implementation would
+not have given. The screen shows what the API really returns, so it cannot drift
+from the service the way a second scoring path would. And the form is built from
+the frozen contract — the same source the request model is generated from — so a
+value the API would reject cannot be entered, and the 422 path is demonstrated
+rather than described.
+
+`make demo` starts both processes and traps on exit, so a demo is still one
+command. The tab says plainly what to run if the service is not answering rather
+than failing obscurely.
+
+**Consequences.** The demo now needs the API up, which is more moving parts than
+section 12 assumed, and the failure mode — service down — is handled explicitly
+because a blank panel in front of an assessor is the worst possible bug. The
+three presets are named for what they contain, not what they score: naming one
+"risky" would claim an outcome before the model has given one. They currently
+land on the three different bands, which is convenient and is deliberately not
+asserted in any test, because a retrain is allowed to move them.

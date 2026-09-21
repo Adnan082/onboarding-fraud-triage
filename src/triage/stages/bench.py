@@ -30,7 +30,6 @@ import numpy as np
 from fastapi.testclient import TestClient
 from omegaconf import DictConfig
 
-from triage.data.contract import CONTRACT
 from triage.evaluation.artefacts import update_section
 from triage.stages._base import CONFIG_PATH, stage_run
 
@@ -42,21 +41,14 @@ DOCKER_IMAGE = "onboarding-fraud-triage:dev"
 
 
 def example_application() -> dict[str, Any]:
-    """One legal application, generated from the contract."""
-    from triage.api.schemas import EXCLUDED_FROM_REQUEST
+    """One legal application, generated from the contract.
 
-    payload: dict[str, Any] = {}
-    for name, spec in CONTRACT.items():
-        if name in EXCLUDED_FROM_REQUEST:
-            continue
-        if spec.levels:
-            payload[name] = spec.levels[0]
-        else:
-            low = float(spec.lo if spec.lo is not None else 0.0)
-            high = float(spec.hi if spec.hi is not None else 1.0)
-            middle = low + (high - low) / 2
-            payload[name] = int(middle) if spec.kind == "int" else middle
-    return payload
+    Re-exported from :mod:`triage.api.schemas` so the benchmark and the demo send
+    the same starting payload.
+    """
+    from triage.api.schemas import example_application as build
+
+    return build()
 
 
 def percentiles(samples_ms: list[float]) -> dict[str, float]:
