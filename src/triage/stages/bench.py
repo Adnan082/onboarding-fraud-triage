@@ -17,6 +17,7 @@ quietly.
 
 from __future__ import annotations
 
+import json
 import logging
 import shutil
 import subprocess
@@ -121,9 +122,31 @@ def docker_image_size() -> dict[str, Any]:
     return {
         "available": True,
         "image": DOCKER_IMAGE,
-        "size_bytes": size_bytes,
-        "size_mb": round(size_bytes / 1e6, 1),
+        # `inspect` reports the compressed content -- what a pull downloads.
+        "compressed_bytes": size_bytes,
+        "compressed_mb": round(size_bytes / 1e6, 1),
+        # What `docker images` prints, and what the image occupies once unpacked.
+        # It is several times the compressed figure, so reporting only one of them
+        # invites a reviewer to check with `docker images` and find a number that
+        # does not match. Docker gives it as a formatted string, not bytes.
+        "on_disk": _docker_images_size(),
     }
+
+
+def _docker_images_size() -> str | None:
+    """The unpacked size as ``docker images`` prints it, e.g. ``"3.35GB"``."""
+    try:
+        result = subprocess.run(
+            ["docker", "image", "ls", "--format", "json", DOCKER_IMAGE],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=30,
+        )
+        line = result.stdout.strip().splitlines()
+        return str(json.loads(line[0])["Size"]) if line else None
+    except (subprocess.SubprocessError, ValueError, KeyError, IndexError):
+        return None
 
 
 @hydra.main(version_base="1.3", config_path=CONFIG_PATH, config_name="config")
@@ -185,7 +208,12 @@ def main(cfg: DictConfig) -> None:
 
         image = docker_image_size()
         if image["available"]:
-            log.info("  docker image %s: %.1f MB", image["image"], image["size_mb"])
+            log.info(
+                "  docker image %s: %.1f MB compressed, %s unpacked",
+                image["image"],
+                image["compressed_mb"],
+                image.get("on_disk") or "unknown",
+            )
         else:
             log.info("  docker image: %s", image["reason"])
 

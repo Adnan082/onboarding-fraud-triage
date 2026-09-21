@@ -51,10 +51,12 @@ artefact, with its path), what didn't work, the next step, and open questions.
   contract at window 0 (never scored); `mirror_income`, `swap_employment` and
   `all_mobile_valid` by the monitor one window after injection. `mirror_income`
   costs 6.76 points of TPR while undetected.
-- **Latency**, 2,000 sequential requests after 100 warm-up: p50 6.53 ms over HTTP
-  without reason codes (target 15 ms), p99 10.13 ms; 152.95 ms with them, p99
-  273.84 ms. Slower with SHAP than before, because the tuned champion has twice
+- **Latency**, 2,000 sequential requests after 100 warm-up: p50 6.42 ms over HTTP
+  without reason codes (target 15 ms), p99 8.90 ms; 148.84 ms with them, p99
+  255.83 ms. Slower with SHAP than before, because the tuned champion has twice
   the trees to walk.
+- **Docker image**: 767 MB compressed, 3.35 GB unpacked
+  (`reports/metrics.json:service.docker`).
 - **Validation report**: 952 words, about 1.98 estimated pages, 5 findings
   (2 High, 2 Medium, 1 Low).
 
@@ -75,10 +77,19 @@ artefact, with its path), what didn't work, the next step, and open questions.
   0.9295, TPR@5%FPR 0.5897 -> 0.6154, fraud coverage 0.7692 -> 0.7179, approve
   share 0.8560 -> 0.8880, all on the fixture. The reason is the parameter change
   and nothing else.
-- **The Docker image size is still not reported.** Docker Desktop's WSL
-  integration is off for this distro, so `docker` on PATH is the stub that says
-  so. `bench` now records what docker actually said instead of guessing "not
-  built".
+- **The Docker image reports two sizes that differ by four times.** `docker image
+  inspect` gives 766,642,640 bytes and `docker images` prints 3.35GB for the same
+  image: the first is the compressed content a pull downloads, the second is what
+  it occupies unpacked. `bench` recorded only the first, which would have left a
+  reviewer checking with `docker images` and finding a number that disagreed. It
+  now records both and the README prints both.
+- **Most of that 3.35 GB is dependencies the service never loads.** Importing
+  `triage.api.app` pulls in lightgbm, pandera and scikit-learn and nothing else
+  heavy: mlflow, streamlit, matplotlib, kaggle, duckdb, mapie and fairlearn are
+  all installed into the image and never used by it (shap loads lazily, only for
+  `?explain=true`). The 2.37 GB `uv sync` layer is where that goes. Not acted on
+  -- splitting the dependency set is section 4's pinned stack and the owner's
+  call -- but it is the obvious way to shrink the image.
 - **No generated table had ever been committed.** The blanket `*.csv` ignore that
   keeps row-level data out of git was also swallowing `reports/tables/`, so
   `policy_grid.csv`, `policy_outcomes.csv`, `fairness_tradeoff.csv` and the new
@@ -94,11 +105,10 @@ artefact, with its path), what didn't work, the next step, and open questions.
   data half still has not been run end to end from nothing.
 
 **Next step**
-- Turn on Docker Desktop -> Settings -> Resources -> WSL Integration for
-  Ubuntu-22.04, then `make bench` to record the image size (it is 3.35 GB as
-  built, measured from Windows).
 - Run `make all` from a clean clone with Kaggle credentials, to close the other
   half of the v1.0 criterion.
+- Decide whether to split the dependency set so the service image stops carrying
+  mlflow, streamlit, matplotlib, kaggle, duckdb, mapie and fairlearn.
 - Consider a matched with-age comparator so M1's claim is an ablation again.
 
 **Open questions for the owner**

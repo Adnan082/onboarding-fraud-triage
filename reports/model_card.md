@@ -88,8 +88,8 @@ event is logged. The fallback is never cleared automatically.
 
 ## Serving
 
-p50 **6.53 ms** without reason codes,
-**149 ms** with them, on CPU. Reason
+p50 **6.42 ms** without reason codes,
+**148.8 ms** with them, on CPU. Reason
 codes cost roughly twenty times the latency budget, so a caller that does not
 need them should ask for `?explain=false`.
 

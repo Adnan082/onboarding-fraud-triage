@@ -399,16 +399,16 @@ Delays are measured on a stream drawn from the calibration month, which is quiet
 <!-- metrics:service -->
 | Path | p50 (ms) | p95 (ms) | p99 (ms) | Under 15 ms? |
 | --- | --- | --- | --- | --- |
-| Scoring only, no reason codes | 5.41 | 7.64 | 8.76 | yes |
-| Scoring only, with reason codes | 151.88 | 244.02 | 255.73 | **no** |
-| Full HTTP request, no reason codes | 6.53 | 8.09 | 9.04 | yes |
-| Full HTTP request, with reason codes | 149.04 | 241.85 | 255.83 | **no** |
+| Scoring only, no reason codes | 5.42 | 7.78 | 9.66 | yes |
+| Scoring only, with reason codes | 152.29 | 242.24 | 260.78 | **no** |
+| Full HTTP request, no reason codes | 6.42 | 7.99 | 8.90 | yes |
+| Full HTTP request, with reason codes | 148.84 | 240.22 | 255.83 | **no** |
 
 2,000 sequential requests after 100 warm-up, on CPU, single process, no network.
 
 Reason codes dominate: they cost roughly twenty times the entire latency budget, because a SHAP explanation walks every tree for every request. Scoring itself is comfortably inside target, and the HTTP layer — validating the request against the frozen contract, then serialising — adds under two milliseconds. A caller that does not need an explanation should pass `?explain=false`; a queue that does should compute them out of band.
 
-Docker image: not measured — could not inspect onboarding-fraud-triage:dev: The command 'docker' could not be found in this WSL 2 distro..
+Docker image: 767 MB compressed, 3.35GB unpacked.
 <!-- /metrics:service -->
 
 ---

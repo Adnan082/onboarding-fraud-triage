@@ -454,11 +454,15 @@ def service_table(metrics: dict[str, Any]) -> str:
         )
 
     docker = section.get("docker", {})
-    image = (
-        f"{docker['size_mb']:.0f} MB"
-        if docker.get("available")
-        else f"not measured — {docker.get('reason', 'unknown')}"
-    )
+    if docker.get("available"):
+        # Both figures, because they differ by several times and a reader who
+        # checks with `docker images` should not find a number that disagrees.
+        unpacked = docker.get("on_disk")
+        image = f"{docker['compressed_mb']:.0f} MB compressed" + (
+            f", {unpacked} unpacked" if unpacked else ""
+        )
+    else:
+        image = f"not measured — {docker.get('reason', 'unknown')}"
 
     header = ["Path", "p50 (ms)", "p95 (ms)", "p99 (ms)", f"Under {target:g} ms?"]
     note = (
