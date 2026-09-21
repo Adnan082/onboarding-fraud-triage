@@ -31,16 +31,22 @@ from triage.models.baselines import fit
 from triage.models.calibrate import fit_calibrator
 from triage.uncertainty.conformal import coverage_report, fit_thresholds
 
-# Recorded 2026-09-19, champion on a 20,000-row fixture (seed 20260917):
-# trained on 12,500 rows with 121 frauds, evaluated on month 6 (2,500 rows, 39 frauds).
+# Re-pinned 2026-09-20, after the tuning search replaced the champion's parameters
+# (DECISIONS D22): 1,000 trees at a 0.02 learning rate, against 500 at 0.05. Three
+# of the seven moved outside tolerance, all in the direction the search intended --
+# better ranking, a wider approve band, and less fraud coverage at a fixed alpha
+# because the calibrated scores are spread differently.
+#
+# Champion on a 20,000-row fixture (seed 20260917): trained on 12,500 rows with 121
+# frauds, evaluated on month 6 (2,500 rows, 39 frauds).
 PINNED = {
-    "roc_auc": 0.917451,
-    "pr_auc": 0.225396,
-    "tpr_at_5pct_fpr": 0.589744,
-    "brier": 0.013823,
-    "ece": 0.008401,
-    "fraud_coverage": 0.769231,
-    "approve_share": 0.856000,
+    "roc_auc": 0.929453,
+    "pr_auc": 0.212793,
+    "tpr_at_5pct_fpr": 0.615385,
+    "brier": 0.013818,
+    "ece": 0.008055,
+    "fraud_coverage": 0.717949,
+    "approve_share": 0.888000,
 }
 
 # Tight enough to catch a real change, loose enough to survive a patch release of

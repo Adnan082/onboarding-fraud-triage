@@ -6,9 +6,15 @@ data/*
 *.parquet
 !tests/fixtures/*.csv
 !tests/fixtures/*.parquet
+# reports/tables/ holds aggregates, not rows: the alpha sweep, its outcomes, the
+# fairness trade-off and the tuning trials. Rule 3 says those are committed, and
+# the README links to them -- the blanket *.csv above was swallowing them.
+!reports/tables/*.csv
 
 # Artefacts and secrets
 mlruns/
+mlflow.db
+mlartifacts/
 models/*
 !models/.gitkeep
 kaggle.json

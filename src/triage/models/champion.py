@@ -12,6 +12,7 @@ those hashes at startup and refuses to serve on a mismatch.
 
 from __future__ import annotations
 
+import csv
 import json
 import logging
 from datetime import UTC, datetime
@@ -128,8 +129,8 @@ def tune(train: pd.DataFrame, valid: pd.DataFrame, cfg: DictConfig) -> dict[str,
             incumbent_score,
         )
     log.info(
-        "best of %d trials: %s = %.4f with %s",
-        len(trials),
+        "best of %d trials (and the incumbent): %s = %.4f with %s",
+        len(trials) - 1,
         tuning.metric,
         best[str(tuning.metric)],
         best["params"],
@@ -144,6 +145,34 @@ def tune(train: pd.DataFrame, valid: pd.DataFrame, cfg: DictConfig) -> dict[str,
         "validation_month": int(cfg.data.protocol.champion_tuning.valid_month),
         "trials": trials,
     }
+
+
+def write_tuning_trials(path: Path, tuning: dict[str, Any]) -> None:
+    """Write every trial to CSV, one row each, the incumbent as trial -1.
+
+    Separate from ``reports/metrics.json`` on purpose. That file is the current
+    state of the project, and the current state of an ordinary run is "not
+    tuned", so a search recorded only there disappears the next time anyone
+    trains. This is the durable record of what the configured parameters beat.
+    """
+    metric = str(tuning["metric"])
+    trials = sorted(tuning["trials"], key=lambda row: int(row["trial"]))
+    names = sorted({name for row in trials for name in row["params"]})
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["trial", "validation_month", metric, *names])
+        for row in trials:
+            writer.writerow(
+                [
+                    row["trial"],
+                    tuning["validation_month"],
+                    row[metric],
+                    *(row["params"].get(name) for name in names),
+                ]
+            )
+    log.info("wrote %s (%d trials, incumbent as trial -1)", path.name, len(trials) - 1)
 
 
 def model_version() -> str:

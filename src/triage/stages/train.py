@@ -31,7 +31,7 @@ from triage.evaluation.protocols import evaluate_slice
 from triage.explain.reasons import training_medians
 from triage.features.encode import lgbm_frame
 from triage.models.calibrate import fit_all, reliability_curve, select
-from triage.models.champion import fit, save, tune
+from triage.models.champion import fit, save, tune, write_tuning_trials
 from triage.stages._base import CONFIG_PATH, stage_run
 
 log = logging.getLogger("triage")
@@ -67,6 +67,14 @@ def main(cfg: DictConfig) -> None:
                 int(cfg.model.tuning.max_trials),
             )
             tuning = tune(tune_train, tune_valid, cfg)
+            # The trials get an artefact of their own. metrics.json holds the
+            # *current* state of the project, and the current state of an
+            # ordinary run is "not tuned" -- so the search would vanish from it
+            # the next time anyone ran `make train`. The winner is pasted into
+            # the config; this file is what says where it came from and what it
+            # beat.
+            write_tuning_trials(Path(cfg.paths.tables) / "tuning_trials.csv", tuning)
+
             tuned = OmegaConf.merge(cfg, {"model": {"params": tuning["best_params"]}})
             cfg = cast(DictConfig, tuned)
             log.info("refitting on months 0-4 with the tuned parameters")

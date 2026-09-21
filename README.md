@@ -4,11 +4,11 @@ Scores an online bank-account application for fraud and routes it to one of thre
 outcomes: **approve**, **human review**, or **extra verification** — with a stated,
 tested guarantee on how much fraud can slip through.
 
-> **Status: in progress.** The baselines, the champion, its probability calibration
-> and the conformal decision policy all run on the full million applications, so
-> those tables are real. The drift monitor, the service and the validation report
-> are still to come, and their tables say so. Nothing here is typed by hand: every
-> table is generated from `reports/metrics.json` by `make report`.
+> **Status: complete and running.** Baselines, champion, calibration, conformal
+> policy, fairness mitigations, drift monitor, scoring service and validation
+> report all run end to end on the full million applications. Nothing below is
+> typed by hand: every table is generated from `reports/metrics.json` by
+> `make report`, and a run on sampled data refuses to write one.
 
 ---
 
@@ -102,10 +102,12 @@ The champion is a LightGBM model trained on months 0 to 4. It never sees
 `customer_age`. The API accepts age and logs it so fairness can be measured, then
 drops it before the model sees anything.
 
-That choice costs almost nothing in detection — the detection table below shows
-the champion within a thousandth of AUC of the otherwise identical model that
-*does* see age — which tells you the information was never uniquely in that
-column. Other fields carry it, which is exactly why "just drop the protected
+That choice costs nothing detectable — the detection table below has the champion,
+which never sees age, slightly *ahead* of B1, which does — so the information was
+never uniquely in that column. Read it as "dropping age did not cost detection"
+rather than as a controlled experiment: since the tuning pass the two models no
+longer share hyper-parameters, because B1 keeps the published baseline's. Other
+fields carry the same signal, which is exactly why "just drop the protected
 attribute" is measured here rather than assumed to work.
 
 The raw score is then **calibrated**, because the decision policy reads
@@ -252,9 +254,9 @@ Training data: 1,000,000 applications, 1.1% fraud. Confidence intervals: 1,000 s
 <!-- metrics:calibration -->
 | Method | Brier | ECE (15 equal-mass bins) | Mean predicted rate | Observed rate |
 | --- | --- | --- | --- | --- |
-| `isotonic` | 0.01057 | 0.00259 | 1.21% | 1.18% |
-| `none` | 0.01054 | 0.00353 | 0.865% | 1.18% |
-| `platt` **chosen** | 0.01051 | 0.0012 | 1.22% | 1.18% |
+| `isotonic` | 0.01046 | 0.00122 | 1.22% | 1.18% |
+| `none` | 0.01048 | 0.0034 | 0.883% | 1.18% |
+| `platt` **chosen** | 0.01044 | 0.00134 | 1.23% | 1.18% |
 
 Fitted on `cal_prob` and chosen on `cal_tune`, two disjoint thirds of month 5, by brier score. The last two columns are calibration-in-the-large: an uncalibrated model can rank well and still be badly wrong about *how likely* fraud is, which matters here because the decision policy reads probabilities, not ranks.
 <!-- /metrics:calibration -->
@@ -266,8 +268,8 @@ Fitted on `cal_prob` and chosen on `cal_tune`, two disjoint thirds of month 5, b
 <!-- metrics:policy -->
 | Month | Fraud caught | Genuine sent to verify | Approve | Review | Verify |
 | --- | --- | --- | --- | --- | --- |
-| 6 | 0.59 | 0.0158 | 0.922 | 0.0589 | 0.0195 |
-| 7 | 0.583 | 0.0115 | 0.936 | 0.0479 | 0.0156 |
+| 6 | 0.581 | 0.016 | 0.925 | 0.055 | 0.0198 |
+| 7 | 0.591 | 0.013 | 0.935 | 0.0478 | 0.0175 |
 
 Policy: `alpha_fraud = 0.45`, `alpha_legit = 0.01`, chosen on `cal_tune` as the best fraud coverage the review team could absorb, then turned into thresholds on `cal_conf` — a third of month 5 that nothing else touches.
 
@@ -279,18 +281,18 @@ The promise is: catch at least **55%** of fraud, and send at most **1%** of genu
 <!-- metrics:tradeoff -->
 | Fraud caught | Review share | Verify share | Reviews per 100,000 applications |
 | --- | --- | --- | --- |
-| 40% | 0.0163 | 0.0132 | 1,629 |
-| 45% | 0.0247 | 0.0132 | 2,469 |
-| 50% | 0.0334 | 0.0132 | 3,339 |
-| 55% **chosen** | 0.0456 | 0.0132 | 4,564 |
-| 60% | 0.0601 | 0.0132 | 6,007 |
-| 65% | 0.077 | 0.0132 | 7,697 |
-| 70% | 0.106 | 0.0132 | 10,613 |
-| 75% | 0.13 | 0.0132 | 12,969 |
-| 80% | 0.169 | 0.0132 | 16,919 |
-| 85% | 0.229 | 0.0132 | 22,851 |
-| 90% | 0.307 | 0.0132 | 30,703 |
-| 95% | 0.445 | 0.0132 | 44,472 |
+| 40% | 0.0124 | 0.0132 | 1,242 |
+| 45% | 0.019 | 0.0132 | 1,896 |
+| 50% | 0.0296 | 0.0132 | 2,964 |
+| 55% **chosen** | 0.0419 | 0.0132 | 4,189 |
+| 60% | 0.059 | 0.0132 | 5,899 |
+| 65% | 0.0818 | 0.0132 | 8,182 |
+| 70% | 0.0994 | 0.0132 | 9,944 |
+| 75% | 0.117 | 0.0132 | 11,735 |
+| 80% | 0.156 | 0.0132 | 15,587 |
+| 85% | 0.215 | 0.0132 | 21,543 |
+| 90% | 0.298 | 0.0132 | 29,811 |
+| 95% | 0.432 | 0.0132 | 43,182 |
 
 Measured on `cal_tune`, at `alpha_legit = 0.01`. This is the whole curve, not just the point that was chosen, because the shape is the argument: the last few points of fraud coverage cost far more review capacity than the first. A 90% catch rate is not a modelling problem, it is a staffing one.
 <!-- /metrics:tradeoff -->
@@ -302,14 +304,14 @@ Measured on `cal_tune`, at `alpha_legit = 0.01`. This is the whole curve, not ju
 <!-- metrics:coverage_by_age -->
 | Age band | Applications | Frauds | Fraud caught | Sent to review | Sent to verify |
 | --- | --- | --- | --- | --- | --- |
-| 10-19 | 2,166 | 9 | (0.333) | 0.0272 | 0.00277 |
-| 20-29 | 25,318 | 153 | 0.458 | 0.0291 | 0.00668 |
-| 30-39 | 30,959 | 309 | 0.489 | 0.0448 | 0.0128 |
-| 40-49 | 28,613 | 408 | 0.578 | 0.0714 | 0.0225 |
-| 50-59 | 15,951 | 374 | 0.668 | 0.0984 | 0.0398 |
-| 60-69 | 3,963 | 146 | 0.712 | 0.109 | 0.0505 |
-| 70-79 | 975 | 43 | 0.791 | 0.106 | 0.0513 |
-| 80-89 | 210 | 8 | (0.875) | 0.148 | 0.0524 |
+| 10-19 | 2,166 | 9 | (0.333) | 0.0231 | 0.00369 |
+| 20-29 | 25,318 | 153 | 0.458 | 0.0253 | 0.00656 |
+| 30-39 | 30,959 | 309 | 0.463 | 0.0414 | 0.0127 |
+| 40-49 | 28,613 | 408 | 0.581 | 0.0676 | 0.0232 |
+| 50-59 | 15,951 | 374 | 0.66 | 0.0939 | 0.041 |
+| 60-69 | 3,963 | 146 | 0.705 | 0.106 | 0.0487 |
+| 70-79 | 975 | 43 | 0.767 | 0.0923 | 0.0564 |
+| 80-89 | 210 | 8 | (0.875) | 0.138 | 0.0476 |
 | 90-99 | 13 | 0 | (n/a) | 0.154 | 0.0769 |
 
 Month 6, under one age-blind pair of thresholds: the policy does not know anyone's age. A bracketed figure rests on fewer than 20 frauds and is noise.
@@ -357,14 +359,14 @@ This is the gap the mitigation experiments (M1-M4) have to close, and the reason
 <!-- metrics:mitigations -->
 | Mitigation | Month | Fraud caught | Genuine stopped | FPR ratio (95% CI) |
 | --- | --- | --- | --- | --- |
-| M1 — drop age | 6 | 0.569 | 0.0651 | 0.439 (0.418-0.46) |
-| M1 — drop age | 7 | 0.561 | 0.0509 | 0.444 (0.419-0.472) |
+| M1 — drop age | 6 | 0.572 | 0.065 | 0.433 (0.415-0.455) |
+| M1 — drop age | 7 | 0.584 | 0.055 | 0.443 (0.418-0.47) |
 | M2 — FairGBM, FPR constraint | 6 | 0.541 | 0.0616 | 0.445 (0.426-0.469) |
 | M2 — FairGBM, FPR constraint | 7 | 0.563 | 0.0568 | 0.473 (0.446-0.503) |
 | M3 — fairlearn, FPR parity | 6 | 0.0379 | 0.000525 | 0.192 (0.113-0.334) |
 | M3 — fairlearn, FPR parity | 7 | 0.042 | 0.000597 | 0.252 (0.147-0.463) |
-| M4 — policy only, no model change | 6 | 0.59 | 0.0714 | 0.45 (0.43-0.47) |
-| M4 — policy only, no model change | 7 | 0.583 | 0.0558 | 0.45 (0.426-0.478) |
+| M4 — policy only, no model change | 6 | 0.581 | 0.0679 | 0.436 (0.418-0.457) |
+| M4 — policy only, no model change | 7 | 0.591 | 0.0573 | 0.444 (0.419-0.47) |
 
 All four use age at training or measurement time only; none uses it to decide anything about an application. M1 and M2 are thresholded at 5% FPR on `cal_tune`. M3 is a randomised classifier with a single operating point, so it is measured where it sits rather than swept. M4 changes no model at all: an application counts as stopped if the conformal policy sends it to review or verify.
 
@@ -378,12 +380,12 @@ The two model-level mitigations did not earn their place. Read the M3 row carefu
 <!-- metrics:monitoring -->
 | Injected fault | Legal under the contract? | Caught by | How long it ran | Detection cost |
 | --- | --- | --- | --- | --- |
-| Mobile check always passes | yes | monitor | 1 window (4,000 applications) | -0.4 pts |
+| Mobile check always passes | yes | monitor | 1 window (4,000 applications) | -0.6 pts |
 | Income multiplied by ten | **no** | contract | before scoring | never scored |
-| Income scale reversed | yes | monitor | 1 window (4,000 applications) | -8.3 pts |
-| Two employment codes swapped | yes | monitor | 1 window (4,000 applications) | -12.6 pts |
+| Income scale reversed | yes | monitor | 1 window (4,000 applications) | -6.8 pts |
+| Two employment codes swapped | yes | monitor | 1 window (4,000 applications) | -9.8 pts |
 
-**False alarms.** Across 200 windows drawn from the calibration month — clean by construction — 8 raised a watch (4.0%) and 0 an alert. For four detectors at a 99th-percentile threshold the expected watch rate is 3.9%, so the false-alarm rate is a measured property rather than a hope.
+**False alarms.** Across 200 windows drawn from the calibration month — clean by construction — 6 raised a watch (3.0%) and 0 an alert. For four detectors at a 99th-percentile threshold the expected watch rate is 3.9%, so the false-alarm rate is a measured property rather than a hope.
 
 **Detection.** The three faults that are *legal* under the contract are the ones worth catching, because no schema check can see them: the values stay in range and only their meaning changes. Each reached an alert one window after injection, which is the floor the two-consecutive-windows rule allows. The fourth is the control — the contract rejects it before anything is scored.
 
@@ -397,16 +399,16 @@ Delays are measured on a stream drawn from the calibration month, which is quiet
 <!-- metrics:service -->
 | Path | p50 (ms) | p95 (ms) | p99 (ms) | Under 15 ms? |
 | --- | --- | --- | --- | --- |
-| Scoring only, no reason codes | 5.42 | 7.82 | 9.15 | yes |
-| Scoring only, with reason codes | 154.86 | 216.32 | 255.70 | **no** |
-| Full HTTP request, no reason codes | 7.25 | 11.98 | 16.33 | yes |
-| Full HTTP request, with reason codes | 151.37 | 212.50 | 254.08 | **no** |
+| Scoring only, no reason codes | 5.41 | 7.64 | 8.76 | yes |
+| Scoring only, with reason codes | 151.88 | 244.02 | 255.73 | **no** |
+| Full HTTP request, no reason codes | 6.53 | 8.09 | 9.04 | yes |
+| Full HTTP request, with reason codes | 149.04 | 241.85 | 255.83 | **no** |
 
 2,000 sequential requests after 100 warm-up, on CPU, single process, no network.
 
 Reason codes dominate: they cost roughly twenty times the entire latency budget, because a SHAP explanation walks every tree for every request. Scoring itself is comfortably inside target, and the HTTP layer — validating the request against the frozen contract, then serialising — adds under two milliseconds. A caller that does not need an explanation should pass `?explain=false`; a queue that does should compute them out of band.
 
-Docker image: not measured — onboarding-fraud-triage:dev is not built: run `make docker`.
+Docker image: not measured — could not inspect onboarding-fraud-triage:dev: The command 'docker' could not be found in this WSL 2 distro..
 <!-- /metrics:service -->
 
 ---
@@ -434,10 +436,11 @@ trusting one number to travel.
 is tried, the false-alarm rate rises steadily across every age band. Other fields
 carry the same information, which is exactly why M1 ("just drop age") is measured
 rather than assumed, and why the fairness experiments exist at all. Removing the
-column does move the FPR ratio in the right direction — the champion, which never
-sees age, is measurably fairer than the otherwise identical B1, which does — but
-it lands nowhere near parity, and it does so at almost no cost in detection. The
-information was never really in that column.
+column does move the FPR ratio in the right direction — 0.433 for the champion,
+which never sees age, against 0.331 for B1, which does — but it lands nowhere near
+parity, and it does so at almost no cost in detection. The information was never
+really in that column. (The two models no longer share hyper-parameters, so that
+gap is a comparison of two fitted models, not a controlled ablation.)
 
 **4. Half of the conformal guarantee did not survive contact with months 6 and 7.**
 The fraud side held: more fraud was caught than promised, on both test months. The
@@ -455,6 +458,16 @@ looser than intended, and the reason is visible in the data: `cal_conf` contains
 only a few hundred frauds, so the threshold is an order statistic drawn from a
 small sample. A bigger calibration month, or a different split of month 5, would
 tighten it — at the cost of whatever that month is taken from.
+
+**6. Tuning bought about a point, and 29 of 30 trials bought nothing.** The
+hyper-parameter search ran with the hand-set parameters scored alongside it, so
+it could be seen to win or lose. It won — 0.5785 against 0.5661 on the
+validation month — but only one trial in thirty beat the starting point, and the
+gap is inside the standard error of a single month's 1,452 frauds. The winner
+was taken because both held-out months moved the same way, not because one
+validation month settled it. Every trial is in
+[`reports/tables/tuning_trials.csv`](reports/tables/tuning_trials.csv) so the
+spread can be judged rather than taken on trust.
 
 ---
 
@@ -493,7 +506,17 @@ Useful targets: `make test` (fast, needs no data), `make lint`, `make serve`
 full list.
 
 While developing, pass `ARGS="data.sample_frac=0.1"`. Never report a number from a
-sampled run.
+sampled run — and you cannot: writing a reported section from a sampled run raises.
+
+Every stage also logs to MLflow, in a local file store under `mlruns/` (`mlflow
+ui` to browse). That is the *history* — every run, including the ones that were
+wrong — and it is git-ignored. `reports/metrics.json` is the *current* state, it
+is committed, and it is the only thing any document reads.
+
+Hyper-parameter search is off by default, because an ordinary `make train` should
+be one fit. `make train ARGS="model.tuning.enabled=true"` runs 30 seeded random
+trials on months 0–3, scored on month 4, with the configured parameters included
+as a baseline so the search can be seen to win or lose.
 
 ---
 
@@ -536,6 +559,7 @@ src/triage/
 ├── api/           app.py         FastAPI: /score, /health, /version, /monitor
 │                  schemas.py     request model GENERATED from the contract
 │                  service.py     artefact loading with hash verification
+├── tracking.py    MLflow: the run history, alongside reports/metrics.json
 └── stages/        one per make target
 ```
 
@@ -573,7 +597,7 @@ in the README, which is why a stale result is visible rather than plausible.
 | `configs/` | Hydra config: data, features, models, calibration, policy, monitor |
 | `src/triage/` | The library, laid out above |
 | `experiments/` | Variant stress tests, injected data bugs |
-| `tests/` | 294 tests, including a seeded BAF-shaped fixture so they need no data |
+| `tests/` | 308 tests; 299 of them need no data, thanks to a seeded BAF-shaped fixture |
 | `reports/` | Generated artefacts, the validation report, the model card, figures |
 | `docs/` | Session notes and every design decision, as context → decision → consequences |
 | `app/demo.py` | One-screen Streamlit demo, reading only precomputed artefacts |

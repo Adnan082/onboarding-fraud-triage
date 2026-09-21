@@ -325,9 +325,12 @@ reference.
 
 ## D19 — 2026-09-19 — Reason codes are optional per request
 
-**Context.** The latency benchmark puts a scored request at p50 7.25 ms without
-reason codes and 151 ms with them. SHAP walks every tree for every request, so
-explanations cost roughly twenty times the entire latency budget in section 10.
+**Context.** The latency benchmark puts a scored request at p50 6.53 ms without
+reason codes and 153 ms with them (re-measured 2026-09-21 against the tuned
+champion; it read 7.25 ms and 151 ms when this was written, and the tuned model's
+thousand trees cost SHAP more than the five hundred they replaced). SHAP walks
+every tree for every request, so explanations cost roughly twenty times the
+entire latency budget in section 10.
 
 **Decision.** `?explain=false` skips them, and the benchmark reports both paths
 rather than a single headline number.
@@ -336,3 +339,88 @@ rather than a single headline number.
 of magnitude for explanation. A real deployment would compute reason codes out of
 band, for the applications a human is going to look at anyway, rather than on
 every request.
+
+---
+
+## D20 — 2026-09-20 — MLflow keeps the history; `metrics.json` keeps the claim
+
+**Context.** Section 4 asks for MLflow, and section 15 asks that every experiment
+run be logged to it. The project already had `reports/metrics.json`, which is
+committed and is what the README, the model card and the validation report read.
+Two stores of the same numbers can disagree, and the one a reader trusts should
+be obvious.
+
+**Decision.** They answer different questions and both stay. `metrics.json` is
+the current state of the project: one file, committed, the only thing any
+document reads. The tracking store is the history: every run ever made,
+including the sampled development runs and the experiments that lost,
+git-ignored because a local record of attempts is working state rather than a
+claim. Stages log through `triage.tracking.track`, which tags sampled runs
+`sampled=True` and swallows every tracking error.
+
+The store is a local SQLite file (`mlflow.db`), not the `mlruns/` directory the
+section names. MLflow 3 puts the filesystem backend in maintenance mode and
+raises rather than starting a run against it, so the first tuning run logged
+nothing and said so in its warning. SQLite is what MLflow now points at, and it
+is still entirely local.
+
+**Consequences.** A reviewer cloning the repo sees the results without needing
+MLflow at all. Someone at the machine can also see how many attempts it took,
+which is a fairer picture than the finished artefacts alone. The cost is that
+"log every experiment" is only true on this machine: the history does not travel
+with the repository, and a fresh clone starts with none of it.
+
+---
+
+## D21 — 2026-09-20 — The validation report's page budget is a test, not an intention
+
+**Context.** Section 14 caps `reports/validation_report.md` at two pages. It had
+grown to about 1,310 words -- roughly two and a half pages once its four tables
+are counted -- because every run adds something worth saying and nothing forces
+anything out.
+
+**Decision.** The prose was compressed (bullet lists folded into running text,
+which costs fewer lines than words) and a test now asserts the generated file
+stays at or under 1,000 words. The failure message points at the prose in
+`triage.evaluation.validation.render` and explicitly not at the findings.
+
+**Consequences.** The cap is now enforced rather than remembered, and the next
+person to add a finding has to take something out of the narrative to make room
+-- which is the right trade, because the findings are what a model-risk reviewer
+reads. A word count is a proxy for a page count: it will be wrong for an export
+at an unusual font size, and it is the only part of the budget that a test can
+check without rendering a PDF.
+
+---
+
+## D22 — 2026-09-20 — The champion's parameters are a search result, and the search is shown losing 29 times
+
+**Context.** Section 8.1 asks for a light tuning pass: at most 30 trials on
+months 0-3, scored on month 4. The champion had been running on hand-set
+starting parameters, so "lightly tuned" was not yet true of it.
+
+**Decision.** `champion.tune()` runs a seeded random search over six LightGBM
+parameters, and the configured parameters run alongside it as trial -1. Without
+that baseline "best of 30" is unfalsifiable: a search cannot be seen to have
+been worth running unless the thing it replaced is scored the same way, on the
+same month, by the same metric. Every trial is written to
+`reports/tables/tuning_trials.csv`, not only the winner — and to a file of its
+own rather than to `reports/metrics.json`, which records the current state of
+the project, where the current state of an ordinary run is "not tuned".
+
+The search won, 0.5785 against the incumbent's 0.5661 TPR at 5% FPR on month 4,
+and 29 of its 30 trials lost. Trial 21's parameters are now pasted into
+`configs/model/champion.yaml` and tuning is off again, so an ordinary
+`make train` is a single fit and a clean clone reproduces the champion without
+re-running the search.
+
+**Consequences.** The champion is slower to fit — a thousand trees at a fifth of
+the learning rate, against five hundred — for about a point of detection. The
+parameters are a result rather than a guess, and the trials are published for
+anyone who wants to judge how solid that point is. It is not very solid: month 4
+holds 1,452 frauds, so the standard error on a TPR near 0.57 is about 1.3 points
+and the 1.2-point gap sits inside it. The change was taken because it is what
+section 8.1 asks for and because both held-out months moved the same way, not
+because one validation month proved anything. A reviewer who reads the spread
+(0.500 to 0.579) and calls it noise is making a defensible reading, which is why
+the spread is published rather than the winner alone.

@@ -29,7 +29,10 @@ paths:
   metrics: ${paths.root}/reports/metrics.json
 
 mlflow:
-  tracking_uri: file:${paths.root}/mlruns
+  # SQLite, not a file store: MLflow 3 puts the filesystem backend in maintenance
+  # mode and refuses to start a run against it. Still entirely local, still
+  # git-ignored -- the run history is working state, not a claim.
+  tracking_uri: sqlite:///${paths.root}/mlflow.db
   experiment: onboarding-fraud-triage
 
 hydra:

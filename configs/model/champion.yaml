@@ -1,4 +1,11 @@
 # Champion: LightGBM without customer_age, lightly tuned.
+#
+# These parameters are trial 21 of the search recorded in
+# reports/metrics.json:champion.tuning -- 30 seeded random trials on months 0-3,
+# scored by TPR at 5% FPR on month 4. It beat the hand-set starting point,
+# 0.5785 against 0.5661. Slower and more conservative than what it replaced:
+# twice the trees at less than half the learning rate, half the leaves, and
+# twice the minimum leaf size.
 name: champion
 kind: lightgbm.LGBMClassifier
 use_age: false
@@ -8,13 +15,13 @@ params:
   force_row_wise: true
   n_jobs: 4
   verbosity: -1
-  n_estimators: 500
-  learning_rate: 0.05
-  num_leaves: 31
-  min_child_samples: 100
-  subsample: 0.9
+  n_estimators: 1000
+  learning_rate: 0.02
+  num_leaves: 15
+  min_child_samples: 200
+  subsample: 0.8
   subsample_freq: 1
-  colsample_bytree: 0.8
+  colsample_bytree: 0.9
 # Tuning: months 0-3 train, month 4 validate, <= 30 trials, then refit on 0-4.
 tuning:
   enabled: false        # flip on for the tuning run; the result is pasted above

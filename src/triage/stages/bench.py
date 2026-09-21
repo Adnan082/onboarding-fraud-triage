@@ -86,7 +86,13 @@ def time_calls(call, n: int, warmup: int) -> list[float]:
 
 
 def docker_image_size() -> dict[str, Any]:
-    """The built image's size, if it has been built. Never builds it here."""
+    """The built image's size, if it has been built. Never builds it here.
+
+    A failure here is reported with whatever docker said, not with a guess. On
+    WSL2 without Docker Desktop's integration enabled there *is* a `docker` on
+    PATH -- a stub that explains the integration is off -- so "not built" would
+    be the wrong answer, and a wrong reason is worse than no number.
+    """
     if shutil.which("docker") is None:
         return {"available": False, "reason": "docker is not on PATH"}
 
@@ -98,8 +104,18 @@ def docker_image_size() -> dict[str, Any]:
             check=True,
             timeout=30,
         )
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-        return {"available": False, "reason": f"{DOCKER_IMAGE} is not built: run `make docker`"}
+    except subprocess.TimeoutExpired:
+        return {"available": False, "reason": "docker did not respond within 30s"}
+    except subprocess.CalledProcessError as error:
+        # The first line only. Docker's longer messages carry setup links that
+        # would land in a README table and read as noise.
+        first = (error.stderr or error.stdout or "").strip().splitlines()
+        said = " ".join(first[0].split())[:160] if first else ""
+        return {
+            "available": False,
+            "reason": f"could not inspect {DOCKER_IMAGE}"
+            + (f": {said}" if said else ": run `make docker`"),
+        }
 
     size_bytes = int(result.stdout.strip())
     return {

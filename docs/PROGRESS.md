@@ -5,6 +5,99 @@ artefact, with its path), what didn't work, the next step, and open questions.
 
 ---
 
+## 2026-09-20/21 — MLflow, champion tuning, Docker, and the report inside two pages
+
+**What changed**
+- `src/triage/tracking.py`: MLflow logging for every stage, wired through
+  `runtime.stage_run`. Params, scalar metrics, config hash, git SHA and the raw
+  data checksums. Sampled runs are tagged `sampled=True`.
+- `champion.tune()` and `write_tuning_trials()`: a seeded 30-trial random search
+  on months 0-3 scored on month 4, with the configured parameters run alongside
+  as trial -1. The winner is pasted into `configs/model/champion.yaml`; tuning is
+  off by default (DECISIONS D22).
+- The whole chain re-run on the tuned champion: `baseline train conformal
+  fairness monitor bench report`.
+- `docker/Dockerfile` copies `README.md` before the second `uv sync`. The image
+  builds and serves.
+- `evaluation/validation.py`: prose compressed and `estimated_pages()` added, so
+  the two-page cap in section 14 is now a test rather than an intention (D21).
+- `tests/test_tuning.py` (5 tests) and a page-budget test. 308 tests, 299 of them
+  data-free.
+
+**Results** (from `reports/metrics.json` unless noted)
+- **Tuning** (`reports/tables/tuning_trials.csv`): best trial 0.5785 TPR@5%FPR on
+  month 4 against the incumbent's 0.5661. 29 of 30 trials lost. Spread 0.500 to
+  0.579. Winner: 1,000 trees, lr 0.02, 15 leaves, min_child 200, colsample 0.9,
+  subsample 0.8.
+- **Champion, month 6 / month 7**: ROC-AUC 0.8906 / 0.8951, TPR 0.5724 / 0.5840
+  at FPR 0.0650 / 0.0550, Brier 0.01211 / 0.01292. Calibration: platt.
+- **Baselines, deployment protocol**: B0 ROC-AUC 0.8812 / 0.8862, B1 0.8871 /
+  0.8901. B1 pooled under the paper protocol: ROC-AUC 0.8873, TPR@5%FPR 0.5202
+  (95% CI 0.5010-0.5389), against the public reference's 0.89 and 0.535.
+- **Conformal policy**: fraud coverage 0.5814 / 0.5910 against a 0.55 target;
+  genuine exclusion 0.0160 / 0.0130 against a 0.01 promise -- still breached, on
+  both months.
+- **Fairness, FPR ratio**: M1 drop age 0.4334 / 0.4429; M2 FairGBM 0.4454 /
+  0.4728 at TPR 0.5414 / 0.5630; M3 fairlearn 0.1922 / 0.2525 at TPR 0.0379 /
+  0.0420; M4 policy only 0.4358 / 0.4439 at TPR 0.5814 / 0.5910. B1, which sees
+  age, sits at 0.3309 / 0.3373.
+- **Monitor** (`reports/monitoring.json`): 200 clean windows give 6 watch, 0
+  alert. Thresholds: score PSI 0.01337, worst-feature PSI 3.968, domain AUC
+  0.5198, conformal-rate -log p 1.830.
+- **Injected bugs, on a quiet stream**: all four detected. `income_x10` by the
+  contract at window 0 (never scored); `mirror_income`, `swap_employment` and
+  `all_mobile_valid` by the monitor one window after injection. `mirror_income`
+  costs 6.76 points of TPR while undetected.
+- **Latency**, 2,000 sequential requests after 100 warm-up: p50 6.53 ms over HTTP
+  without reason codes (target 15 ms), p99 10.13 ms; 152.95 ms with them, p99
+  273.84 ms. Slower with SHAP than before, because the tuned champion has twice
+  the trees to walk.
+- **Validation report**: 952 words, about 1.98 estimated pages, 5 findings
+  (2 High, 2 Medium, 1 Low).
+
+**What didn't work**
+- **MLflow's file store refuses to run.** MLflow 3 puts `./mlruns` in maintenance
+  mode and raises rather than starting a run, so the first tuning run logged
+  nothing and said so in a warning. Moved to a local SQLite store (D20).
+- **The tuning win is inside the noise.** Month 4 holds 1,452 frauds, so the
+  standard error on a TPR near 0.57 is about 1.3 points and the 1.2-point gain
+  sits inside it. Taken because both held-out months moved the same way, not
+  because one month proved it.
+- **Tuning cost a controlled comparison.** The champion and B1 no longer share
+  hyper-parameters, so "dropping age costs nothing" is now a comparison of two
+  fitted models rather than an ablation. Both README claims were reworded to say
+  so. A matched with-age comparator would restore it; not added, because M1-M4
+  are what section 8.2 specifies.
+- **Three pinned regression metrics moved** and were re-pinned: ROC-AUC 0.9175 ->
+  0.9295, TPR@5%FPR 0.5897 -> 0.6154, fraud coverage 0.7692 -> 0.7179, approve
+  share 0.8560 -> 0.8880, all on the fixture. The reason is the parameter change
+  and nothing else.
+- **The Docker image size is still not reported.** Docker Desktop's WSL
+  integration is off for this distro, so `docker` on PATH is the stub that says
+  so. `bench` now records what docker actually said instead of guessing "not
+  built".
+- **No generated table had ever been committed.** The blanket `*.csv` ignore that
+  keeps row-level data out of git was also swallowing `reports/tables/`, so
+  `policy_grid.csv`, `policy_outcomes.csv`, `fairness_tradeoff.csv` and the new
+  `tuning_trials.csv` were missing from every clone. That broke the README's
+  links to them and meant the demo, which reads `policy_grid.csv`, could not run
+  from a clean clone without re-running the pipeline. `.gitignore` now excepts
+  them, and they are aggregates -- the largest is 16 KB.
+
+**Next step**
+- Turn on Docker Desktop -> Settings -> Resources -> WSL Integration for
+  Ubuntu-22.04, then `make bench` to record the image size (it is 3.35 GB as
+  built, measured from Windows).
+- Consider a matched with-age comparator so M1's claim is an ablation again.
+
+**Open questions for the owner**
+- The alpha targets and cost parameters remain placeholders and are load-bearing
+  for the headline claim.
+- Kaggle licence check before the repo goes public.
+- Two outside reviews for `reports/reviews.md`, and the 2-minute demo walkthrough.
+
+---
+
 ## 2026-09-19 — Monitor, mitigations, API, and the reporting layer
 
 **What changed**

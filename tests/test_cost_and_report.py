@@ -11,7 +11,7 @@ import numpy as np
 import pytest
 from hydra import compose, initialize_config_dir
 
-from triage.evaluation.validation import collect_findings, render
+from triage.evaluation.validation import collect_findings, estimated_pages, render
 from triage.policy.cost import cost_breakdown, cost_per_10k, sensitivity_table
 
 
@@ -185,6 +185,22 @@ def test_the_report_states_what_it_cannot_show() -> None:
     assert "not UK data" in report
     assert "no vulnerability analysis is possible" in report
     assert "No saving is claimed" in report
+
+
+def test_the_generated_report_stays_inside_its_page_budget(repo_root) -> None:
+    """Section 14 caps the validation report at two pages when exported.
+
+    Tested rather than trusted, because a validation report grows by accretion --
+    every run adds something worth saying -- and the thing the cap protects is a
+    reviewer's attention, which does not grow.
+    """
+    report = (repo_root / "reports" / "validation_report.md").read_text(encoding="utf-8")
+    pages = estimated_pages(report)
+    assert pages <= 2.0, (
+        f"reports/validation_report.md renders to about {pages:.2f} pages, over the "
+        "two-page cap. Trim the prose in triage.evaluation.validation.render, not "
+        "the findings."
+    )
 
 
 def test_the_report_names_its_provenance() -> None:
