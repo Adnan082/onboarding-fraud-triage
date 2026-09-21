@@ -5,6 +5,61 @@ artefact, with its path), what didn't work, the next step, and open questions.
 
 ---
 
+## 2026-09-21 — Going public: a licence, a generated summary, and a live demo
+
+**What changed**
+- `LICENSE` (MIT, the code only). The README's licence section now states what
+  the data is published under -- CC BY-NC-ND 4.0 on the Kaggle page -- rather
+  than telling the reader to go and look, and says plainly that no BAF data is
+  committed here.
+- A generated `headline` block at the top of Results: six lines built from
+  `metrics.json` like every other table. Typed numbers introduced into the prose
+  earlier in the session were removed; they broke rule 6 and would have drifted.
+- A second demo tab that scores one editable application by posting to the
+  running API, with the form built from the frozen contract (DECISIONS D23).
+  `make demo` starts both processes. `tests/test_demo.py` checks every preset
+  against the generated request model.
+- `example_application()` moved from `stages/bench.py` to `api/schemas.py`, so
+  the benchmark and the demo send the same starting payload.
+
+**Results**
+- The three demo presets land on the three different bands, scored through the
+  live API: "Established, long settled" 0.010 approve `{legit}`; "Contract
+  midpoint" 0.053 review `{legit, fraud}`; "Thin file, shared device" 0.588
+  verify `{fraud}`. Reason codes on all three.
+- Clean-clone `make all`: exit 0, and twenty headline figures identical to this
+  working copy (see the reproducibility note above).
+- 324 tests, 306 of them data-free. Coverage gate green.
+
+**What didn't work**
+- **The repository is not public yet, and should not be until the licence
+  question is answered.** The dataset is CC BY-NC-**ND** -- no derivatives --
+  and while no BAF data is committed, aggregate output computed from it is.
+  Whether that is a derivative work is a legal question, and rule 9 says flag
+  those rather than answer them. The LICENSE and the README are ready either way.
+- `test_the_same_window_measures_the_same_twice` compared floats exactly and
+  failed under load when a PSI sum reassociated in its last bit. Fixed to compare
+  to twelve places, as `test_repro.py` already did. The test was wrong, not the
+  runner.
+- A first attempt at the demo imported `requests`, which is not in the pinned
+  stack and only arrives transitively through Streamlit. Switched to `httpx`,
+  which is declared.
+
+**Next step**
+- Answer the licence question, then make the repository public.
+- Set the alpha targets, review capacity and cost parameters; every headline
+  number is conditional on them.
+- Optional: split the dependency set so the service image stops carrying mlflow,
+  streamlit, matplotlib, kaggle, duckdb, mapie and fairlearn; add a matched
+  with-age comparator so M1 is an ablation again.
+
+**Open questions for the owner**
+- The licence reading above.
+- Two outside reviews for `reports/reviews.md`, and the 2-minute demo walkthrough
+  -- now easier, because the demo shows a single application being decided.
+
+---
+
 ## 2026-09-20/21 — MLflow, champion tuning, Docker, and the report inside two pages
 
 **What changed**
@@ -99,10 +154,17 @@ artefact, with its path), what didn't work, the next step, and open questions.
   them, and they are aggregates -- the largest is 16 KB.
 
 **Reproducibility check**
-- A fresh `git clone` of this repo into /tmp gets 107 tracked files and runs
-  `make setup && make lint && make test` green: 299 passed, 9 deselected. That is
-  the half of section 9's v1.0 criterion that needs no Kaggle credentials; the
-  data half still has not been run end to end from nothing.
+- A fresh `git clone` gets 107 tracked files and runs `make setup && make lint &&
+  make test` green with no data at all.
+- **The full criterion is closed.** A second clean clone ran `make all` end to
+  end -- Kaggle download, contract, baseline, train, conformal, fairness,
+  monitor, report, bench, tests -- and exited 0. Twenty headline figures were
+  compared against this working copy and **all twenty are identical**: ROC-AUC,
+  realised TPR, Brier and FPR ratio for both test months; fraud coverage and
+  genuine exclusion for both; both conformal thresholds to nine decimal places;
+  the calibration choice; the config hash; and all four monitor thresholds.
+  Section 9's "a fresh clone plus `make all` reproduces the README" now has
+  evidence behind it rather than an intention.
 
 **Next step**
 - Run `make all` from a clean clone with Kaggle credentials, to close the other
