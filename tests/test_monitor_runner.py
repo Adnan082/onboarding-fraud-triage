@@ -163,11 +163,20 @@ def test_only_thresholdable_numbers_reach_the_alarm_rules(context, reference) ->
 
 
 def test_the_same_window_measures_the_same_twice(context, reference) -> None:
-    """Thresholds calibrated on one batch of windows must transfer to the next."""
+    """Thresholds calibrated on one batch of windows must transfer to the next.
+
+    To twelve places, not bit for bit. Under load the PSI sum reassociates and the
+    last bit moves -- 0.009360339214389708 against ...706 on one run here. That is
+    float64 epsilon against a threshold of about 4, so it cannot flip a detector;
+    asserting exact equality would only test the hardware. `test_repro.py` rounds
+    for the same reason.
+    """
     window = _window(reference, seed=7)
     probs = np.random.default_rng(7).beta(1.5, 60.0, size=len(window))
 
-    first = detectors_for_window(window, probs, context)
-    second = detectors_for_window(window, probs, context)
+    first = thresholded_only(detectors_for_window(window, probs, context))
+    second = thresholded_only(detectors_for_window(window, probs, context))
 
-    assert thresholded_only(first) == thresholded_only(second)
+    assert first.keys() == second.keys()
+    for name, value in first.items():
+        assert value == pytest.approx(second[name], rel=1e-12), f"{name} is not reproducible"

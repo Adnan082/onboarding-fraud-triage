@@ -23,6 +23,122 @@ def _table(header: list[str], rows: list[list[str]]) -> str:
     return "\n".join(lines)
 
 
+def _pct(value: float | None, digits: int = 1) -> str:
+    return "n/a" if value is None else f"{value * 100:.{digits}f}%"
+
+
+def headline_table(metrics: dict[str, Any]) -> str:
+    """The findings, in one block, for a reader who will not scroll.
+
+    Generated like every other table (rule 6). A summary is exactly where a typed
+    number would rot first: it is the part people copy into an email, and the part
+    nobody re-checks after a re-run.
+    """
+    champion = metrics.get("champion")
+    policy = metrics.get("policy")
+    fairness = metrics.get("fairness")
+    monitoring = metrics.get("monitoring")
+    service = metrics.get("service")
+    if not champion or not policy:
+        return MISSING
+
+    rows: list[list[str]] = []
+    months = sorted(champion["months"])
+
+    aucs = " / ".join(
+        format_number(champion["months"][m]["discrimination"]["roc_auc"]) for m in months
+    )
+    tprs = " / ".join(_pct(champion["months"][m]["realised"]["tpr"]) for m in months)
+    rows.append(
+        [
+            "**Detection**",
+            f"ROC-AUC {aucs} on months {' and '.join(months)}, catching {tprs} of fraud "
+            "at the operating threshold.",
+        ]
+    )
+
+    target_legit = float(policy["chosen"]["alpha_legit"])
+    realised = " / ".join(_pct(policy["months"][m]["genuine_exclusion_rate"]) for m in months)
+    rows.append(
+        [
+            "**The guarantee that broke**",
+            f"At most {_pct(target_legit)} of genuine applicants were promised extra "
+            f"verification. {realised} got it. The promise holds only while new "
+            "applications look like the calibration month, and they stop.",
+        ]
+    )
+
+    target_fraud = 1 - float(policy["chosen"]["alpha_fraud"])
+    coverage = " / ".join(_pct(policy["months"][m]["fraud_coverage"]) for m in months)
+    rows.append(
+        [
+            "**The guarantee that held**",
+            f"{_pct(target_fraud, 0)} of fraud was promised a non-approval. "
+            f"{coverage} got one -- over-delivered, which is the safe direction "
+            "and still a finding.",
+        ]
+    )
+
+    ratios = " / ".join(
+        format_number(champion["months"][m]["fairness"]["fpr_ratio"]) for m in months
+    )
+    rows.append(
+        [
+            "**Fairness**",
+            f"False alarms among genuine applicants are {ratios} as likely for the "
+            "younger group as the older one. 1.00 would be parity. The model never "
+            "sees age.",
+        ]
+    )
+
+    if fairness:
+        by_name = {r["experiment"]: r for r in fairness.get("tradeoff", []) if r["month"] == 6}
+        eg = by_name.get("m3_fairlearn_eg")
+        if eg:
+            rows.append(
+                [
+                    "**What fairness cost**",
+                    "Neither model-level mitigation beat simply dropping age. The "
+                    f"constrained learner reached {format_number(eg['fpr_ratio'])} by "
+                    f"catching {_pct(eg['tpr'])} of fraud -- equal treatment by way of "
+                    "flagging almost nobody.",
+                ]
+            )
+
+    if monitoring:
+        counts = monitoring.get("threshold_calibration", {}).get("counts", {})
+        total = sum(counts.values()) if counts else 0
+        bugs = monitoring.get("bugs", {})
+        detected = sum(1 for b in bugs.values() if b.get("on_clean_stream", {}).get("detected"))
+        if total and bugs:
+            rows.append(
+                [
+                    "**Monitoring, without labels**",
+                    f"{detected} of {len(bugs)} injected data faults were caught, on a "
+                    f"stream carrying no fraud labels at all. On {total} clean windows "
+                    f"the detectors raised {counts.get('watch', 0)} watches and "
+                    f"{counts.get('alert', 0)} alerts.",
+                ]
+            )
+
+    if service:
+        latency = service.get("latency", {}).get("http_without_shap")
+        docker = service.get("docker", {})
+        if latency:
+            size = (
+                f", in a {docker['compressed_mb']:.0f} MB image" if docker.get("available") else ""
+            )
+            rows.append(
+                [
+                    "**Shipped**",
+                    f"{format_number(latency['p50_ms'], 2)} ms per scored request at the "
+                    f"median, against a {service['target_p50_ms']:g} ms target{size}.",
+                ]
+            )
+
+    return _table(["", ""], rows)
+
+
 def baselines_table(metrics: dict[str, Any]) -> str:
     """Detection for B0 and B1, per test month, under both protocols."""
     section = metrics.get("baselines")
@@ -509,6 +625,7 @@ def data_table(metrics: dict[str, Any]) -> str:
 
 
 RENDERERS = {
+    "headline": headline_table,
     "baselines": baselines_table,
     "calibration": calibration_table,
     "policy": policy_table,
