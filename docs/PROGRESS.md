@@ -21,8 +21,11 @@ artefact, with its path), what didn't work, the next step, and open questions.
   builds and serves.
 - `evaluation/validation.py`: prose compressed and `estimated_pages()` added, so
   the two-page cap in section 14 is now a test rather than an intention (D21).
-- `tests/test_tuning.py` (5 tests) and a page-budget test. 308 tests, 299 of them
-  data-free.
+- `tests/test_tuning.py` (5 tests), `tests/test_monitor_runner.py` (7) and a
+  page-budget test. 315 tests, 306 of them data-free.
+- `make coverage` gates the four section 13 packages at 85% and CI runs it.
+  `monitoring/runner.py` had 0% coverage and pulled the package to 81.9%, under
+  the bar; it is now at 100% and the four together are at 95.13%.
 
 **Results** (from `reports/metrics.json` unless noted)
 - **Tuning** (`reports/tables/tuning_trials.csv`): best trial 0.5785 TPR@5%FPR on
@@ -84,10 +87,18 @@ artefact, with its path), what didn't work, the next step, and open questions.
   from a clean clone without re-running the pipeline. `.gitignore` now excepts
   them, and they are aggregates -- the largest is 16 KB.
 
+**Reproducibility check**
+- A fresh `git clone` of this repo into /tmp gets 107 tracked files and runs
+  `make setup && make lint && make test` green: 299 passed, 9 deselected. That is
+  the half of section 9's v1.0 criterion that needs no Kaggle credentials; the
+  data half still has not been run end to end from nothing.
+
 **Next step**
 - Turn on Docker Desktop -> Settings -> Resources -> WSL Integration for
   Ubuntu-22.04, then `make bench` to record the image size (it is 3.35 GB as
   built, measured from Windows).
+- Run `make all` from a clean clone with Kaggle credentials, to close the other
+  half of the v1.0 criterion.
 - Consider a matched with-age comparator so M1's claim is an ablation again.
 
 **Open questions for the owner**

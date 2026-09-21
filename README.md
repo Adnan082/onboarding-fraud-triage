@@ -501,9 +501,14 @@ make data       # needs Kaggle credentials; writes data/interim/*.parquet
 make all        # data -> contract -> evaluate -> report -> bench -> test
 ```
 
-Useful targets: `make test` (fast, needs no data), `make lint`, `make serve`
-(API on :8000), `make demo` (Streamlit), `make docker`. Run `make help` for the
-full list.
+Useful targets: `make test` (fast, needs no data), `make lint`, `make coverage`,
+`make serve` (API on :8000), `make demo` (Streamlit), `make docker`. Run
+`make help` for the full list.
+
+`make coverage` gates the four packages where a silent mistake would be worst —
+the conformal guarantee, the fairness metrics, the detectors and the decision
+rule — at 85%. They currently sit at 95%. CI runs it on every push, because a
+coverage target nothing enforces is one nobody has to meet.
 
 While developing, pass `ARGS="data.sample_frac=0.1"`. Never report a number from a
 sampled run — and you cannot: writing a reported section from a sampled run raises.
@@ -597,7 +602,7 @@ in the README, which is why a stale result is visible rather than plausible.
 | `configs/` | Hydra config: data, features, models, calibration, policy, monitor |
 | `src/triage/` | The library, laid out above |
 | `experiments/` | Variant stress tests, injected data bugs |
-| `tests/` | 308 tests; 299 of them need no data, thanks to a seeded BAF-shaped fixture |
+| `tests/` | 315 tests; 306 of them need no data, thanks to a seeded BAF-shaped fixture |
 | `reports/` | Generated artefacts, the validation report, the model card, figures |
 | `docs/` | Session notes and every design decision, as context → decision → consequences |
 | `app/demo.py` | One-screen Streamlit demo, reading only precomputed artefacts |

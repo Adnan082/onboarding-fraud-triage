@@ -79,6 +79,15 @@ test:  ## Fast, data-free tests
 test-data:  ## Tests that need data/interim/
 	$(RUN) pytest -m data
 
+# Section 13 sets the bar at 85% for these four packages only. They are where a
+# silent mistake would be worst: the guarantee, the fairness numbers, the
+# detectors and the decision rule. The rest of the tree is measured, not gated.
+coverage:  ## Enforce the section 13 coverage bar on the load-bearing packages
+	$(RUN) pytest -m "not data" \
+	  --cov=src/triage/uncertainty --cov=src/triage/fairness \
+	  --cov=src/triage/monitoring --cov=src/triage/policy \
+	  --cov-report=term-missing --cov-fail-under=85
+
 lint:  ## ruff check, ruff format --check, mypy
 	$(RUN) ruff check .
 	$(RUN) ruff format --check .

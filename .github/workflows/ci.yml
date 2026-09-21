@@ -36,6 +36,11 @@ jobs:
       - name: Test (data-free)
         run: uv run pytest -m "not data" --cov=src/triage --cov-report=term-missing
 
+      # Section 13's bar, on the four packages it applies to. Failing here is the
+      # point: a coverage target nothing enforces is one nobody has to meet.
+      - name: Coverage bar
+        run: make coverage
+
       - name: Check no row-level data was committed
         run: |
           if git ls-files | grep -E '^(data/(raw|interim)/|models/).*\.(csv|parquet|joblib)$'; then
