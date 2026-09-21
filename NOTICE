@@ -1,0 +1,19 @@
+The MIT licence in LICENSE covers the code in this repository. It does not cover
+the data.
+
+The Bank Account Fraud (BAF) dataset is published separately by its authors and
+carries its own terms, stated on its Kaggle page:
+
+    https://www.kaggle.com/datasets/sgpjesus/bank-account-fraud-dataset-neurips-2022
+
+No BAF data is included in this repository -- not the raw CSVs, not the interim
+parquet, not a sample. CI fails the build if any appears. What is committed is
+aggregate output computed from it: metric summaries, the alpha sweep, the
+figures. Anyone wanting the data should download it from Kaggle under those
+terms; `make data` does exactly that and verifies the checksums.
+
+Citation for the dataset:
+
+    Jesus et al., "Turning the Tables: Biased, Imbalanced, Dynamic Tabular
+    Datasets for ML Evaluation", NeurIPS 2022.
+    https://arxiv.org/abs/2211.13358

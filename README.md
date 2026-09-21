@@ -651,7 +651,8 @@ in [`reports/reviews.md`](reports/reviews.md).
 
 ## Licence
 
-**The code in this repository is MIT** — see [LICENSE](LICENSE).
+**The code in this repository is MIT** — see [LICENSE](LICENSE), and [NOTICE](NOTICE)
+for what it does and does not cover.
 
 **The data is not mine to license.** The Bank Account Fraud dataset is published
 on [Kaggle](https://www.kaggle.com/datasets/sgpjesus/bank-account-fraud-dataset-neurips-2022)
