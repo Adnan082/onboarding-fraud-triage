@@ -4,11 +4,6 @@ Scores an online bank-account application for fraud and routes it to one of thre
 outcomes: **approve**, **human review**, or **extra verification** — with a stated,
 tested guarantee on how much fraud can slip through.
 
-> **Status: complete and running.** Baselines, champion, calibration, conformal
-> policy, fairness mitigations, drift monitor, scoring service and validation
-> report all run end to end on the full million applications. Nothing below is
-> typed by hand: every table is generated from `reports/metrics.json` by
-> `make report`, and a run on sampled data refuses to write one.
 
 ---
 
