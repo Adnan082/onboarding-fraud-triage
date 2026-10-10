@@ -113,6 +113,13 @@ def test_readiness_without_model(monkeypatch):
         assert client.get("/ready").status_code == 503
 
 
+@pytest.mark.parametrize("payload", ["[]", '{"drift_status": [], "fallback_active": false}'])
+def test_malformed_monitor_shapes_are_unknown(tmp_path, payload):
+    path = tmp_path / "state.json"
+    path.write_text(payload)
+    assert read_state(path)["drift_status"] == "unknown"
+
+
 def test_stale_monitor_is_unknown_but_alert_remains_latched(tmp_path, monkeypatch):
     import json
 

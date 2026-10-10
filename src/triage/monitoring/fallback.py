@@ -3,10 +3,10 @@
 Appends to ``reports/monitor_events.jsonl`` and updates ``models/monitor_state.json``,
 which the API reads on every request.
 
-The fallback is deliberately blunt: tighten the alphas so more applications go to
-a human. Drift means the coverage guarantee no longer holds, and the safe response
-to "I no longer know how wrong I am" is to decide less automatically -- never to
-decline automatically, which this system does not do at all (rule 5).
+The fallback is a separately configured policy, fitted on the calibration split.
+Its workload must be measured: the configured alphas do not uniformly tighten
+both classes. Drift invalidates the exchangeability assumption; switching policy
+does not restore a coverage guarantee. There is no automatic decline (rule 5).
 
 The state file is written atomically, via a temporary file and a rename, because
 the API may read it at any moment and a half-written state is worse than a stale
@@ -102,7 +102,7 @@ def read_state(state_path: Path) -> dict[str, Any]:
     if (
         not isinstance(state, dict)
         or type(state.get("fallback_active")) is not bool
-        or state.get("drift_status") not in {"ok", "watch", "alert"}
+        or state.get("drift_status") not in ("ok", "watch", "alert")
         or (state["drift_status"] == "alert" and not state["fallback_active"])
     ):
         return unknown("invalid monitor state")

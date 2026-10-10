@@ -667,6 +667,26 @@ verifies the checksums.
 
 Run `make train` and then `make conformal` before using this version of the API. The latter creates `models/serving_policy.json` with the normal and configured fallback thresholds fitted on `cal_conf`; the manifest hashes this file alongside the model and calibrator. The bundle also binds the data contract, feature configuration and reason templates. Old manifests without this bundle cannot become ready.
 
+Run `make monitor` and inspect `/monitor/status` before accepting traffic. A fresh
+checkout with no monitor state stays unready. If a completed review permits normal
+operation (including a reviewed, alert-free first run), initialize or reset the
+state explicitly and retain the event log:
+
+```python
+from pathlib import Path
+from triage.api.service import load_config
+from triage.monitoring.fallback import clear
+
+cfg = load_config()
+clear(
+    Path(cfg.monitor.fallback.state_file),
+    Path(cfg.monitor.fallback.event_log),
+    reason="operator reviewed monitoring and approved normal operation",
+)
+```
+
+Do not reset an active alert solely to make the readiness probe pass.
+
 `/health` is process liveness. `/ready` requires a verified model/policy bundle and readable monitor state. Missing or malformed monitoring state returns `unknown` and pauses scoring with HTTP 503. An operator can set `TRIAGE_MONITOR_MAX_AGE_SECONDS` to reject stale non-alert state; no time budget is assumed for the synthetic application-count windows. Alerts remain latched until manual reset. Deploy complete versioned model directories atomically; do not overwrite a live bundle file by file.
 
 ```mermaid
