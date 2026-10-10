@@ -3,10 +3,10 @@
 Appends to ``reports/monitor_events.jsonl`` and updates ``models/monitor_state.json``,
 which the API reads on every request.
 
-The fallback is deliberately blunt: tighten the alphas so more applications go to
-a human. Drift means the coverage guarantee no longer holds, and the safe response
-to "I no longer know how wrong I am" is to decide less automatically -- never to
-decline automatically, which this system does not do at all (rule 5).
+The fallback is a separately configured policy, fitted on the calibration split.
+Its workload must be measured: the configured alphas do not uniformly tighten
+both classes. Drift invalidates the exchangeability assumption; switching policy
+does not restore a coverage guarantee. There is no automatic decline (rule 5).
 
 The state file is written atomically, via a temporary file and a rename, because
 the API may read it at any moment and a half-written state is worse than a stale
@@ -84,25 +84,38 @@ def clear(state_path: Path, event_log: Path, *, reason: str = "manual reset") ->
 
 
 def read_state(state_path: Path) -> dict[str, Any]:
-    """Read ``monitor_state.json``; return an 'ok' default when it is missing.
+    """Report unavailable monitoring explicitly; never silently default to healthy.
 
-    A corrupt state file also reads as 'ok' with a note, rather than taking the
-    service down: the API's job is to keep scoring, and a monitor that cannot be
-    read is a monitoring problem, not a scoring one. It is logged loudly.
+    Optional TRIAGE_MONITOR_MAX_AGE_SECONDS applies an operator-chosen wall-clock
+    freshness budget. It is unset by default because BAF windows are application
+    counts rather than real elapsed days. A latched alert never expires to OK.
     """
-    if not state_path.exists():
-        return dict(OK_STATE)
+
+    def unknown(reason: str) -> dict[str, Any]:
+        log.error("monitor unavailable: %s", reason)
+        return {"drift_status": "unknown", "fallback_active": False, "reason": reason}
 
     try:
         state = json.loads(state_path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as error:
-        log.error("could not read %s (%s): serving 'ok'", state_path, error)
-        return {**OK_STATE, "reason": f"unreadable monitor state: {error}"}
-
-    if not isinstance(state, dict) or "fallback_active" not in state:
-        log.error("%s is not a valid monitor state: serving 'ok'", state_path)
-        return {**OK_STATE, "reason": "invalid monitor state"}
-
+    except (ValueError, OSError) as error:
+        return unknown(f"unreadable monitor state: {error}")
+    if (
+        not isinstance(state, dict)
+        or type(state.get("fallback_active")) is not bool
+        or state.get("drift_status") not in ("ok", "watch", "alert")
+        or (state["drift_status"] == "alert" and not state["fallback_active"])
+    ):
+        return unknown("invalid monitor state")
+    max_age = os.environ.get("TRIAGE_MONITOR_MAX_AGE_SECONDS")
+    if max_age is not None and not state["fallback_active"]:
+        try:
+            budget = float(max_age)
+            updated = datetime.fromisoformat(state["updated_at"])
+            age = (datetime.now(UTC) - updated).total_seconds()
+            if not 0 < budget < float("inf") or age < 0 or age > budget:
+                return unknown("stale monitor state or invalid freshness budget")
+        except (ValueError, TypeError, KeyError):
+            return unknown("invalid monitor timestamp or freshness budget")
     return state
 
 

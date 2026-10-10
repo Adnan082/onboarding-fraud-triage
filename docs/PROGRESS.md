@@ -584,3 +584,8 @@ artefact, with its path), what didn't work, the next step, and open questions.
 4. Kaggle credentials: `make data` cannot run without them.
 5. DECISIONS D4 changes two pins in CLAUDE.md section 4 (numpy cap, numba floor).
    It was needed to make the environment install at all -- please confirm.
+
+
+## 2026-10-08 — Serving policy integrity
+
+Context: scoring returned a fallback flag but used the normal thresholds; missing monitoring state looked healthy. Decision: publish both configured policies from cal_conf into a hashed serving bundle, select one immutable threshold snapshot per request, expose readiness, and pause scoring when monitoring is unavailable. Existing alpha values, data splits and historical result artifacts are unchanged. The fallback preset is not described as a uniform tightening because its legitimate-class alpha increases. Runtime migration requires `make conformal` and an explicit valid monitor state. Freshness is operator-configurable for deployments with a real cadence. New model-quality or load-test results have not been generated.

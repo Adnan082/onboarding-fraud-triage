@@ -131,8 +131,9 @@ def headline_table(metrics: dict[str, Any]) -> str:
             rows.append(
                 [
                     "**Shipped**",
-                    f"{format_number(latency['p50_ms'], 2)} ms per scored request at the "
-                    f"median, against a {service['target_p50_ms']:g} ms target{size}.",
+                    f"{format_number(latency['p50_ms'], 2)} ms median in-process HTTP "
+                    f"latency with SHAP disabled, against a "
+                    f"{service['target_p50_ms']:g} ms target{size}.",
                 ]
             )
 
