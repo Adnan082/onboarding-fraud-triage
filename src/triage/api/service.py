@@ -29,6 +29,7 @@ from triage.explain.reasons import Reason, load_templates, top_reasons
 from triage.features.encode import lgbm_frame
 from triage.models.champion import MANIFEST_FILE, load
 from triage.monitoring.fallback import read_state
+from triage.policy.bundle import load as load_policy
 from triage.policy.decide import decide
 from triage.uncertainty.conformal import ConformalThresholds, predict_sets, set_labels
 
@@ -59,28 +60,8 @@ def load_config() -> DictConfig:
         return compose(config_name="config", overrides=overrides)
 
 
-def _thresholds_from(cfg: DictConfig) -> ConformalThresholds:
-    """The conformal thresholds the policy stage fitted on ``cal_conf``."""
-    metrics_path = Path(cfg.paths.metrics)
-    stored = None
-    if metrics_path.exists():
-        metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
-        stored = metrics.get("policy", {}).get("thresholds")
-
-    if not stored:
-        raise ValueError(
-            "no conformal thresholds in reports/metrics.json. Run `make conformal` "
-            "before serving: without them there is no policy to apply."
-        )
-
-    return ConformalThresholds(
-        tau_fraud=float(stored["tau_fraud"]),
-        tau_legit=float(stored["tau_legit"]),
-        alpha_fraud=float(stored["alpha_fraud"]),
-        alpha_legit=float(stored["alpha_legit"]),
-        n_fraud=int(stored["n_fraud"]),
-        n_legit=int(stored["n_legit"]),
-    )
+class MonitorUnavailable(RuntimeError):
+    """Scoring cannot proceed without a valid monitoring state."""
 
 
 @dataclass
@@ -92,6 +73,7 @@ class ScoringService:
     calibrator: Any
     manifest: dict[str, Any]
     thresholds: ConformalThresholds
+    fallback_thresholds: ConformalThresholds
     medians: dict[str, float] = field(default_factory=dict)
     templates: dict[str, dict[str, str]] = field(default_factory=dict)
 
@@ -100,7 +82,7 @@ class ScoringService:
         """Load artefacts and verify every hash against the manifest."""
         cfg = cfg or load_config()
         estimator, calibrator, manifest = load(cfg)
-        thresholds = _thresholds_from(cfg)
+        thresholds, fallback_thresholds = load_policy(cfg, manifest)
 
         log.info(
             "loaded %s (calibration %s, policy %s)",
@@ -114,6 +96,7 @@ class ScoringService:
             calibrator=calibrator,
             manifest=manifest,
             thresholds=thresholds,
+            fallback_thresholds=fallback_thresholds,
             medians=manifest.get("training_medians", {}),
             templates=load_templates(REASONS_PATH),
         )
@@ -125,27 +108,31 @@ class ScoringService:
         ``customer_age`` is logged for fairness monitoring and dropped before
         scoring, so changing it cannot change the score.
         """
+        # Snapshot policy state once per request, before any model computation.
+        state = read_state(MONITOR_STATE_PATH)
+        if state["drift_status"] == "unknown":
+            raise MonitorUnavailable("Monitoring state unavailable; scoring is paused.")
+        active = self.fallback_thresholds if state["fallback_active"] else self.thresholds
         frame = pd.DataFrame([features])
         prepared = lgbm_frame(frame, self.cfg, use_age=False)
 
         raw = float(self.estimator.predict_proba(prepared)[0, 1])
         probability = float(self.calibrator.transform(np.array([raw]))[0])
 
-        sets = predict_sets(np.array([probability]), self.thresholds)
+        sets = predict_sets(np.array([probability]), active)
         has_legit, has_fraud = bool(sets[0, 0]), bool(sets[0, 1])
 
         reasons: list[Reason] = []
         if explain:
             reasons = top_reasons(self.estimator, prepared, self.medians, self.templates)
 
-        state = read_state(MONITOR_STATE_PATH)
         return {
             "risk_score": probability,
             "decision": decide(has_legit, has_fraud),
             "conformal_set": set_labels(sets)[0],
             "reasons": [reason.to_dict() for reason in reasons],
             "model_version": self.manifest["model_version"],
-            "policy_version": self.thresholds.policy_version,
+            "policy_version": active.policy_version,
             "drift_status": str(state.get("drift_status", "ok")),
             "fallback_active": bool(state.get("fallback_active", False)),
         }
@@ -158,6 +145,6 @@ def read_manifest(path: Path = MANIFEST_PATH) -> dict[str, Any] | None:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def read_monitor_state(path: Path = MONITOR_STATE_PATH) -> dict[str, Any]:
-    """Return the monitor state, defaulting to 'ok' before the monitor has run."""
-    return read_state(path)
+def read_monitor_state(path: Path | None = None) -> dict[str, Any]:
+    """Read the active monitor path; unavailable monitoring is explicitly unknown."""
+    return read_state(MONITOR_STATE_PATH if path is None else path)

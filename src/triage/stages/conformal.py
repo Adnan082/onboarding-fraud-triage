@@ -28,6 +28,7 @@ from triage.data.split import deployment_protocol
 from triage.evaluation.artefacts import update_section
 from triage.fairness.metrics import fpr_by_group, fpr_ratio
 from triage.models.champion import load_fitted
+from triage.policy.bundle import publish
 from triage.policy.cost import cost_breakdown
 from triage.policy.decide import decide_many
 from triage.policy.sweep import apply_policy, coverage_by_age, select_within_capacity, sweep
@@ -109,6 +110,15 @@ def main(cfg: DictConfig) -> None:
             thresholds.tau_fraud,
             thresholds.tau_legit,
         )
+
+        # The fallback preset is configured in advance, not selected on test months.
+        fallback_thresholds = fit_thresholds(
+            probabilities(conf),
+            conf[label].to_numpy(),
+            alpha_fraud=float(cfg.policy.fallback.alpha_fraud),
+            alpha_legit=float(cfg.policy.fallback.alpha_legit),
+        )
+        publish(cfg, thresholds, fallback_thresholds)
 
         # 4. what actually happens on the test months
         months: dict[str, dict] = {}

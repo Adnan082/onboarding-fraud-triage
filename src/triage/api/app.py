@@ -63,6 +63,15 @@ def health() -> HealthResponse:
     return HealthResponse(status="ok")
 
 
+@app.get("/ready", response_model=HealthResponse)
+def ready() -> HealthResponse:
+    """Readiness requires a verified serving bundle and readable monitor state."""
+    _require_service()
+    if service.read_monitor_state()["drift_status"] == "unknown":
+        raise HTTPException(status_code=503, detail="Monitoring state unavailable")
+    return HealthResponse(status="ok")
+
+
 @app.get("/version")
 def version() -> dict:
     """Return ``models/manifest.json`` (hashes, config, git SHA)."""
@@ -90,5 +99,8 @@ def score(
     """
     loaded = _require_service()
     features = request.features.model_dump()  # type: ignore[attr-defined]
-    result = loaded.score(features, explain=explain)
+    try:
+        result = loaded.score(features, explain=explain)
+    except service.MonitorUnavailable as error:
+        raise HTTPException(status_code=503, detail=str(error)) from error
     return ScoreResponse(application_id=request.application_id, **result)

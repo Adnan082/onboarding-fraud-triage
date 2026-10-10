@@ -77,8 +77,7 @@ flowchart TB
 
 Three things are worth noticing in that picture. Validation happens **before**
 scoring, so a broken feed cannot reach the model. The monitor reads **scores, not
-outcomes**, so it works weeks before any fraud label exists. And its only lever is
-to send *more* work to humans — never to decide anything itself.
+outcomes**, so it works weeks before any fraud label exists. And its policy response uses a separately precomputed fallback preset; it never automatically declines an application.
 
 ### Step one — does the application even make sense?
 
@@ -197,8 +196,7 @@ false-alarm rate is a measured property rather than a hope.
 
 A single window over threshold is a **watch**. The *same* detector over threshold
 twice running is an **alert**, which is what separates a blip from a break. On
-alert the policy switches to tighter alphas, sending more cases to a human, and
-the service picks that up on its next request. It is never cleared automatically.
+alert the service selects the precomputed fallback thresholds on its next request. The configured preset changes both alpha targets; its workload and verification trade-offs must be measured rather than assumed to be a uniform tightening. It is never cleared automatically.
 
 The most useful thing this monitor did was catch the guarantee breaking on month
 6 using no labels at all — the same failure the conformal results show, detected
@@ -223,7 +221,7 @@ not been run.
 | **Fairness** | False alarms among genuine applicants are 0.433 / 0.443 as likely for the younger group as the older one. 1.00 would be parity. The model never sees age. |
 | **What fairness cost** | Neither model-level mitigation beat simply dropping age. The constrained learner reached 0.192 by catching 3.8% of fraud -- equal treatment by way of flagging almost nobody. |
 | **Monitoring, without labels** | 4 of 4 injected data faults were caught, on a stream carrying no fraud labels at all. On 200 clean windows the detectors raised 6 watches and 0 alerts. |
-| **Shipped** | 6.4 ms per scored request at the median, against a 15 ms target, in a 767 MB image. |
+| **Shipped** | 6.4 ms per in-process HTTP request at the median, with SHAP disabled, against a 15 ms target, in a 767 MB image. |
 <!-- /metrics:headline -->
 
 The rest of this section is the evidence for those six lines, in the order it was
@@ -478,8 +476,7 @@ hyper-parameter search ran with the hand-set parameters scored alongside it as
 trial −1, so it could be seen to win or lose — without that, "best of 30" says
 nothing about whether the search was worth running. It won, but only one trial in
 thirty beat the starting point, and the margin is smaller than the standard error
-of a single validation month at this prevalence. The winner was taken because both
-held-out months moved the same way, not because one month settled it. Every trial,
+of a single validation month at this prevalence. The implemented selection ranks candidates on month 4. An earlier account also cited improvement on both held-out months when retaining the winner; that creates uncertainty about human selection after test inspection. The current code alone cannot establish an untouched final evaluation. Treat the month-6/7 figures as potentially selection-influenced until an independent evaluation resolves this. Every trial,
 including the incumbent, is in
 [`reports/tables/tuning_trials.csv`](reports/tables/tuning_trials.csv), so the
 spread can be judged rather than taken on trust — and a reader who looks at it and
@@ -664,3 +661,23 @@ whether those count as a derivative work under that licence is a question for a
 reader who needs to be sure, not something this README answers. Anyone wanting the
 data should download it from Kaggle themselves; `make data` does exactly that and
 verifies the checksums.
+
+
+## Serving integrity and reproduction
+
+Run `make train` and then `make conformal` before using this version of the API. The latter creates `models/serving_policy.json` with the normal and configured fallback thresholds fitted on `cal_conf`; the manifest hashes this file alongside the model and calibrator. The bundle also binds the data contract, feature configuration and reason templates. Old manifests without this bundle cannot become ready.
+
+`/health` is process liveness. `/ready` requires a verified model/policy bundle and readable monitor state. Missing or malformed monitoring state returns `unknown` and pauses scoring with HTTP 503. An operator can set `TRIAGE_MONITOR_MAX_AGE_SECONDS` to reject stale non-alert state; no time budget is assumed for the synthetic application-count windows. Alerts remain latched until manual reset. Deploy complete versioned model directories atomically; do not overwrite a live bundle file by file.
+
+```mermaid
+flowchart TB
+    fit["Train and calibrate on separate splits"] --> bundle["Versioned model, calibration and policy bundle"]
+    bundle --> verify["Verify hashes and serving context"]
+    verify --> api["Ready API: validate and score"]
+    monitor["Monitor: atomically publish policy state"] --> api
+    api --> decision["Approve, review or verify"]
+```
+
+**Latency boundary:** the committed benchmark is sequential and uses an in-process HTTP test client. It is not a network or concurrent-load benchmark. The default `explain=true` path includes SHAP; compare the existing with-SHAP and without-SHAP rows before selecting a service budget. External HTTP throughput, concurrent p50/p95/p99 latency and an operational availability target remain unmeasured.
+
+**Remaining release work:** rebuild the serving bundle from the original data; measure the fallback preset's workload; exercise container readiness and rollback; run an external HTTP load test with named hardware, concurrency and worker count. Do not reuse pre-change latency numbers as measurements of this serving revision.

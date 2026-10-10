@@ -240,12 +240,9 @@ def test_exceeded_ignores_detectors_without_a_threshold() -> None:
 # --- fallback and the state the API reads --------------------------------------------------
 
 
-def test_missing_state_reads_as_ok(tmp_path) -> None:
-    """Before the monitor has ever run, the service is not in fallback."""
-    assert read_state(tmp_path / "monitor_state.json") == {
-        "drift_status": "ok",
-        "fallback_active": False,
-    }
+def test_missing_state_is_unknown(tmp_path) -> None:
+    """Missing evidence of monitoring is not evidence of health."""
+    assert read_state(tmp_path / "monitor_state.json")["drift_status"] == "unknown"
 
 
 def test_activate_writes_state_and_logs_an_event(tmp_path) -> None:
@@ -294,13 +291,14 @@ def test_the_event_log_is_appended_never_rewritten(tmp_path) -> None:
     assert read_state(state_path)["fallback_active"] is False
 
 
-def test_a_corrupt_state_file_does_not_take_the_service_down(tmp_path) -> None:
+def test_a_corrupt_state_file_is_reported_as_unknown(tmp_path) -> None:
     """A monitor that cannot be read is a monitoring problem, not a scoring one."""
     state_path = tmp_path / "monitor_state.json"
     state_path.write_text("{ this is not json", encoding="utf-8")
 
     state = read_state(state_path)
     assert state["fallback_active"] is False
+    assert state["drift_status"] == "unknown"
     assert "unreadable" in state["reason"]
 
 
