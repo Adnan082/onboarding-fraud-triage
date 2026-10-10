@@ -86,7 +86,7 @@ def test_monitor_status_answers() -> None:
 
     It deliberately does not assert *which* state: once the monitor has run and
     found drift, `fallback_active` is true, and the service reporting that
-    faithfully is the point. The default-when-missing behaviour is covered in
+    faithfully is the point. The explicit unknown-when-missing behaviour is covered in
     `test_monitoring.py`, where the state file can be controlled.
     """
     with TestClient(app) as client:
@@ -95,7 +95,7 @@ def test_monitor_status_answers() -> None:
     assert response.status_code == 200
     body = response.json()
     assert isinstance(body["fallback_active"], bool)
-    assert body["drift_status"] in {"ok", "watch", "alert"}
+    assert body["drift_status"] in {"ok", "watch", "alert", "unknown"}
 
 
 def test_config_hash_survives_moving_the_checkout(repo_root: Path) -> None:
